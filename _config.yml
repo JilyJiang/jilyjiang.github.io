@@ -4,13 +4,12 @@
 
 # Site
 title: jily's blog
-subtitle: 要事第一，效率优先
-description: 努力奔跑，只为看更大的世界！
+subtitle: 努力奔跑，只为看更大的世界！
+description: 要事第一，效率优先
 author: jily.jiang
 email: jily.jiang@hotmail.com
 language: zh-Hans
 keywords: jilyjiang
-
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
 url: https://github.com/jilyjiang

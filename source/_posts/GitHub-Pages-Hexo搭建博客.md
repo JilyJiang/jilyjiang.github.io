@@ -1,7 +1,7 @@
 layout: draft
-title: GitHub Pages + Hexo搭建博客
+title: github搭建个人网站
 comment: true
-tags: [技术, 静态独立博客, Hexo, GitHub Page, Git]
+tags: [技术, Hexo, GitHub Page, Git]
 date: 2016-06-8 22:40:50
 updated: 2016-06-9 15:12:00
 ---
@@ -247,5 +247,43 @@ Hexo部署到GitHub上的文件，是.md（你的博文）转化之后的.html�
 1. 使用git clone git@github.com:jilyjiang/jilyjiang.github.io.git拷贝仓库（默认分支为hexo）；
 2. 在本地新拷贝的jilyjiang.github.io文件夹下通过Git bash依次执行下列指令：npm install hexo、npm install、npm install hexo-deployer-git（记得，不需要hexo init这条指令）。
 
-## 五、结尾
-下一步来讲域名注册！！！
+## 五、购买域名并解析
+
+这一环节相对简单，可以参考一步步在GitHub上创建博客主页(3),
+
+
+将独立域名与 GitHub Pages 的空间绑定
+
+DNS 设置
+领取到域名后进行解析，进入到我的域名管理，添加域名，如下图设置。
+
+
+
+其中A的两条记录指向的ip地址是github Pages的提供的ip
+
+192.30.252.153
+192.30.252.154
+如博客不能登录，有可能是 github 更改了空间服务的 ip 地址，记得及时到在GitHub Pages查看最新的ip即可
+
+www 指定的记录是你在 github 注册的仓库。
+
+GitHub Pages 的设置
+去到你的aierui.github.io 仓库，点击 CNAME(没有自行创建) ,再点击右下角的 铅笔 编辑，将 jily.org 改成你的域名
+
+
+
+
+
+域名绑定成功，域名解析成功，因此你在浏览中输入www.jily.org或者现在jily.org均可以访问到主页。
+
+
+这里不再多赘述，可以看看官方文档，有使用说明。
+
+
+# 相关链接
+- [视己慎独的博客](http://blog.shijinrong.cn/2016/01/03/How-to-build-a-blog/)
+- [crazymilk's blog](http://crazymilk.github.io/)
+- [hexo-theme-yilia](https://github.com/litten/hexo-theme-yilia)
+
+##  六、感谢
+[1]Thanks to the powerful bing and Google, let me solve the problem.
