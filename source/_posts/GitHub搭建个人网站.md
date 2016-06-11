@@ -140,7 +140,7 @@ $ npm install -g hexo-cli
 ```
 
 ### 2.4.2 使用Hexo建站
-安装完后，在你喜欢的文件夹内（例如D：\Hexo），点击鼠标右键选择Git bash，输入以下指令：
+安装完后，在你喜欢的文件夹内（例如：/Hexo），点击鼠标右键选择Git bash，输入以下指令：
 
 ```bash
 $ hexo init
@@ -201,7 +201,7 @@ $ hexo deploy
 之后，可以通过在浏览器键入：username.github.io进行浏览，开心吧~
 
 ### 3.2 其他theme
-如果想要使用其他主题，可以使用git clone将别人的主题拷贝到D:\Hexo\themes下，然后将_config.yml中的theme: landscape改为对应的主题名字。
+如果想要使用其他主题，可以使用git clone将别人的主题拷贝到/Hexo/themes下，然后将_config.yml中的theme: landscape改为对应的主题名字。
 
 详细步骤可以参考网上的指南。
 
@@ -249,12 +249,12 @@ Hexo部署到GitHub上的文件，是.md（你的博文）转化之后的.html�
 
 ## 五、购买域名并解析
 
-这一环节相对简单，可以参考一步步在GitHub上创建博客主页(3),
+这一环节相对简单，可以参考[一步步在GitHub上创建博客主页](http://www.pchou.info/ssgithubPage/2013-01-03-build-github-blog-page-01.html),
 
 
 将独立域名与 GitHub Pages 的空间绑定
 
-DNS 设置
+### DNS 设置
 领取到域名后进行解析，进入到我的域名管理，添加域名，如下图设置。
 
 
@@ -267,8 +267,8 @@ DNS 设置
 
 www 指定的记录是你在 github 注册的仓库。
 
-GitHub Pages 的设置
-去到你的aierui.github.io 仓库，点击 CNAME(没有自行创建) ,再点击右下角的 铅笔 编辑，将 jily.org 改成你的域名
+### GitHub Pages 的设置
+去到你的jilyjiang.github.io 仓库，点击 CNAME(没有自行创建) ,再点击右下角的编辑，将 jily.org 改成你的域名
 
 
 
