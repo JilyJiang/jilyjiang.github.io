@@ -7,9 +7,10 @@ updated: 2016-07-10 11:42:08
 ---
 
 ------
-#android 5.0 service bind 必须要显式声明
+# android 5.0 service bind 必须要显式声明
 上周在南京出差，在把江苏中国移动的apk从android4.4.4移植到android5.1.1；所有的内容和结构都porting完后，满怀信心的登陆账号+密码，从界面上的第一个icon开始点击测试，一路下来一切正常，正得意的想，工作终于快搞完了O(∩_∩)O哈哈~；结果给我来了一个**surprise，What？**在点击到最后的应用商城时crash了，于是引出这篇blog
-##问题现象：
+## 问题现象：
+<!-- more -->
 ```java
 Process: com.xxx.appstore, PID: 5719
 java.lang.RuntimeException: Unable to start activity ComponentInfo{com.xxx.appstore/com.xxx.appstore.authorClient}: java.lang.IllegalArgumentException: Service Intent must be explicit: Intent { act=com.xxx.authorClient.BIND }
@@ -25,7 +26,6 @@ java.lang.RuntimeException: Unable to start activity ComponentInfo{com.xxx.appst
         at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:836)
         at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:631)
  Caused by: java.lang.IllegalArgumentException: Service Intent must be explicit: Intent { act=com.xxx.authorClient.BIND}
-<!-- more -->
         at android.app.ContextImpl.validateServiceIntent(ContextImpl.java:1603)
         at android.app.ContextImpl.bindServiceCommon(ContextImpl.java:1702)
         at android.app.ContextImpl.bindService(ContextImpl.java:1680)
@@ -60,8 +60,8 @@ You can use this code as an example how to do this: [Unity's updated version of 
 Yet another way to get around the problem is to rebuild your project and the google libraries using targetSDK no later than 19. This will make it run without crashing on Lollipop but is the less secure option and prevents you from using SDK functionality introduced in later versions (for Android 5).
 `
 哈哈，我知道你们是没有耐心把上述的rootcause全部看完的，肯定急切的想知道，我们只要结论，How to solve this problem？
-##解决方案：
-###apk的解决办法：
+## 解决方案：
+### apk的解决办法：
 So Easy， add one line  code；
 ```java
 Intent intent = new Intent("com.xxx.authorClient.BIND");
@@ -70,7 +70,7 @@ Intent intent = new Intent("com.xxx.authorClient.BIND");
 getContext().bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE);
 ```
 But,人生总是充满了But，每一个but后面都有一个心酸的故事o(╯□╰)o；上帝的apk可是不会修改的，要改只能我们底层进行修改进行适配：于是从context进行入手了，在里面进行添加校验intent的工作；
-###底层的修改方法：
+### framework的修改方法：
 [有google大神android提交一个patch](https://android.googlesource.com/platform/frameworks/base/+/fd6c7b1%5E!/)
 
 	Fix issue #10378741: configupdater needs to be explicit when it calls startService()
