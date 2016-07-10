@@ -65,8 +65,11 @@ Yet another way to get around the problem is to rebuild your project and the goo
 So Easy， add one line  code；
 ```java
 Intent intent = new Intent("com.xxx.authorClient.BIND");
+```
+
 // This is the key line that fixed this problem for me
-***intent.setPackage(getContext().getPackageName());***
+<font color=red>intent.setPackage(getContext().getPackageName());</font>
+```java
 getContext().bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE);
 ```
 But,人生总是充满了But，每一个but后面都有一个心酸的故事o(╯□╰)o；上帝的apk可是不会修改的，要改只能我们底层进行修改进行适配：于是从context进行入手了，在里面进行添加校验intent的工作；
