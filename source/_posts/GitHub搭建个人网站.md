@@ -45,6 +45,7 @@ updated: 2016-06-9 15:12:00
 ```bash
 $ git config --global user.name "username"
 $ git config --global user.email "username@example.com"
+
 ```
 
 对于user.email，因为在GitHub的commits信息上是可见的，所以如果你不想让人知道你的email，可以Keeping your email address private:
@@ -57,6 +58,7 @@ $ git config --global user.email "username@example.com"
 
 ```bash
 $ git config --global user.email "username@users.noreply.github.com"
+
 ```
 
 ### 2.2.3 相关资料
@@ -79,6 +81,7 @@ git是一个版本控制的工具，而github有点类似于远程仓库，用�
 ``` bash
 $ ls -al ~/.ssh
 # Lists the files in your .ssh directory, if they exist
+
 ```
 
 默认情况下，public keys的文件名是以下的格式之一：id_dsa.pub、id_ecdsa.pub、id_ed25519.pub、id_rsa.pub。因此，如果列出的文件有public和private钥匙对（例如id_ras.pub和id_rsa），证明已存在SSH keys。
@@ -87,6 +90,7 @@ $ ls -al ~/.ssh
 ```bash
 $ ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
 # Creates a new ssh key, using the provided email as a label
+
 ```
 之后一路回车即可。
 
@@ -95,6 +99,7 @@ $ ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
 ```bash
 # start the ssh-agent in the background
 $ ssh-agent -s
+
 ```
 然后添加SSH key：
 ```bash
@@ -106,22 +111,26 @@ $ ssh-add ~/.ssh/id_rsa
 ```bash
 clip < ~/.ssh/id_rsa.pub
 # Copies the contents of the id_rsa.pub file to your cllipboard
+
 ```
 然后，在GitHub右上方点击头像，选择"Settings"，在右边的"Personal settings"侧边栏选择"SSH Keys"。接着粘贴key，点击"Add key"按钮。最后，测试链接：
 ```bash
 $ ssh -T git@github.com
 # Attempts to ssh to GitHub
+
 ```
 如果你看到：
 ```bash
 The authenticity of host 'github.com (207.97.227.239)' can't be established.
 RSA key fingerprint is 16:27:ac:a5:76:28:2d:36:63:1b:56:4d:eb:df:a6:48.
 Are you sure you want to continue connecting (yes/no)?
+
 ```
 就键入：yes。之后将会看到如下信息：
 ```bash
 Hi username! You've successfully authenticated, but GitHub does not
 provide shell access.
+
 ```
 
 ### 2.3.3 相关资料
@@ -135,6 +144,7 @@ provide shell access.
 如果您的电脑中已经安装上述必备程序，那么恭喜您！接下来只需要使用 npm 即可完成 Hexo 的安装。
 ```bash
 $ npm install -g hexo-cli
+
 ```
 
 ### 2.4.2 使用Hexo建站
@@ -142,11 +152,13 @@ $ npm install -g hexo-cli
 
 ```bash
 $ hexo init
+
 ```
 该命令会在目标文件夹内建立网站所需要的所有文件。接下来是安装依赖包：
 
 ```bash
 $ npm install
+
 ```
 
 这样，我们就已经搭建起本地的Hexo博客了。可以先执行以下命令（在对应文件夹下），然后再浏览器输入localhost:4000查看。
@@ -154,6 +166,7 @@ $ npm install
 ```bash
 $ hexo generate
 $ hexo server
+
 ```
 
 这个博客只是本地的，别人是浏览不了的，之后需要部署到GitHub上。
@@ -173,6 +186,7 @@ $ hexo server
 ## Docs: http://hexo.io/docs/deployment.html
 deploy:
   type:
+  
 ```
 
 修改后的_config.yml：
@@ -181,12 +195,14 @@ deploy:
   type: git
   repo: 对应仓库的SSH地址（可以在GitHub对应的仓库中复制）
   branch: 分支（User Pages为master，Project Pages为gh-pages）
+  
 ```
 
 为了能够使Hexo部署到GitHub上，需要安装一个插件：
 
 ```bash
 $ npm install hexo-deployer-git --save
+
 ```
 
 然后，执行下列指令即可完成部署：
@@ -194,6 +210,7 @@ $ npm install hexo-deployer-git --save
 ```bash
 $ hexo generate
 $ hexo deploy
+
 ```
 
 之后，可以通过在浏览器键入：username.github.io进行浏览，开心吧~
@@ -229,6 +246,7 @@ $ npm install hexo
 $ hexo init
 $ npm install 
 $ npm install hexo-deployer-git（此时当前分支应显示为hexo）;
+
 ```
 6. 修改_config.yml中的deploy参数，分支应为master；
 7. 依次执行
@@ -236,12 +254,14 @@ $ npm install hexo-deployer-git（此时当前分支应显示为hexo）;
 $ git add .
 $ git commit -m "..."
 $ git push origin hexo
+
 ```
 提交网站相关的文件；
 
 8. 执行
 ```bash
 $ hexo generate -d
+
 ```
 生成网站并部署到GitHub上。
 
@@ -256,11 +276,13 @@ $ hexo generate -d
 $ git add .
 $ git commit -m "..."
 $ git push origin hexo
+
 ```
 指令将改动推送到GitHub（此时当前分支应为hexo）；
 2. 然后才执行
 ```bash
 $ hexo generate -d
+
 ```
 发布网站到master分支上。
 
@@ -272,6 +294,7 @@ $ hexo generate -d
 1. 使用
 ```bash
 $ git clone git@github.com:jilyjiang/jilyjiang.github.io.git
+
 ```
 拷贝仓库（默认分支为hexo）；
 2. 在本地新拷贝的jilyjiang.github.io文件夹下通过Git bash依次执行下列指令：
@@ -279,6 +302,7 @@ $ git clone git@github.com:jilyjiang/jilyjiang.github.io.git
 $ npm install hexo
 $ npm install
 $ npm install hexo-deployer-git
+
 ```
 （记得，不需要hexo init这条指令,否则你以前生成文件全部被覆盖）。
 
@@ -320,4 +344,4 @@ www 指定的记录是你在 github 注册的仓库。
 - [hexo-theme-yilia](https://github.com/litten/hexo-theme-yilia)
 
 ##  六、感谢
-[1]Thanks to the powerful bing and Google, let me solve the problem.
+[1]Thanks to the powerful Google, let me solve the problem.
