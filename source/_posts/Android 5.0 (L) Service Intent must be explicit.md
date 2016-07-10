@@ -1,7 +1,7 @@
 layout: post
 title: Android 5.0 (L) Service Intent must be explicit
 comment: true
-tags: [android， service，intent，技术]
+tags: [技术, android, service, intent]
 date: 2016-07-10 11:42:08
 updated: 2016-07-10 11:42:08
 ---
@@ -220,6 +220,7 @@ index ea9fd06..2e3b81d 100644
       * Like {@link #getCallers(int)}, but each location is append to the string
       * as a new line with <var>linePrefix</var> in front of it.
       * @param depth the number of levels to return, starting with the immediate caller.
+      */
 ```
 ## 相关链接
 * [google-in-app-billing-illegalargumentexception-service-intent-must-be-explicit/](http://stackoverflow.com/questions/24480069/google-in-app-billing-illegalargumentexception-service-intent-must-be-explicit/26318757#26318757)

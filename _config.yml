@@ -88,6 +88,6 @@ deploy:
   type: git
   repo: git@github.com:JilyJiang/jilyjiang.github.io.git
   branch: master
-
+  
 
 duoshuo_shortname: jily.duoshuo.com

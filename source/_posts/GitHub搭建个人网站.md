@@ -328,8 +328,7 @@ www 指定的记录是你在 github 注册的仓库。
 
 ### GitHub Pages 的设置
 去到你的jilyjiang.github.io 仓库，点击 CNAME(没有自行创建) ,再点击右下角的编辑，将 jily.org 改成你的域名
-
-
+![cname](http://oa1wnpe3m.bkt.clouddn.com/CNAME.png  "cname")
 
 
 域名绑定成功，域名解析成功，因此你在浏览中输入www.jily.org或者现在jily.org均可以访问到主页。
