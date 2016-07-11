@@ -1,7 +1,7 @@
 layout: post
 title: Android 5.0 (L) Service Intent must be explicit
 comment: true
-tags: [技术, android, service, intent]
+tags: [技术, Android, Service, Intent]
 date: 2016-07-10 11:42:08
 updated: 2016-07-10 11:42:08
 ---

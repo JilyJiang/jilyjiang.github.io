@@ -1,7 +1,7 @@
 layout: post
 title: git读书笔记
 comment: true
-tags: [读书, 技术, git]
+tags: [读书, 技术, Git]
 date: 2016-07-10 22:04:23
 updated: 2016-07-10 22:04:23
 ---
