@@ -8,7 +8,7 @@ updated: 2016-07-11 11:21:52
 
 ------
 # Android5.0有哪些新特性
-因为公司的平台全部切到android5.1.1,除了大名鼎鼎的ART的模式，android5.0以后的新特性一直没有进行汇总，上周出差porting客户的apk发现bind service的大坑后，见我另一篇文章：[Android 5.0 (L) Service Intent must be explicit](http://jily.org/2016/07/10/Android%205.0%20%28L%29%20Service%20Intent%20must%20be%20explicit/)；后来又发现了一个坑，[armeabi-v7a与armeabi的坑]()，这个坑后续补上；
+因为公司的平台全部切到android5.1.1,除了大名鼎鼎的ART的模式，android5.0以后的新特性一直没有进行汇总，上周出差porting客户的apk发现bind service的大坑后，见我另一篇文章：[Android 5.0 (L) Service Intent must be explicit](http://jily.org/2016/07/10/Android%205.0%20%28L%29%20Service%20Intent%20must%20be%20explicit/)；后来又发现了一个坑，[armeabi-v7a与armeabi的坑](http://jily.org/2016/07/11/Android%E4%B8%8Eso%E7%9B%B8%E5%85%B3%E7%9A%84%E4%B8%80%E4%B8%AA%E5%A4%A7%E5%9D%91/)
 
 除了[谷歌官方高大上的特性说明](https://developer.android.com/about/versions/android-5.0-changes.html)外，还有如下坑需要注意：
 <!-- more -->
