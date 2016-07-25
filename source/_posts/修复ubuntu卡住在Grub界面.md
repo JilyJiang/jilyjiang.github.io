@@ -31,8 +31,8 @@ You should first run update, then upgrade. Neither of them automatically runs th
 当进入upgrade运行到一半的时候，<font color=red size=5>Oh，My God!系统引导区坏掉了 </font>系统直接条Grub界面里面去了，给我一个Grub的界面
 
 ```bash 
-	grub>
-grub>
+     grub>
+     grub>
 ```
 心理暗暗祈祷不要救不回来，重装系统就麻烦了，里面的开发工具都是折腾好久的！
 于是乎敲入如下命令：
