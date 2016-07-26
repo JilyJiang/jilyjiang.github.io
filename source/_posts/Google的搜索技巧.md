@@ -1,7 +1,7 @@
 layout: post
 title: Google的搜索技巧
 comment: true
-tags: [技术]
+tags: [技术, 读书]
 date: 2016-07-22 15:20:49
 updated: 2016-07-22 15:20:49
 ---
