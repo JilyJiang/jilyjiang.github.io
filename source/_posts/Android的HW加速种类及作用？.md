@@ -15,7 +15,7 @@ HW加速的这个内容，其实[谷歌的官方网站](https://developer.androi
 **2. Activity**
 **3. Window**
 **4. View**
-
+<!-- more -->
 ### Application level
 ```xml
 <application android:hardwareAccelerated="true" ...>
