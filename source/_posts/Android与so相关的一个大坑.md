@@ -64,3 +64,7 @@ arm64-v8a: 64位支持
 
 <font  color=red size=4>1.为了减小 apk 体积，只保留 armeabi 和 armeabi-v7a 两个文件夹，并保证这两个文件夹中 .so 数量一致
 2.对只提供 armeabi 版本的第三方 .so，原样复制一份到 armeabi-v7a 文件夹</font>
+
+	还有一个简单粗暴的办法，就是直接把系统的abilist改成只有armeabi，拿掉armeabi-v7a等其他配置选项就OK，
+改变<font color=red>ro.product.cpu.abilist</font>即可
+
