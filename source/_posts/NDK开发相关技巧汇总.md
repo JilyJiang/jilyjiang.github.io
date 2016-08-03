@@ -74,41 +74,46 @@ SDK中的做法是指定了minsdk后，选择尽可能高的targetsdk，这样�
 
 使用任何的别人提供的东西，最好获取帮助的方式就是看人家给你的文档和指导。现在的文档都写的很详细了。Android开发者官网上面也有很多关于NDK开发的教程，都值得仔细读一读的。
 
+经常会有同事或朋友问，我当前的Android版本需要采用多少版本的NDK比较合适？
+其实查看官网地址[Codenames, Tags, and Build Numbers](http://source.android.com/source/build-numbers.html)即可
+![android](http://oa1wnpe3m.bkt.clouddn.com/android.png) 
+
+
 ### C++的兼容性调试
-1. __int64找不到符号
+* __int64找不到符号
 采用int64_t来代替：
 ```c
 #if defined(__ANDROID__)
 typedef int64_t __int64;
 #endif
 ```
-2. <sys/io.h>找不到android下不需要直接引用该文件，用下面的宏去掉即可
+* `<sys/io.h>`找不到android下不需要直接引用该文件，用下面的宏去掉即可
 ```c
 #if !defined(__APPLE__) && !defined(__ANDROID__)
 #include <sys/io.h>
 #endif
 ```
-3 .SO_NOSIGPIPE找不到
+* SO_NOSIGPIPE找不到
 SO_NOSIGPIPE在mac中存在，可惜在android中不存在。请使用MSG_NOSIGNAL来代替
 ```
 #if defined(__ANDROID__)
 #define SO_NOSIGPIPE MSG_NOSIGNAL
 #endif
 ```
-4. uint64_t, int64_t, uint32_t, int32_t等类似类型找不到
+* uint64_t, int64_t, uint32_t, int32_t等类似类型找不到
+
 请检查你的头文件包含，将系统的头文件放在自已的头文件之前。因为你自己的头文件有可以定义了重复的类型，导致系统头文件出错。
 
-5. S_IREAD、S_IWRITE或者__S_IREAD、__S_IWRITE找不到
+* S_IREAD、S_IWRITE或者__S_IREAD、__S_IWRITE找不到
 请用S_IRUSR、S_IWUSR代替
 
-6. pthread_cancel找不到
+* pthread_cancel找不到
 这个android并未实现，有一些替代方法，[具体见](http://bbs.rosoo.net/thread-10289-1-1.html)
 
-7. getifaddrs, <ifaddr.h> 找不到
+* getifaddrs, `<ifaddr.h> `找不到
 android并没有实现。不过谢天谢地，有人已经帮我们[实现了](https://github.com/kmackay/android-ifaddrs)。
 
-
-8. <sys/statvfs.h>找不到
+* `<sys/statvfs.h>`找不到
 请用此来代替：
 ```c
 #if defined(__ANDROID__)
