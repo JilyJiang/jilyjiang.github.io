@@ -1,7 +1,7 @@
 layout: post
 title: 跟着Android源码学app开发之settings分析(一)
 comment: true
-tags: [技术, Android, settings]
+tags: [技术, Android, Settings]
 date: 2016-07-26 11:56:50
 updated: 2016-07-26 11:56:50
 ---

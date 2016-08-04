@@ -19,7 +19,7 @@ To specify that the activity does not have an affinity for any task, set it to a
 If this attribute is not set, the activity inherits the affinity set for the application (see the `<application> `element's taskAffinity attribute). The name of the default affinity for an application is the package name set by the `<manifest>` element.
 
 看完是否有一头雾水的状况，直接感觉懵逼了；于是参考stackoverflow的链接进一步分析解释：[What is Android Task Affinity used for?](http://stackoverflow.com/questions/17872989/android-task-affinity-explanation)
-
+<!-- more -->
 * 每个Activity都有taskAffinity属性，这个属性指出了它希望进入的Task；
 * 如果一个Activity没有显式的指明该Activity的taskAffinity，那么它的这个属性就等于Application指明的taskAffinity；
 * 如果Application也没有指明，那么该taskAffinity的值就等于包名。而Task也有自己的affinity属性，它的值等于它的根Activity的taskAffinity的值。
@@ -29,10 +29,11 @@ If this attribute is not set, the activity inherits the affinity set for the app
 #### **第一种情况**
 如果该Activity的allowTaskReparenting设置为true，它进入后台，当一个和它有相同affinity的Task进入前台时，它会重新宿主，进入到该前台的task中。
 
-我们验证一下这种情况。
-Application Activity taskAffinity allowTaskReparenting
-application1 Activity1 com.winuxxan.affinity true
-application2 Activity2 com.winuxxan.affinity false
+我们验证一下这种情况:
+* Application Activity taskAffinity allowTaskReparenting
+* application1 Activity1 com.winuxxan.affinity true
+* application2 Activity2 com.winuxxan.affinity false
+
 
 我们创建两个工程，application1和application2，分别含有Activity1和Activity2，它们的taskAffinity相同，Activity1的allowTaskReparenting为true。
 
@@ -45,7 +46,7 @@ application2 Activity2 com.winuxxan.affinity false
 我们来做一个测试。
 
 我们首先写一个应用，它有两个Activity（Activity1和Activity2），AndroidManifest.xml如下：
-
+```xml
 <application android:icon="@drawable/icon" android:label="@string/app_name">
       <activity android:name=".Activity1"
              android:taskAffinity="com.winuxxan.task"
@@ -58,9 +59,9 @@ application2 Activity2 com.winuxxan.affinity false
              </intent-filter>
       </activity>
 </application>
+```
 Activity2的代码如下：
-
-
+```java
 public class Activity2 extends Activity {
      private static final String TAG = "Activity2";
      @Override
@@ -77,9 +78,9 @@ public class Activity2 extends Activity {
           return super.onTouchEvent(event);
      }
 }
+```
 然后，我们再写一个应用MyActivity，它包含一个Activity（MyActivity），AndroidManifest.xml如下：
-
-
+```xml
 <application
        android:icon="@drawable/icon"
        android:label="@string/app_name">
@@ -92,6 +93,7 @@ public class Activity2 extends Activity {
              </intent-filter>
         </activity>
 </application>
+```
 我们首先启动MyActivity，然后按Home键，返回到桌面，然后打开Activity2，点击Activity2，进入Activity1。然后按返回键。
 
 我们发现，我们进入Activity的顺序为Activity2->Activity1，而返回时顺序为Activity1->MyActivity。这就说明了一个问题，Activity1在启动时，重新宿主到了MyActivity所在的Task中去了。 （因为  android:taskAffinity=”com.winuxxan.task” ）
