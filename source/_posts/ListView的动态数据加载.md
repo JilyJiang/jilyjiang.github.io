@@ -11,7 +11,7 @@ updated: 2016-08-04 22:11:14
 
 ## 通过使用Picasa的网络数据动态更新ListView
 在这个例子中，我们将构建一个从Picasa网络API加载数据并显示在列表中一个ListView。 我们将在几个步骤做到这一点。
-
+<!-- more-->
 * 首先，我们将创建一个空的数据集一个ListView。
 * 其次，对于填充的数据将被检索。
 * 最后，在需要时，我们将加载为每个项目中的图像列表
@@ -205,12 +205,12 @@ public class LoadFeedData extends
           mAdapter.upDateEntries(entries);                        #6
        }
 }
-``` 
- ＃1 LoadFeedData延伸的AsyncTask
- ＃2设置URL，这构成了一个查询到的Picasa API
- ＃3 LoadFeedData构造
- ＃4 retrieveStream方法调用返回的InputStream到Picasa数据
- ＃5呼叫fromJson方式转变JSON字符串转换为对象
+```
+＃1 LoadFeedData延伸的AsyncTask
+＃2设置URL，这构成了一个查询到的Picasa API
+＃3 LoadFeedData构造
+＃4 retrieveStream方法调用返回的InputStream到Picasa数据
+＃5呼叫fromJson方式转变JSON字符串转换为对象
 在适配器＃6呼叫UpdateEntries数据的检索数组来填充它 
 在LoadFeedData左看右看，我们可以看到，这是一个异步类。 Android的异步类允许我们在不同的线程主的Andr​​oid UI线程执行代码。 通过调用一个异步任务执行方法，我们指示它执行的是在一个单独的后台线程其doInBackground方法的任何代码。 在异步任务的完整解释超出了这个例子的范围，但是对这些非常有用的类的更多信息可以在Android开发者网站找到[AsyncTask](https://developer.android.com/training/improving-layouts/smooth-scrolling.html)
 通过本类的​​代码步进，我们可以看到，我们做的第一件事就是建立一个URL（＃2）。 此URL拼成一个查询到的Picasa API。 该参数指出，我们要检索最多20幅影像的缩略图大小的，并涉及到景观和日落。 此外，我们声明，我们希望数据以JSON格式返回。 用于保持简单起见这个URL被硬编码，但是当然有可能建立的网址，可以在运行时做出许多不同类型的查询的目的。 LoadFeedData类的构造函数取到适配器的参考为ListView（＃3），这样我们就可以通知它，当我们从Picasa中API检索提要数据。
