@@ -39,6 +39,8 @@ updated: 2016-07-26 11:56:50
    使用<original-package>标签后，在<activity><service><receiver><provider>中的android:name属性需要写完整的包名，".ClassName"形式无效。
    
    <font color=red size=5>注意:</font>**<manifest>标签中package属性只是告诉系统应用的进程名；因此进程名（Manifest中package属性的值）与<original-package>的值可以不一样**。
+
+若某些客户不想改变他们的apk，但是需要启动我们的apk，这样就需要把我们的报名+类名改成客户apk指定的名字，若你又不想修改源码的代码结构，此时orgin-package就发挥重大用途了；添加origin-package，修改packagename，改完之后，只需要替换R文件的路径即可（先通过AS或eclipse导入新的R，然后ctrl+H替换整个project的R文件即可）
   
 需要注意下
 ```xml
