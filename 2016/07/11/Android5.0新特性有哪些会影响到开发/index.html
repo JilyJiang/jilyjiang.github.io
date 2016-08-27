@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>Android5.0新特性有哪些会影响到开发者？ | jily&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Android5.0有哪些新特性因为公司的平台全部切到android5.1.1,除了大名鼎鼎的ART的模式，android5.0以后的新特性一直没有进行汇总，上周出差porting客户的apk发现bind service的大坑后，见我另一篇文章：Android 5.0 (L) Service Intent must be explicit；后来又发现了一个坑，armeabi-v7a与armeab">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android5.0新特性有哪些会影响到开发者？">
+<meta property="og:url" content="https://github.com/jilyjiang/2016/07/11/Android5.0新特性有哪些会影响到开发/index.html">
+<meta property="og:site_name" content="jily's blog">
+<meta property="og:description" content="Android5.0有哪些新特性因为公司的平台全部切到android5.1.1,除了大名鼎鼎的ART的模式，android5.0以后的新特性一直没有进行汇总，上周出差porting客户的apk发现bind service的大坑后，见我另一篇文章：Android 5.0 (L) Service Intent must be explicit；后来又发现了一个坑，armeabi-v7a与armeab">
+<meta property="og:updated_time" content="2016-07-11T03:21:52.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android5.0新特性有哪些会影响到开发者？">
+<meta name="twitter:description" content="Android5.0有哪些新特性因为公司的平台全部切到android5.1.1,除了大名鼎鼎的ART的模式，android5.0以后的新特性一直没有进行汇总，上周出差porting客户的apk发现bind service的大坑后，见我另一篇文章：Android 5.0 (L) Service Intent must be explicit；后来又发现了一个坑，armeabi-v7a与armeab">
+  
+    <link rel="alternative" href="/atom.xml" title="jily&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/assets/images/favicon/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/assets/images/avatar/avatar.png" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">jily.jiang</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">努力奔跑，只为看更大的世界！</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/tags/随笔">随笔</a></li>
+				        
+							<li><a href="/tags/技术">技术</a></li>
+				        
+							<li><a href="/tags/读书">读书</a></li>
+				        
+							<li><a href="/tags/电影">电影</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/JilyJiang" title="github">github</a>
+					        
+								<a class="zhihu" target="_blank" href="https://zhihu.com" title="zhihu">zhihu</a>
+					        
+								<a class="mail" target="_blank" href="/jily.jiang@hotmail.com" title="mail">mail</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Activity/" style="font-size: 10px;">Activity</a> <a href="/tags/Android/" style="font-size: 16.67px;">Android</a> <a href="/tags/Git/" style="font-size: 13.33px;">Git</a> <a href="/tags/GitHub-Page/" style="font-size: 10px;">GitHub Page</a> <a href="/tags/Grub/" style="font-size: 10px;">Grub</a> <a href="/tags/HW加速/" style="font-size: 10px;">HW加速</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Intent/" style="font-size: 10px;">Intent</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/ListView/" style="font-size: 10px;">ListView</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/NDK/" style="font-size: 13.33px;">NDK</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Settings/" style="font-size: 13.33px;">Settings</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/技术/" style="font-size: 20px;">技术</a> <a href="/tags/电影/" style="font-size: 10px;">电影</a> <a href="/tags/读书/" style="font-size: 13.33px;">读书</a> <a href="/tags/随笔/" style="font-size: 13.33px;">随笔</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://juniperphoton.net/">JuniperPhoton</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://yazhuo.github.io/">yazoo</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">嗯...我是来占领地球的，哈哈哈哈！</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">jily.jiang</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="/assets/images/avatar/avatar.png" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">jily.jiang</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">努力奔跑，只为看更大的世界！</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/tags/随笔">随笔</a></li>
+		        
+					<li><a href="/tags/技术">技术</a></li>
+		        
+					<li><a href="/tags/读书">读书</a></li>
+		        
+					<li><a href="/tags/电影">电影</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/JilyJiang" title="github">github</a>
+			        
+						<a class="zhihu" target="_blank" href="https://zhihu.com" title="zhihu">zhihu</a>
+			        
+						<a class="mail" target="_blank" href="/jily.jiang@hotmail.com" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-Android5.0新特性有哪些会影响到开发" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/07/11/Android5.0新特性有哪些会影响到开发/" class="article-date">
+  	<time datetime="2016-07-11T03:21:52.000Z" itemprop="datePublished">2016-07-11</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Android5.0新特性有哪些会影响到开发者？
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术/">技术</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h1 id="Android5-0有哪些新特性"><a href="#Android5-0有哪些新特性" class="headerlink" title="Android5.0有哪些新特性"></a>Android5.0有哪些新特性</h1><p>因为公司的平台全部切到android5.1.1,除了大名鼎鼎的ART的模式，android5.0以后的新特性一直没有进行汇总，上周出差porting客户的apk发现bind service的大坑后，见我另一篇文章：<a href="http://jily.org/2016/07/10/Android%205.0%20%28L%29%20Service%20Intent%20must%20be%20explicit/" target="_blank" rel="external">Android 5.0 (L) Service Intent must be explicit</a>；后来又发现了一个坑，<a href="http://jily.org/2016/07/11/Android%E4%B8%8Eso%E7%9B%B8%E5%85%B3%E7%9A%84%E4%B8%80%E4%B8%AA%E5%A4%A7%E5%9D%91/" target="_blank" rel="external">armeabi-v7a与armeabi的坑</a></p>
+<p>除了<a href="https://developer.android.com/about/versions/android-5.0-changes.html" target="_blank" rel="external">谷歌官方高大上的特性说明</a>外，还有如下坑需要注意：<br><a id="more"></a></p>
+<ol>
+<li><p>Service must be explitict，从Lollipop开始，service必须显性声明，解决方案：<a href="http://blog.android-develop.com/2014/10/android-l-api-21-javalangillegalargumen.html" target="_blank" rel="external">http://blog.android-develop.com/2014/10/android-l-api-21-javalangillegalargumen.html</a><br>源代码参考<br><code>sdk/sources/android-21/android/app/ContextImpl.java</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">validateServiceIntent</span><span class="params">(Intent service)</span> </span>&#123;</div><div class="line">       <span class="keyword">if</span> (service.getComponent() == <span class="keyword">null</span> &amp;&amp; service.getPackage() == <span class="keyword">null</span>) &#123;</div><div class="line">           <span class="keyword">if</span> (getApplicationInfo().targetSdkVersion &gt;= Build.VERSION_CODES.LOLLIPOP) &#123;</div><div class="line">               IllegalArgumentException ex = <span class="keyword">new</span> IllegalArgumentException(</div><div class="line">                       <span class="string">"Service Intent must be explicit: "</span> + service);</div><div class="line">               <span class="keyword">throw</span> ex;</div><div class="line">           &#125; <span class="keyword">else</span> &#123;</div><div class="line">               Log.w(TAG, <span class="string">"Implicit intents with startService are not safe: "</span> + service</div><div class="line">                       + <span class="string">" "</span> + Debug.getCallers(<span class="number">2</span>, <span class="number">3</span>));</div><div class="line">           &#125;</div><div class="line">       &#125;</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p><a href="https://code.google.com/p/android-developer-preview/issues/detail?id=487" target="_blank" rel="external">Material Design 按钮文字默认大写</a>,奇怪吧，看看源代码就知道</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">name</span>=<span class="string">"TextAppearance.Material.Button"</span>&gt;</span><span class="xml"></span></div><div class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"textSize"</span>&gt;</span>@dimen/text_size_button_material<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"fontFamily"</span>&gt;</span>@string/font_family_button_material<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"textAllCaps"</span>&gt;</span>true<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"textColor"</span>&gt;</span>?attr/textColorPrimary<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>JobScheduler 是可以通过<code>System serviceContext.getSystemService(Context.JOB_SCHEDULER_SERVICE)</code>来获得的，它不依赖于implicit service或者是explicit service，但explicit service是可以与JobScheduler交互，<a href="https://github.com/googlesamples/android-JobScheduler">参考sample</a>。 在app中声明的explicit service，用电是在app头上，所以使用者看到的结果是android os 耗电不会很高，取而代之是各种app在耗电list裹。</p>
+</li>
+<li><p>Material Design Action Bar 默认是有shadow的，是因为新的elevation API, 所以你想去除它，要买在action bar style 的xml中，定义elevation 属性为0，要么</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">getActionBar().setElevation(<span class="number">0</span>)</div></pre></td></tr></table></figure>
+</li>
+<li><p>FlashLight按照以前的接口是不能用了，注意是不能用了，所以一定要做版本适配，Lollipop上把Camera直接杠掉，从新弄了一套Camera2，详情可以去看Lollipop状态栏闪光灯开关的<a href="https://android.googlesource.com/platform/frameworks/base/+/android-5.0.0_r2/packages/SystemUI/src/com/android/systemui/statusbar/policy/FlashlightController.java" target="_blank" rel="external">源码</a></p>
+</li>
+<li><p>ActivityManger中通过getRunningTask获取当前列表也是禁用了，这个是代码上注释的描述</p>
+<blockquote>
+<p>@deprecated As of {@link android.os.Build.VERSION_CODES#LOLLIPOP}, this method is no longer available to third party applications: the introduction of document-centric recents means it can leak person information to the caller. For backwards compatibility, it will still return a small subset of its data: at least the caller’s own tasks, and possibly some other tasks such as home that are known to not be sensitive.<br>这就禁止后我就无法获取到当前运行的packageName了，也就没法进行一些涉及到需求的判断了。目前我还没找到很好的解决方案，涉及到系统设计的问题，可能只能从产品上去改进了</p>
+</blockquote>
+</li>
+<li><p>终于支持Vector图片了，还是SVG标准的，再也不用担心叠加的相框失真了，请戳<br><a href="https://developer.android.com/training/material/drawables.html#VectorDrawables" target="_blank" rel="external">Working with Drawables</a></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">&lt;!-- res/drawable/heart.xml --&gt;</div><div class="line">&lt;vector xmlns:android="http://schemas.android.com/apk/res/android"</div><div class="line">    &lt;!-- intrinsic size of the drawable --&gt;</div><div class="line">    android:height="256dp"</div><div class="line">    android:width="256dp"</div><div class="line">    &lt;!-- size of the virtual canvas --&gt;</div><div class="line">    android:viewportWidth="32"</div><div class="line">    android:viewportHeight="32"&gt;</div><div class="line"></div><div class="line">  &lt;!-- draw a path --&gt;</div><div class="line">  &lt;path android:fillColor="#8fff"</div><div class="line">      android:pathData="M20.5,9.5</div><div class="line">                        c-1.955,0,-3.83,1.268,-4.5,3</div><div class="line">                        c-0.67,-1.732,-2.547,-3,-4.5,-3</div><div class="line">                        C8.957,9.5,7,11.432,7,14</div><div class="line">                        c0,3.53,3.793,6.257,9,11.5</div><div class="line">                        c5.207,-5.242,9,-7.97,9,-11.5</div><div class="line">                        C25,11.432,23.043,9.5,20.5,9.5z" /&gt;</div><div class="line">&lt;/vector&gt;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="参考链接："><a href="#参考链接：" class="headerlink" title="参考链接："></a>参考链接：</h2><ul>
+<li><a href="https://www.zhihu.com/question/26225078" target="_blank" rel="external">https://www.zhihu.com/question/26225078</a></li>
+<li><a href="https://developer.android.com/about/versions/android-5.0-changes.html" target="_blank" rel="external">https://developer.android.com/about/versions/android-5.0-changes.html</a></li>
+</ul>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/07/11/Android与so相关的一个大坑/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Android与so相关的一个大坑
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/07/11/movies01/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">movies01</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Android5.0新特性有哪些会影响到开发" data-title="Android5.0新特性有哪些会影响到开发者？" data-url="https://github.com/jilyjiang/2016/07/11/Android5.0新特性有哪些会影响到开发/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"jily"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 jily.jiang
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

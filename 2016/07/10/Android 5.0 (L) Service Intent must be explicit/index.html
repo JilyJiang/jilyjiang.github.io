@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>Android 5.0 (L) Service Intent must be explicit | jily&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="android 5.0 service bind 必须要显式声明上周在南京出差，在把江苏中国移动的apk从android4.4.4移植到android5.1.1；所有的内容和结构都porting完后，满怀信心的登陆账号+密码，从界面上的第一个icon开始点击测试，一路下来一切正常，正得意的想，工作终于快搞完了O(∩_∩)O哈哈~；结果给我来了一个surprise，What？在点击到最后的应用商城">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android 5.0 (L) Service Intent must be explicit">
+<meta property="og:url" content="https://github.com/jilyjiang/2016/07/10/Android 5.0 (L) Service Intent must be explicit/index.html">
+<meta property="og:site_name" content="jily's blog">
+<meta property="og:description" content="android 5.0 service bind 必须要显式声明上周在南京出差，在把江苏中国移动的apk从android4.4.4移植到android5.1.1；所有的内容和结构都porting完后，满怀信心的登陆账号+密码，从界面上的第一个icon开始点击测试，一路下来一切正常，正得意的想，工作终于快搞完了O(∩_∩)O哈哈~；结果给我来了一个surprise，What？在点击到最后的应用商城">
+<meta property="og:updated_time" content="2016-07-10T03:42:08.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android 5.0 (L) Service Intent must be explicit">
+<meta name="twitter:description" content="android 5.0 service bind 必须要显式声明上周在南京出差，在把江苏中国移动的apk从android4.4.4移植到android5.1.1；所有的内容和结构都porting完后，满怀信心的登陆账号+密码，从界面上的第一个icon开始点击测试，一路下来一切正常，正得意的想，工作终于快搞完了O(∩_∩)O哈哈~；结果给我来了一个surprise，What？在点击到最后的应用商城">
+  
+    <link rel="alternative" href="/atom.xml" title="jily&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/assets/images/favicon/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/assets/images/avatar/avatar.png" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">jily.jiang</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">努力奔跑，只为看更大的世界！</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/tags/随笔">随笔</a></li>
+				        
+							<li><a href="/tags/技术">技术</a></li>
+				        
+							<li><a href="/tags/读书">读书</a></li>
+				        
+							<li><a href="/tags/电影">电影</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/JilyJiang" title="github">github</a>
+					        
+								<a class="zhihu" target="_blank" href="https://zhihu.com" title="zhihu">zhihu</a>
+					        
+								<a class="mail" target="_blank" href="/jily.jiang@hotmail.com" title="mail">mail</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Activity/" style="font-size: 10px;">Activity</a> <a href="/tags/Android/" style="font-size: 16.67px;">Android</a> <a href="/tags/Git/" style="font-size: 13.33px;">Git</a> <a href="/tags/GitHub-Page/" style="font-size: 10px;">GitHub Page</a> <a href="/tags/Grub/" style="font-size: 10px;">Grub</a> <a href="/tags/HW加速/" style="font-size: 10px;">HW加速</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Intent/" style="font-size: 10px;">Intent</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/ListView/" style="font-size: 10px;">ListView</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/NDK/" style="font-size: 13.33px;">NDK</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Settings/" style="font-size: 13.33px;">Settings</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/技术/" style="font-size: 20px;">技术</a> <a href="/tags/电影/" style="font-size: 10px;">电影</a> <a href="/tags/读书/" style="font-size: 13.33px;">读书</a> <a href="/tags/随笔/" style="font-size: 13.33px;">随笔</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://juniperphoton.net/">JuniperPhoton</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://yazhuo.github.io/">yazoo</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">嗯...我是来占领地球的，哈哈哈哈！</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">jily.jiang</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="/assets/images/avatar/avatar.png" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">jily.jiang</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">努力奔跑，只为看更大的世界！</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/tags/随笔">随笔</a></li>
+		        
+					<li><a href="/tags/技术">技术</a></li>
+		        
+					<li><a href="/tags/读书">读书</a></li>
+		        
+					<li><a href="/tags/电影">电影</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/JilyJiang" title="github">github</a>
+			        
+						<a class="zhihu" target="_blank" href="https://zhihu.com" title="zhihu">zhihu</a>
+			        
+						<a class="mail" target="_blank" href="/jily.jiang@hotmail.com" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-Android 5.0 (L) Service Intent must be explicit" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/07/10/Android 5.0 (L) Service Intent must be explicit/" class="article-date">
+  	<time datetime="2016-07-10T03:42:08.000Z" itemprop="datePublished">2016-07-10</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Android 5.0 (L) Service Intent must be explicit
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Intent/">Intent</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Service/">Service</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术/">技术</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h1 id="android-5-0-service-bind-必须要显式声明"><a href="#android-5-0-service-bind-必须要显式声明" class="headerlink" title="android 5.0 service bind 必须要显式声明"></a>android 5.0 service bind 必须要显式声明</h1><p>上周在南京出差，在把江苏中国移动的apk从android4.4.4移植到android5.1.1；所有的内容和结构都porting完后，满怀信心的登陆账号+密码，从界面上的第一个icon开始点击测试，一路下来一切正常，正得意的想，工作终于快搞完了O(∩_∩)O哈哈~；结果给我来了一个<strong>surprise，What？</strong>在点击到最后的应用商城时crash了，于是引出这篇blog</p>
+<h2 id="问题现象："><a href="#问题现象：" class="headerlink" title="问题现象："></a>问题现象：</h2><a id="more"></a>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">Process: com.xxx.appstore, PID: <span class="number">5719</span></div><div class="line">java.lang.RuntimeException: Unable to start activity ComponentInfo&#123;com.xxx.appstore/com.xxx.appstore.authorClient&#125;: java.lang.IllegalArgumentException: Service Intent must be explicit: Intent &#123; act=com.xxx.authorClient.BIND &#125;</div><div class="line">        at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:<span class="number">2255</span>)</div><div class="line">        at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:<span class="number">2317</span>)</div><div class="line">        at android.app.ActivityThread.access$<span class="number">800</span>(ActivityThread.java:<span class="number">143</span>)</div><div class="line">        at android.app.ActivityThread$H.handleMessage(ActivityThread.java:<span class="number">1258</span>)</div><div class="line">        at android.os.Handler.dispatchMessage(Handler.java:<span class="number">102</span>)</div><div class="line">        at android.os.Looper.loop(Looper.java:<span class="number">135</span>)</div><div class="line">        at android.app.ActivityThread.main(ActivityThread.java:<span class="number">5070</span>)</div><div class="line">        at java.lang.reflect.Method.invoke(Native Method)</div><div class="line">        at java.lang.reflect.Method.invoke(Method.java:<span class="number">372</span>)</div><div class="line">        at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:<span class="number">836</span>)</div><div class="line">        at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:<span class="number">631</span>)</div><div class="line"> Caused by: java.lang.IllegalArgumentException: Service Intent must be explicit: Intent &#123; act=com.xxx.authorClient.BIND&#125;</div><div class="line">        at android.app.ContextImpl.validateServiceIntent(ContextImpl.java:<span class="number">1603</span>)</div><div class="line">        at android.app.ContextImpl.bindServiceCommon(ContextImpl.java:<span class="number">1702</span>)</div><div class="line">        at android.app.ContextImpl.bindService(ContextImpl.java:<span class="number">1680</span>)</div><div class="line">        at android.content.ContextWrapper.bindService(ContextWrapper.java:<span class="number">528</span>)</div><div class="line">        at com.tbse.wnswfree.util.IabHelper.startSetup(IabHelper.java:<span class="number">262</span>)</div><div class="line">        at com.tbse.wnswfree.InfoPanel.onStart(InfoPanel.java:<span class="number">709</span>)</div><div class="line">        at android.app.Instrumentation.callActivityOnStart(Instrumentation.java:<span class="number">1217</span>)</div><div class="line">        at android.app.Activity.performStart( Activity.java:<span class="number">5736</span>)</div><div class="line">        at android.app.ActivityThread.performLaunchActivity( ActivityThread.java:<span class="number">2218</span>)</div><div class="line">        at android.app.ActivityThread.handleLaunchActivity( ActivityThread.java:<span class="number">2317</span>)</div><div class="line">        at android.app.ActivityThread.access$<span class="number">800</span>( ActivityThread.java:<span class="number">143</span>)</div><div class="line">        at android.app.ActivityThread$H.handleMessage( ActivityThread.java:<span class="number">1258</span>)</div><div class="line">        ...</div></pre></td></tr></table></figure>
+<p>因为上帝提供的apk是不提供代码，并且原则上他们也不可能修改的代码的；于是乎反编译上帝的apk，然后进行查看源代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Intent intent = <span class="keyword">new</span> Intent(<span class="string">"com.xxx.authorClient.BIND"</span>);</div><div class="line">getContext().bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE);</div></pre></td></tr></table></figure></p>
+<p>看完代码我一脸的懵逼了o(╯□╰)o，这代码看起来没有任何问题啊，于是乎反过来继续排查上述log：<font color="red"><code>java.lang.IllegalArgumentException: Service Intent must be explicit:</code></font><br><strong>What？非法声明异常，service的intent必须显式声明？</strong><br>印象中，android以前没有这个要求的啊，于是查阅android的官网+Google 之；终于找到如下结论：</p>
+<p>`<strong>Since Android 5.0 (Lollipop) bindService() must always be called with an explicit intent. This was previously a recommendation, <font color="red">but since Lollipop it is enforced:</font></strong> java.lang.IllegalArgumentException: Service Intent must be explicit is thrown every time a call to bindService() is made using implicit intents. The difference between implicit and explicit intents is that the latter specifies the component to start by name (the fully-qualified class name). <a href="https://developer.android.com/guide/components/intents-filters.html" target="_blank" rel="external">See the documentation about intent types here</a>.</p>
+<p>The issue you are having is due to not having upgraded to a newer version of the google libraries, which comply with Android’s restrictions on implicit intents when binding a service on Android 5 Lollipop. To fix the issue, you can upgrade the library to a newer version if available, or update the library code yourself and build your project with the modified version.</p>
+<p>If there’s no suitable library upgrade in the general case, you need to modify the source code (in your case  com.google.analytics.tracking.android.AnalyticsGmsCoreClient.connect()) to call intent.setPackage(packageName) before calling bindService() where intent is the first argument of the bundService() call and packageName is the name of the package containing the service the code is attempting to start (in your case “com.google.android.gms.analytics”).</p>
+<p>You can use this code as an example how to do this: <a href="https://github.com/Unity-Technologies/UnityOBBDownloader/blob/master/Plugins/Android/UnityOBBDownloader/src/com/google/android/vending/licensing/LicenseChecker.java">Unity’s updated version of the Google Licensing Library (LVL) which calls bindService with an explicit intent and does not result in IllegalArgumentException</a>.</p>
+<p>Yet another way to get around the problem is to rebuild your project and the google libraries using targetSDK no later than 19. This will make it run without crashing on Lollipop but is the less secure option and prevents you from using SDK functionality introduced in later versions (for Android 5).<br>`<br>哈哈，我知道你们是没有耐心把上述的rootcause全部看完的，肯定急切的想知道，我们只要结论，How to solve this problem？</p>
+<h2 id="解决方案："><a href="#解决方案：" class="headerlink" title="解决方案："></a>解决方案：</h2><h3 id="apk的解决办法："><a href="#apk的解决办法：" class="headerlink" title="apk的解决办法："></a>apk的解决办法：</h3><p>So Easy， add one line  code；<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Intent intent = <span class="keyword">new</span> Intent(<span class="string">"com.xxx.authorClient.BIND"</span>);</div></pre></td></tr></table></figure></p>
+<p>// This is the key line that fixed this problem for me</p>
+<p><font color="red">intent.setPackage(getContext().getPackageName());</font><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">getContext().bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE);</div></pre></td></tr></table></figure></p>
+<p>But,人生总是充满了But，每一个but后面都有一个心酸的故事o(╯□╰)o；上帝的apk可是不会修改的，要改只能我们底层进行修改进行适配：于是从context进行入手了，在里面进行添加校验intent的工作；</p>
+<h3 id="framework的修改方法："><a href="#framework的修改方法：" class="headerlink" title="framework的修改方法："></a>framework的修改方法：</h3><p><a href="https://android.googlesource.com/platform/frameworks/base/+/fd6c7b1%5E!/" target="_blank" rel="external">有google大神android提交一个patch</a></p>
+<pre><code>Fix issue #10378741: configupdater needs to be explicit when it calls startService()
+Not enough time to fix everything, so instead we&apos;ll make it a warning
+in this release and finish up turning it into a target-SDK based
+exception in the next release.
+
+Change-Id: I5aae64a1225a145f03ba4162238b53d5e401aba2
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div></pre></td><td class="code"><pre><div class="line">diff --git a/core/java/android/app/ContextImpl.java b/core/java/android/app/ContextImpl.java</div><div class="line">index <span class="number">300424</span>c..<span class="number">0</span>ad0a99 <span class="number">100644</span></div><div class="line">--- a/core/java/android/app/ContextImpl.java</div><div class="line">+++ b/core/java/android/app/ContextImpl.java</div><div class="line">@@ -<span class="number">1453</span>,<span class="number">29</span> +<span class="number">1453</span>,<span class="number">39</span> @@</div><div class="line">         &#125;</div><div class="line">     &#125;</div><div class="line"> </div><div class="line">+    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">validateServiceIntent</span><span class="params">(Intent service)</span> </span>&#123;</div><div class="line">+        <span class="keyword">if</span> (service.getComponent() == <span class="keyword">null</span> &amp;&amp; service.getPackage() == <span class="keyword">null</span>) &#123;</div><div class="line">+            <span class="keyword">if</span> (<span class="keyword">true</span> || getApplicationInfo().targetSdkVersion &gt;= Build.VERSION_CODES.KITKAT) &#123;</div><div class="line">+                Log.w(TAG, <span class="string">"Implicit intents with startService are not safe: "</span> + service</div><div class="line">+                        + <span class="string">" "</span> + Debug.getCallers(<span class="number">2</span>, <span class="number">3</span>));</div><div class="line">+                <span class="comment">//IllegalArgumentException ex = new IllegalArgumentException(</span></div><div class="line">+                <span class="comment">//        "Service Intent must be explicit: " + service);</span></div><div class="line">+                <span class="comment">//Log.e(TAG, "This will become an error", ex);</span></div><div class="line">+                <span class="comment">//throw ex;</span></div><div class="line">+            &#125;</div><div class="line">+        &#125;</div><div class="line">+    &#125;</div><div class="line">+</div><div class="line">     <span class="meta">@Override</span></div><div class="line">     <span class="function"><span class="keyword">public</span> ComponentName <span class="title">startService</span><span class="params">(Intent service)</span> </span>&#123;</div><div class="line">         warnIfCallingFromSystemProcess();</div><div class="line">-        <span class="keyword">return</span> startServiceAsUser(service, mUser);</div><div class="line">+        <span class="keyword">return</span> startServiceCommon(service, mUser);</div><div class="line">     &#125;</div><div class="line"> </div><div class="line">     <span class="meta">@Override</span></div><div class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">stopService</span><span class="params">(Intent service)</span> </span>&#123;</div><div class="line">         warnIfCallingFromSystemProcess();</div><div class="line">-        <span class="keyword">return</span> stopServiceAsUser(service, mUser);</div><div class="line">+        <span class="keyword">return</span> stopServiceCommon(service, mUser);</div><div class="line">     &#125;</div><div class="line"> </div><div class="line">     <span class="meta">@Override</span></div><div class="line">     <span class="function"><span class="keyword">public</span> ComponentName <span class="title">startServiceAsUser</span><span class="params">(Intent service, UserHandle user)</span> </span>&#123;</div><div class="line">+        <span class="keyword">return</span> startServiceCommon(service, user);</div><div class="line">+    &#125;</div><div class="line">+</div><div class="line">+    <span class="function"><span class="keyword">private</span> ComponentName <span class="title">startServiceCommon</span><span class="params">(Intent service, UserHandle user)</span> </span>&#123;</div><div class="line">         <span class="keyword">try</span> &#123;</div><div class="line">-            <span class="keyword">if</span> (service.getComponent() == <span class="keyword">null</span> &amp;&amp; service.getPackage() == <span class="keyword">null</span>) &#123;</div><div class="line">-                <span class="keyword">if</span> (getApplicationInfo().targetSdkVersion &gt;= Build.VERSION_CODES.KITKAT) &#123;</div><div class="line">-                    IllegalArgumentException ex = <span class="keyword">new</span> IllegalArgumentException(</div><div class="line">-                            <span class="string">"Service Intent must be explicit: "</span> + service);</div><div class="line">-                    Log.e(TAG, <span class="string">"This will become an error"</span>, ex);</div><div class="line">-                    <span class="comment">//throw ex;</span></div><div class="line">-                &#125;</div><div class="line">-            &#125;</div><div class="line">+            validateServiceIntent(service);</div><div class="line">             service.prepareToLeaveProcess();</div><div class="line">             ComponentName cn = ActivityManagerNative.getDefault().startService(</div><div class="line">                 mMainThread.getApplicationThread(), service,</div><div class="line">@@ -<span class="number">1499</span>,<span class="number">15</span> +<span class="number">1509</span>,<span class="number">12</span> @@</div><div class="line"> </div><div class="line">     <span class="meta">@Override</span></div><div class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">stopServiceAsUser</span><span class="params">(Intent service, UserHandle user)</span> </span>&#123;</div><div class="line">+        <span class="keyword">return</span> stopServiceCommon(service, user);</div><div class="line">+    &#125;</div><div class="line">+</div><div class="line">+    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">stopServiceCommon</span><span class="params">(Intent service, UserHandle user)</span> </span>&#123;</div><div class="line">         <span class="keyword">try</span> &#123;</div><div class="line">-            <span class="keyword">if</span> (service.getComponent() == <span class="keyword">null</span> &amp;&amp; service.getPackage() == <span class="keyword">null</span>) &#123;</div><div class="line">-                <span class="keyword">if</span> (getApplicationInfo().targetSdkVersion &gt;= Build.VERSION_CODES.KITKAT) &#123;</div><div class="line">-                    IllegalArgumentException ex = <span class="keyword">new</span> IllegalArgumentException(</div><div class="line">-                            <span class="string">"Service Intent must be explicit: "</span> + service);</div><div class="line">-                    Log.e(TAG, <span class="string">"This will become an error"</span>, ex);</div><div class="line">-                    <span class="comment">//throw ex;</span></div><div class="line">-                &#125;</div><div class="line">-            &#125;</div><div class="line">+            validateServiceIntent(service);</div><div class="line">             service.prepareToLeaveProcess();</div><div class="line">             <span class="keyword">int</span> res = ActivityManagerNative.getDefault().stopService(</div><div class="line">                 mMainThread.getApplicationThread(), service,</div><div class="line">@@ -<span class="number">1526</span>,<span class="number">12</span> +<span class="number">1533</span>,<span class="number">17</span> @@</div><div class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">bindService</span><span class="params">(Intent service, ServiceConnection conn,</span></span></div><div class="line">             <span class="keyword">int</span> flags) &#123;</div><div class="line">         warnIfCallingFromSystemProcess();</div><div class="line">-        <span class="keyword">return</span> bindServiceAsUser(service, conn, flags, Process.myUserHandle());</div><div class="line">+        <span class="keyword">return</span> bindServiceCommon(service, conn, flags, Process.myUserHandle());</div><div class="line">     &#125;</div><div class="line"> </div><div class="line">     <span class="comment">/** <span class="doctag">@hide</span> */</span></div><div class="line">     <span class="meta">@Override</span></div><div class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">bindServiceAsUser</span><span class="params">(Intent service, ServiceConnection conn, <span class="keyword">int</span> flags,</span></span></div><div class="line">+            UserHandle user) &#123;</div><div class="line">+        <span class="keyword">return</span> bindServiceCommon(service, conn, flags, user);</div><div class="line">+    &#125;</div><div class="line">+</div><div class="line">+    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">bindServiceCommon</span><span class="params">(Intent service, ServiceConnection conn, <span class="keyword">int</span> flags,</span></span></div><div class="line">             UserHandle user) &#123;</div><div class="line">         IServiceConnection sd;</div><div class="line">         <span class="keyword">if</span> (conn == <span class="keyword">null</span>) &#123;</div><div class="line">@@ -<span class="number">1543</span>,<span class="number">14</span> +<span class="number">1555</span>,<span class="number">7</span> @@</div><div class="line">         &#125; <span class="keyword">else</span> &#123;</div><div class="line">             <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"Not supported in system context"</span>);</div><div class="line">         &#125;</div><div class="line">-        <span class="keyword">if</span> (service.getComponent() == <span class="keyword">null</span> &amp;&amp; service.getPackage() == <span class="keyword">null</span>) &#123;</div><div class="line">-            <span class="keyword">if</span> (getApplicationInfo().targetSdkVersion &gt;= Build.VERSION_CODES.KITKAT) &#123;</div><div class="line">-                IllegalArgumentException ex = <span class="keyword">new</span> IllegalArgumentException(</div><div class="line">-                        <span class="string">"Service Intent must be explicit: "</span> + service);</div><div class="line">-                Log.e(TAG, <span class="string">"This will become an error"</span>, ex);</div><div class="line">-                <span class="comment">//throw ex;</span></div><div class="line">-            &#125;</div><div class="line">-        &#125;</div><div class="line">+        validateServiceIntent(service);</div><div class="line">         <span class="keyword">try</span> &#123;</div><div class="line">             IBinder token = getActivityToken();</div><div class="line">             <span class="keyword">if</span> (token == <span class="keyword">null</span> &amp;&amp; (flags&amp;BIND_AUTO_CREATE) == <span class="number">0</span> &amp;&amp; mPackageInfo != <span class="keyword">null</span></div><div class="line">diff --git a/core/java/android/os/Debug.java b/core/java/android/os/Debug.java</div><div class="line">index ea9fd06..<span class="number">2e3</span>b81d <span class="number">100644</span></div><div class="line">--- a/core/java/android/os/Debug.java</div><div class="line">+++ b/core/java/android/os/Debug.java</div><div class="line">@@ -<span class="number">1582</span>,<span class="number">6</span> +<span class="number">1582</span>,<span class="number">22</span> @@</div><div class="line">     &#125;</div><div class="line"> </div><div class="line">     <span class="comment">/**</span></div><div class="line">+     * Return a string consisting of methods and locations at multiple call stack levels.</div><div class="line">+     * <span class="doctag">@param</span> depth the number of levels to return, starting with the immediate caller.</div><div class="line">+     * <span class="doctag">@return</span> a string describing the call stack.</div><div class="line">+     * &#123;<span class="doctag">@hide</span>&#125;</div><div class="line">+     */</div><div class="line">+    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getCallers</span><span class="params">(<span class="keyword">final</span> <span class="keyword">int</span> start, <span class="keyword">int</span> depth)</span> </span>&#123;</div><div class="line">+        <span class="keyword">final</span> StackTraceElement[] callStack = Thread.currentThread().getStackTrace();</div><div class="line">+        StringBuffer sb = <span class="keyword">new</span> StringBuffer();</div><div class="line">+        depth += start;</div><div class="line">+        <span class="keyword">for</span> (<span class="keyword">int</span> i = start; i &lt; depth; i++) &#123;</div><div class="line">+            sb.append(getCaller(callStack, i)).append(<span class="string">" "</span>);</div><div class="line">+        &#125;</div><div class="line">+        <span class="keyword">return</span> sb.toString();</div><div class="line">+    &#125;</div><div class="line">+</div><div class="line">+    <span class="comment">/**</span></div><div class="line">      * Like &#123;<span class="doctag">@link</span> #getCallers(int)&#125;, but each location is append to the string</div><div class="line">      * as a new line with &lt;var&gt;linePrefix&lt;/var&gt; in front of it.</div><div class="line">      * <span class="doctag">@param</span> depth the number of levels to return, starting with the immediate caller.</div><div class="line">      */</div></pre></td></tr></table></figure>
+<h2 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h2><ul>
+<li><a href="http://stackoverflow.com/questions/24480069/google-in-app-billing-illegalargumentexception-service-intent-must-be-explicit/26318757#26318757" target="_blank" rel="external">google-in-app-billing-illegalargumentexception-service-intent-must-be-explicit/</a></li>
+<li><a href="http://stackoverflow.com/questions/26530565/android-5-0-l-service-intent-must-be-explicit-in-google-analytics" target="_blank" rel="external">Android 5.0 (L) Service Intent must be explicit in Google analytics</a></li>
+</ul>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/07/10/TODO/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          TODO
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/07/09/Markdown的基本操作命令/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Markdown基本语法入门</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Android 5.0 (L) Service Intent must be explicit" data-title="Android 5.0 (L) Service Intent must be explicit" data-url="https://github.com/jilyjiang/2016/07/10/Android 5.0 (L) Service Intent must be explicit/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"jily"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 jily.jiang
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

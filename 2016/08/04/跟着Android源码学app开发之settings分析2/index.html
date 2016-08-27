@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>跟着Android源码学app开发之settings分析（二） | jily&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="android:taskAffinity谷歌官网解释The task that the activity has an affinity for. Activities with the same affinity conceptually belong to the same task (to the same “application” from the user’s perspective">
+<meta property="og:type" content="article">
+<meta property="og:title" content="跟着Android源码学app开发之settings分析（二）">
+<meta property="og:url" content="https://github.com/jilyjiang/2016/08/04/跟着Android源码学app开发之settings分析2/index.html">
+<meta property="og:site_name" content="jily's blog">
+<meta property="og:description" content="android:taskAffinity谷歌官网解释The task that the activity has an affinity for. Activities with the same affinity conceptually belong to the same task (to the same “application” from the user’s perspective">
+<meta property="og:updated_time" content="2016-08-04T13:12:53.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="跟着Android源码学app开发之settings分析（二）">
+<meta name="twitter:description" content="android:taskAffinity谷歌官网解释The task that the activity has an affinity for. Activities with the same affinity conceptually belong to the same task (to the same “application” from the user’s perspective">
+  
+    <link rel="alternative" href="/atom.xml" title="jily&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/assets/images/favicon/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/assets/images/avatar/avatar.png" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">jily.jiang</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">努力奔跑，只为看更大的世界！</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/tags/随笔">随笔</a></li>
+				        
+							<li><a href="/tags/技术">技术</a></li>
+				        
+							<li><a href="/tags/读书">读书</a></li>
+				        
+							<li><a href="/tags/电影">电影</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/JilyJiang" title="github">github</a>
+					        
+								<a class="zhihu" target="_blank" href="https://zhihu.com" title="zhihu">zhihu</a>
+					        
+								<a class="mail" target="_blank" href="/jily.jiang@hotmail.com" title="mail">mail</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Activity/" style="font-size: 10px;">Activity</a> <a href="/tags/Android/" style="font-size: 16.67px;">Android</a> <a href="/tags/Git/" style="font-size: 13.33px;">Git</a> <a href="/tags/GitHub-Page/" style="font-size: 10px;">GitHub Page</a> <a href="/tags/Grub/" style="font-size: 10px;">Grub</a> <a href="/tags/HW加速/" style="font-size: 10px;">HW加速</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Intent/" style="font-size: 10px;">Intent</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/ListView/" style="font-size: 10px;">ListView</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/NDK/" style="font-size: 13.33px;">NDK</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Settings/" style="font-size: 13.33px;">Settings</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/技术/" style="font-size: 20px;">技术</a> <a href="/tags/电影/" style="font-size: 10px;">电影</a> <a href="/tags/读书/" style="font-size: 13.33px;">读书</a> <a href="/tags/随笔/" style="font-size: 13.33px;">随笔</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://juniperphoton.net/">JuniperPhoton</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://yazhuo.github.io/">yazoo</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">嗯...我是来占领地球的，哈哈哈哈！</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">jily.jiang</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="/assets/images/avatar/avatar.png" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">jily.jiang</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">努力奔跑，只为看更大的世界！</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/tags/随笔">随笔</a></li>
+		        
+					<li><a href="/tags/技术">技术</a></li>
+		        
+					<li><a href="/tags/读书">读书</a></li>
+		        
+					<li><a href="/tags/电影">电影</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/JilyJiang" title="github">github</a>
+			        
+						<a class="zhihu" target="_blank" href="https://zhihu.com" title="zhihu">zhihu</a>
+			        
+						<a class="mail" target="_blank" href="/jily.jiang@hotmail.com" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-跟着Android源码学app开发之settings分析2" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/08/04/跟着Android源码学app开发之settings分析2/" class="article-date">
+  	<time datetime="2016-08-04T13:12:53.000Z" itemprop="datePublished">2016-08-04</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      跟着Android源码学app开发之settings分析（二）
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Settings/">Settings</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术/">技术</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h3 id="android-taskAffinity"><a href="#android-taskAffinity" class="headerlink" title="android:taskAffinity"></a><code>android:taskAffinity</code></h3><p><a href="https://developer.android.com/guide/topics/manifest/activity-element.html#aff" target="_blank" rel="external">谷歌官网解释</a><br>The task that the activity has an affinity for. Activities with the same affinity conceptually belong to the same task (to the same “application” from the user’s perspective). The affinity of a task is determined by the affinity of its root activity.<br>The affinity determines two things — the task that the activity is re-parented to (see the allowTaskReparenting attribute) and the task that will house the activity when it is launched with the FLAG_ACTIVITY_NEW_TASK flag.</p>
+<p>By default, all activities in an application have the same affinity.<br>You can set this attribute to group them differently, and even place activities defined in different applications within the same task.<br>To specify that the activity does not have an affinity for any task, set it to an empty string.</p>
+<p>If this attribute is not set, the activity inherits the affinity set for the application (see the <code>&lt;application&gt;</code>element’s taskAffinity attribute). The name of the default affinity for an application is the package name set by the <code>&lt;manifest&gt;</code> element.</p>
+<p>看完是否有一头雾水的状况，直接感觉懵逼了；于是参考stackoverflow的链接进一步分析解释：<a href="http://stackoverflow.com/questions/17872989/android-task-affinity-explanation" target="_blank" rel="external">What is Android Task Affinity used for?</a><br><a id="more"></a></p>
+<ul>
+<li>每个Activity都有taskAffinity属性，这个属性指出了它希望进入的Task；</li>
+<li>如果一个Activity没有显式的指明该Activity的taskAffinity，那么它的这个属性就等于Application指明的taskAffinity；</li>
+<li>如果Application也没有指明，那么该taskAffinity的值就等于包名。而Task也有自己的affinity属性，它的值等于它的根Activity的taskAffinity的值。</li>
+</ul>
+<p>一开始，创建的Activity都会在创建它的Task中，并且大部分都在这里度过了它的整个生命。然而有一些情况，创建的Activity会被分配其它的Task中去，有的甚至，本来在一个Task中，之后出现了转移。我们首先分析一下android文档给我们介绍的两种情况。</p>
+<h4 id="第一种情况"><a href="#第一种情况" class="headerlink" title="第一种情况"></a><strong>第一种情况</strong></h4><p>如果该Activity的allowTaskReparenting设置为true，它进入后台，当一个和它有相同affinity的Task进入前台时，它会重新宿主，进入到该前台的task中。</p>
+<p>我们验证一下这种情况:</p>
+<ul>
+<li>Application Activity taskAffinity allowTaskReparenting</li>
+<li>application1 Activity1 com.winuxxan.affinity true</li>
+<li>application2 Activity2 com.winuxxan.affinity false</li>
+</ul>
+<p>我们创建两个工程，application1和application2，分别含有Activity1和Activity2，它们的taskAffinity相同，Activity1的allowTaskReparenting为true。</p>
+<p>首先，我们启动application1,加载Activity1，然后按Home键，使该task（假设为task1）进入后台。然后启动application2，默认加载Activity2。</p>
+<p>我们看到了什么现象？没错，本来应该是显示Activity2，但是我们却看到了Activity1。实际上Activity2也被加载了，只是Activity1重新宿主，所以看到了Activity1。</p>
+<p>第二种情况。如果加载某个Activity的intent，Flag被设置成FLAG_ACTIVITY_NEW_TASK时，它会首先检查是否存在与自己taskAffinity相同的Task，如果存在，那么它会直接宿主到该Task中，如果不存在则重新创建Task。</p>
+<p>我们来做一个测试。</p>
+<p>我们首先写一个应用，它有两个Activity（Activity1和Activity2），AndroidManifest.xml如下：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">application</span> <span class="attr">android:icon</span>=<span class="string">"@drawable/icon"</span> <span class="attr">android:label</span>=<span class="string">"@string/app_name"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">activity</span> <span class="attr">android:name</span>=<span class="string">".Activity1"</span></span></div><div class="line">             <span class="attr">android:taskAffinity</span>=<span class="string">"com.winuxxan.task"</span></div><div class="line">             <span class="attr">android:label</span>=<span class="string">"@string/app_name"</span>&gt;</div><div class="line">      <span class="tag">&lt;/<span class="name">activity</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">activity</span> <span class="attr">android:name</span>=<span class="string">".Activity2"</span>&gt;</span></div><div class="line">             <span class="tag">&lt;<span class="name">intent-filter</span>&gt;</span></div><div class="line">                   <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">"android.intent.action.MAIN"</span> /&gt;</span></div><div class="line">                   <span class="tag">&lt;<span class="name">category</span> <span class="attr">android:name</span>=<span class="string">"android.intent.category.LAUNCHER"</span> /&gt;</span></div><div class="line">             <span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">activity</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">application</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>Activity2的代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Activity2</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</div><div class="line">     <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String TAG = <span class="string">"Activity2"</span>;</div><div class="line">     <span class="meta">@Override</span></div><div class="line">     <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">          <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">          setContentView(R.layout.main2);</div><div class="line">     &#125;</div><div class="line"> </div><div class="line">     <span class="meta">@Override</span></div><div class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onTouchEvent</span><span class="params">(MotionEvent event)</span> </span>&#123;</div><div class="line">          Intent intent = <span class="keyword">new</span> Intent(<span class="keyword">this</span>, Activity1.class);</div><div class="line">          intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);</div><div class="line">          startActivity(intent);</div><div class="line">          <span class="keyword">return</span> <span class="keyword">super</span>.onTouchEvent(event);</div><div class="line">     &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>然后，我们再写一个应用MyActivity，它包含一个Activity（MyActivity），AndroidManifest.xml如下：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">application</span></span></div><div class="line">       <span class="attr">android:icon</span>=<span class="string">"@drawable/icon"</span></div><div class="line">       <span class="attr">android:label</span>=<span class="string">"@string/app_name"</span>&gt;</div><div class="line">       <span class="tag">&lt;<span class="name">activity</span> <span class="attr">android:name</span>=<span class="string">".MyActivity"</span></span></div><div class="line">             <span class="attr">android:taskAffinity</span>=<span class="string">"com.winuxxan.task"</span></div><div class="line">             <span class="attr">android:label</span>=<span class="string">"@string/app_name"</span>&gt;</div><div class="line">             <span class="tag">&lt;<span class="name">intent-filter</span>&gt;</span></div><div class="line">                   <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">"android.intent.action.MAIN"</span>/&gt;</span></div><div class="line">                   <span class="tag">&lt;<span class="name">category</span> <span class="attr">android:name</span>=<span class="string">"android.intent.category.LAUNCHER"</span>/&gt;</span></div><div class="line">             <span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">activity</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">application</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>我们首先启动MyActivity，然后按Home键，返回到桌面，然后打开Activity2，点击Activity2，进入Activity1。然后按返回键。</p>
+<p>我们发现，我们进入Activity的顺序为Activity2-&gt;Activity1，而返回时顺序为Activity1-&gt;MyActivity。这就说明了一个问题，Activity1在启动时，重新宿主到了MyActivity所在的Task中去了。 （因为  android:taskAffinity=”com.winuxxan.task” ）</p>
+<p>以上是验证了文档中提出的两种TaskAffinity的用法。</p>
+<p>下面就是见证奇迹的时刻，同志们，不要眨眼！</p>
+<p>我们现在将上一段时间文章中的launchMode和本文讲的taskAffinity结合起来。</p>
+<p>首先是singleTask加载模式与taskAffinity的结合。</p>
+<p>我们还是用上一段时间文章的singleTask的代码，这里就不在列出来了，请读者自己查阅上一文。唯一不同的就是，我们为MyActivity和Activity1设置成相同的taskAffinity，重新执行上文的测试。</p>
+<p>我们发现测试结果令我们惊讶：从同一应用程序启动singleTask和不同应用程序启动的结果完全与上文讲的相反！</p>
+<p>我们经过思考，就可以把从同一应用程序执行和从不同应用程序执行另种方式同一起来，得到一个结论：</p>
+<p>当一个应用程序加载一个singleTask模式的Activity时，首先该Activity会检查是否存在与它的taskAffinity相同的Task。</p>
+<p>1、如果存在，那么检查是否实例化，如果已经实例化，那么销毁在该Activity以上的Activity并调用onNewIntent。如果没有实例化，那么该Activity实例化并入栈。</p>
+<p>2、如果不存在，那么就重新创建Task，并入栈。</p>
+<p>用一个流程来表示：</p>
+<p>然后我们来检测singleInstance模式融入taskAffinity时的情况，我们也是用上文中测试singleInstance的例子，在此不列出，读者翻阅前文查阅。唯一不同的是，我们将MyActivity和Activity2设置成相同的taskAffinity。</p>
+<p>我们发现测试结果也有一定的出入，就是，当从singleInstance中启动Activity时，并没用重新创建一个Task，而是进入了和它具有相同affinity的MyActivity所在的Task。</p>
+<p>于是，我们也能得到以下结论：</p>
+<p>1、当一个应用程序加载一个singleInstance模式的Activity时，如果该Activity没有被实例化，那么就重新创建一个Task，并入栈，如果已经被实例化，那么就调用该Activity的onNewIntent；</p>
+<p>2、singleInstance的Activity所在的Task不允许存在其他Activity，任何从该Activity加载的其它Activity（假设为Activity2）都会被放入其它的Task中，如果存在与Activity2相同affinity的Task，则在该Task内创建Activity2。如果不存在，则重新生成新的Task并入栈。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/08/04/ListView的动态数据加载/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          译：ListView的动态数据加载
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/08/04/Activity启动模式详解/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Activity启动模式详解</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="跟着Android源码学app开发之settings分析2" data-title="跟着Android源码学app开发之settings分析（二）" data-url="https://github.com/jilyjiang/2016/08/04/跟着Android源码学app开发之settings分析2/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"jily"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 jily.jiang
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

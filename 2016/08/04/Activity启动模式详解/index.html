@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>Activity启动模式详解 | jily&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="在介绍四种启动模式之前，先介绍一下Task栈的相关知识，task是一个具有栈结构的容器，可以放置多个Activity实例。启动一个应用，系统就会为之创建一个task，来放置根Activity；默认情况下，一个Activity启动另一个Activity时，两个Activity是放置在同一个task中的，后者被压入前者所在的task栈，当用户按下后退键，后者从task被弹出，前者又显示在幕前，特别是">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Activity启动模式详解">
+<meta property="og:url" content="https://github.com/jilyjiang/2016/08/04/Activity启动模式详解/index.html">
+<meta property="og:site_name" content="jily's blog">
+<meta property="og:description" content="在介绍四种启动模式之前，先介绍一下Task栈的相关知识，task是一个具有栈结构的容器，可以放置多个Activity实例。启动一个应用，系统就会为之创建一个task，来放置根Activity；默认情况下，一个Activity启动另一个Activity时，两个Activity是放置在同一个task中的，后者被压入前者所在的task栈，当用户按下后退键，后者从task被弹出，前者又显示在幕前，特别是">
+<meta property="og:image" content="http://img.blog.csdn.net/20150603102458040?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWF5dW4wNTE2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:image" content="http://img.blog.csdn.net/20150603102840651?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWF5dW4wNTE2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:image" content="http://img.blog.csdn.net/20150603103549669?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWF5dW4wNTE2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:image" content="http://img.blog.csdn.net/20150603105015340?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWF5dW4wNTE2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:image" content="http://img.blog.csdn.net/20150603105554358?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWF5dW4wNTE2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:image" content="http://img.blog.csdn.net/20150603124043982?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWF5dW4wNTE2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:image" content="http://img.blog.csdn.net/20150603124235346?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWF5dW4wNTE2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:image" content="http://img.blog.csdn.net/20150603143830763?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWF5dW4wNTE2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:image" content="http://img.blog.csdn.net/20150603144158306?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWF5dW4wNTE2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:updated_time" content="2016-08-04T09:26:17.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Activity启动模式详解">
+<meta name="twitter:description" content="在介绍四种启动模式之前，先介绍一下Task栈的相关知识，task是一个具有栈结构的容器，可以放置多个Activity实例。启动一个应用，系统就会为之创建一个task，来放置根Activity；默认情况下，一个Activity启动另一个Activity时，两个Activity是放置在同一个task中的，后者被压入前者所在的task栈，当用户按下后退键，后者从task被弹出，前者又显示在幕前，特别是">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20150603102458040?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWF5dW4wNTE2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+  
+    <link rel="alternative" href="/atom.xml" title="jily&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/assets/images/favicon/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/assets/images/avatar/avatar.png" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">jily.jiang</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">努力奔跑，只为看更大的世界！</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/tags/随笔">随笔</a></li>
+				        
+							<li><a href="/tags/技术">技术</a></li>
+				        
+							<li><a href="/tags/读书">读书</a></li>
+				        
+							<li><a href="/tags/电影">电影</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/JilyJiang" title="github">github</a>
+					        
+								<a class="zhihu" target="_blank" href="https://zhihu.com" title="zhihu">zhihu</a>
+					        
+								<a class="mail" target="_blank" href="/jily.jiang@hotmail.com" title="mail">mail</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Activity/" style="font-size: 10px;">Activity</a> <a href="/tags/Android/" style="font-size: 16.67px;">Android</a> <a href="/tags/Git/" style="font-size: 13.33px;">Git</a> <a href="/tags/GitHub-Page/" style="font-size: 10px;">GitHub Page</a> <a href="/tags/Grub/" style="font-size: 10px;">Grub</a> <a href="/tags/HW加速/" style="font-size: 10px;">HW加速</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Intent/" style="font-size: 10px;">Intent</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/ListView/" style="font-size: 10px;">ListView</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/NDK/" style="font-size: 13.33px;">NDK</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Settings/" style="font-size: 13.33px;">Settings</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/技术/" style="font-size: 20px;">技术</a> <a href="/tags/电影/" style="font-size: 10px;">电影</a> <a href="/tags/读书/" style="font-size: 13.33px;">读书</a> <a href="/tags/随笔/" style="font-size: 13.33px;">随笔</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://juniperphoton.net/">JuniperPhoton</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://yazhuo.github.io/">yazoo</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">嗯...我是来占领地球的，哈哈哈哈！</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">jily.jiang</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="/assets/images/avatar/avatar.png" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">jily.jiang</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">努力奔跑，只为看更大的世界！</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/tags/随笔">随笔</a></li>
+		        
+					<li><a href="/tags/技术">技术</a></li>
+		        
+					<li><a href="/tags/读书">读书</a></li>
+		        
+					<li><a href="/tags/电影">电影</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/JilyJiang" title="github">github</a>
+			        
+						<a class="zhihu" target="_blank" href="https://zhihu.com" title="zhihu">zhihu</a>
+			        
+						<a class="mail" target="_blank" href="/jily.jiang@hotmail.com" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-Activity启动模式详解" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/08/04/Activity启动模式详解/" class="article-date">
+  	<time datetime="2016-08-04T09:26:17.000Z" itemprop="datePublished">2016-08-04</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Activity启动模式详解
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Activity/">Activity</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术/">技术</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<p>在介绍四种启动模式之前，先介绍一下Task栈的相关知识，task是一个具有栈结构的容器，可以放置多个Activity实例。<br>启动一个应用，系统就会为之创建一个task，来放置根Activity；默认情况下，一个Activity启动另一个Activity时，两个Activity是放置在同一个task中的，后者被压入前者所在的task栈，当用户按下后退键，后者从task被弹出，前者又显示在幕前，特别是启动其他应用中的Activity时，两个Activity对用户来说就好像是属于同一个应用；系统task和task之间是互相独立的，当我们运行一个应用时，按下Home键回到主屏，启动另一个应用，这个过程中，之前的task被转移到后台，新的task被转移到前台，其根Activity也会显示到幕前，过了一会之后，在此按下Home键回到主屏，再选择之前的应用，之前的task会被转移到前台，系统仍然保留着task内的所有Activity实例，而那个新的task会被转移到后台，如果这时用户再做后退等动作，就是针对该task内部进行操作了。<br>下面介绍一下启动模式，启动模式一共有四种：<strong>standard、singleTop、singleTask、singleInstance</strong>，可以在AndroidManifest.xml文件中通过给<activity>标签指定android:launchMode属性来选择启动模式，下面来逐个研究。</activity></p>
+<h2 id="一、standard模式"><a href="#一、standard模式" class="headerlink" title="一、standard模式"></a>一、standard模式</h2><p>standard是默认启动方式，所有活动会自动使用这种模式。Android使用Task栈来管理活动的，在本模式下，每当启动一个新的活动，它就会在Task栈中入栈，并处于栈顶位置。对于该模式下，系统不会在乎是否这个活动已经在栈中，每次启动都会创建该活动的一个新的实例。下面我们通过程序观察一下：<br><a id="more"></a><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> org.jily.demo;</div><div class="line"></div><div class="line"><span class="keyword">import</span> android.app.Activity;</div><div class="line"><span class="keyword">import</span> android.content.Intent;</div><div class="line"><span class="keyword">import</span> android.os.Bundle;</div><div class="line"><span class="keyword">import</span> android.util.Log;</div><div class="line"><span class="keyword">import</span> android.view.View;</div><div class="line"><span class="keyword">import</span> android.view.View.OnClickListener;</div><div class="line"><span class="keyword">import</span> android.widget.Button;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</div><div class="line"> <span class="keyword">private</span> Button btnButton;</div><div class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">  <span class="keyword">super</span>.onCreate(savedInstanceState); <span class="comment">// 生命周期方法</span></div><div class="line">  Log.d(<span class="string">"MainActivity"</span>,<span class="keyword">this</span>.toString());</div><div class="line">  <span class="keyword">super</span>.setContentView(R.layout.main); <span class="comment">// 设置要使用的布局管理器</span></div><div class="line">  </div><div class="line"> btnButton=(Button)findViewById(R.id.btn);</div><div class="line"> btnButton.setOnClickListener(<span class="keyword">new</span> OnClickListener() &#123;</div><div class="line">  </div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</div><div class="line">   Intent intent=<span class="keyword">new</span> Intent(MainActivity.<span class="keyword">this</span>,MainActivity.class);</div><div class="line">   startActivity(intent);</div><div class="line">   </div><div class="line">  &#125;</div><div class="line"> &#125;);</div><div class="line"></div><div class="line"> &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>运行程序连续点击三次按钮，观察一下logcat:<br><img src="http://img.blog.csdn.net/20150603102458040?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWF5dW4wNTE2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""><br>可以看出每点击一次按钮就产生一个新的活动，此时返回栈中有四个MainActivity,连续按四次返回键才能退出程序。看一下模拟原理示意图：<br><img src="http://img.blog.csdn.net/20150603102840651?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWF5dW4wNTE2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
+<h2 id="二、singleTop模式"><a href="#二、singleTop模式" class="headerlink" title="二、singleTop模式"></a>二、singleTop模式</h2><p>从字面意思来理解，当活动处于栈顶且已经存在时即不再入栈，当不处于栈顶时，则继续入栈。通过实例来验证一下我们观点的正确性。<br>修改AndroidManifest.xml中MainActivity的启动模式：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">manifest</span> </span></div><div class="line"> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></div><div class="line"> <span class="attr">package</span>=<span class="string">"org.jily.demo"</span> </div><div class="line"> <span class="attr">android:versionCode</span>=<span class="string">"1"</span> </div><div class="line"> <span class="attr">android:versionName</span>=<span class="string">"1.0"</span>&gt;</div><div class="line"> <span class="tag">&lt;<span class="name">uses-sdk</span> <span class="attr">android:minSdkVersion</span>=<span class="string">"10"</span> /&gt;</span></div><div class="line"> <span class="tag">&lt;<span class="name">application</span> </span></div><div class="line">  <span class="attr">android:icon</span>=<span class="string">"@drawable/icon"</span> </div><div class="line">  <span class="attr">android:label</span>=<span class="string">"@string/app_name"</span>&gt;</div><div class="line">  <span class="tag">&lt;<span class="name">activity</span> </span></div><div class="line">   <span class="attr">android:name</span>=<span class="string">".MainActivity"</span> </div><div class="line">   <span class="attr">android:launchMode</span>=<span class="string">"singleTop"</span></div><div class="line">   <span class="attr">android:label</span>=<span class="string">"@string/app_name"</span>&gt;</div><div class="line">   <span class="tag">&lt;<span class="name">intent-filter</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">"android.intent.action.MAIN"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">category</span> <span class="attr">android:name</span>=<span class="string">"android.intent.category.LAUNCHER"</span> /&gt;</span></div><div class="line">   <span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">activity</span>&gt;</span></div><div class="line"> <span class="tag">&lt;/<span class="name">application</span>&gt;</span></div><div class="line"> </div><div class="line"><span class="tag">&lt;/<span class="name">manifest</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>然后重新运行程序,此时再点击按钮只会产生一个Activity:<br><img src="http://img.blog.csdn.net/20150603103549669?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWF5dW4wNTE2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""><br>下面我们测试，当MainActivity不处于栈顶时的情形：<br>1.修改MainActivity.java代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> org.jily.demo;</div><div class="line"></div><div class="line"><span class="keyword">import</span> android.app.Activity;</div><div class="line"><span class="keyword">import</span> android.content.Intent;</div><div class="line"><span class="keyword">import</span> android.os.Bundle;</div><div class="line"><span class="keyword">import</span> android.util.Log;</div><div class="line"><span class="keyword">import</span> android.view.View;</div><div class="line"><span class="keyword">import</span> android.view.View.OnClickListener;</div><div class="line"><span class="keyword">import</span> android.widget.Button;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</div><div class="line"> <span class="keyword">private</span> Button btnButton;</div><div class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">  <span class="keyword">super</span>.onCreate(savedInstanceState); <span class="comment">// 生命周期方法</span></div><div class="line">  Log.d(<span class="string">"MainActivity"</span>,<span class="keyword">this</span>.toString());</div><div class="line">  <span class="keyword">super</span>.setContentView(R.layout.main); <span class="comment">// 设置要使用的布局管理器</span></div><div class="line">  </div><div class="line"> btnButton=(Button)findViewById(R.id.btn);</div><div class="line"> btnButton.setOnClickListener(<span class="keyword">new</span> OnClickListener() &#123;</div><div class="line">  </div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</div><div class="line">   Intent intent=<span class="keyword">new</span> Intent(MainActivity.<span class="keyword">this</span>,SecondActivity.class);</div><div class="line">   startActivity(intent);</div><div class="line">   </div><div class="line">  &#125;</div><div class="line"> &#125;);</div><div class="line"></div><div class="line"> &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>2.SecondActivity.java代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> org.jily.demo;</div><div class="line"></div><div class="line"><span class="keyword">import</span> android.app.Activity;</div><div class="line"><span class="keyword">import</span> android.content.Intent;</div><div class="line"><span class="keyword">import</span> android.os.Bundle;</div><div class="line"><span class="keyword">import</span> android.util.Log;</div><div class="line"><span class="keyword">import</span> android.view.View;</div><div class="line"><span class="keyword">import</span> android.view.View.OnClickListener;</div><div class="line"><span class="keyword">import</span> android.widget.Button;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SecondActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</div><div class="line"> <span class="keyword">private</span> Button button;</div><div class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">  <span class="keyword">super</span>.onCreate(savedInstanceState); <span class="comment">// 生命周期方法</span></div><div class="line">  Log.d(<span class="string">"SecondMainActivity"</span>,<span class="keyword">this</span>.toString());</div><div class="line">  <span class="keyword">super</span>.setContentView(R.layout.second); <span class="comment">// 设置要使用的布局管理器</span></div><div class="line"> button=(Button)findViewById(R.id.btn);</div><div class="line"> button.setOnClickListener(<span class="keyword">new</span> OnClickListener() &#123;</div><div class="line">  </div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</div><div class="line">   Intent intent=<span class="keyword">new</span> Intent(SecondActivity.<span class="keyword">this</span>,MainActivity.class);<span class="comment">//跳到MainActivity</span></div><div class="line">   startActivity(intent);</div><div class="line">   </div><div class="line">  &#125;</div><div class="line"> &#125;);</div><div class="line"> </div><div class="line"></div><div class="line"> &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>先点击MainActivity里的按钮跳到SecondActivity，然后再点击SecondActivity里的按钮跳到MainActivity，我们来观察logcat:<br><img src="http://img.blog.csdn.net/20150603105015340?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWF5dW4wNTE2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""><br>一共启动了两次MainActivity，这时你按返回按钮，应该先返回SecondActivity,再按返回按钮返回MainActivity，再按返回按钮程序退出，看一下模拟原理示意图：<br><img src="http://img.blog.csdn.net/20150603105554358?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWF5dW4wNTE2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
+<h2 id="三、singleTask模式"><a href="#三、singleTask模式" class="headerlink" title="三、singleTask模式"></a>三、singleTask模式</h2><p>使用本模式可以很好的解决重复创建栈顶活动的问题，当活动的启动模式指定为singleTask，每次启动该活动时系统首先会在Task栈中检查是否存在该活动的实例，如果发现已经存在则直接使用该实例，并把这个活动之上的活动统统出栈，如果没有发现则创建一个实例。<br>1.将MainActivity的启动模式修改为：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">manifest</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></div><div class="line">    <span class="attr">package</span>=<span class="string">"org.jily.demo"</span></div><div class="line">    <span class="attr">android:versionCode</span>=<span class="string">"1"</span></div><div class="line">    <span class="attr">android:versionName</span>=<span class="string">"1.0"</span> &gt;</div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">uses-sdk</span> <span class="attr">android:minSdkVersion</span>=<span class="string">"10"</span> /&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">application</span></span></div><div class="line">        <span class="attr">android:icon</span>=<span class="string">"@drawable/icon"</span></div><div class="line">        <span class="attr">android:label</span>=<span class="string">"@string/app_name"</span> &gt;</div><div class="line">        <span class="tag">&lt;<span class="name">activity</span></span></div><div class="line">            <span class="attr">android:name</span>=<span class="string">".MainActivity"</span></div><div class="line">            <span class="attr">android:label</span>=<span class="string">"@string/app_name"</span></div><div class="line">            <span class="attr">android:launchMode</span>=<span class="string">"singleTask"</span> &gt;</div><div class="line">            <span class="tag">&lt;<span class="name">intent-filter</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">"android.intent.action.MAIN"</span> /&gt;</span></div><div class="line"></div><div class="line">                <span class="tag">&lt;<span class="name">category</span> <span class="attr">android:name</span>=<span class="string">"android.intent.category.LAUNCHER"</span> /&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">activity</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">activity</span> <span class="attr">android:name</span>=<span class="string">".SecondActivity"</span> &gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">activity</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">application</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">manifest</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>2.在MainActivity中覆写onRestart()方法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onRestart</span><span class="params">()</span> </span>&#123;</div><div class="line"> <span class="keyword">super</span>.onRestart();</div><div class="line"> Log.d(<span class="string">"MainActivity"</span>,<span class="string">"onRestart"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>3.在SecondActivity中覆写onDestroy()方法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"> <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDestroy</span><span class="params">()</span> </span>&#123;</div><div class="line">  <span class="keyword">super</span>.onDestroy();</div><div class="line">  Log.d(<span class="string">"SecondActivity"</span>,<span class="string">"onDestroy"</span>);</div><div class="line"> &#125;</div></pre></td></tr></table></figure></p>
+<p>4.运行实例，首先点击MainActivity里的按钮跳到SecondActivity，然后点击SecondActivity里的按钮跳到MainActivity。查看logcat:<br><img src="http://img.blog.csdn.net/20150603124043982?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWF5dW4wNTE2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""><br> 从打印信息中可以看出，在SecondActivity中启动MainActivity时会发现栈中已经存在一个MainActivity实例了，并且在SecondActivity的下面，于是SecondActivity会从返回栈中出栈，而MainActivity重新成了栈顶活动，因此MainActivity的onRestart()方法和SecondActivity的onDestroy()方法得以执行。这时你只用点击一次返回按钮就能退出程序了。看一下原理示意图：<br><img src="http://img.blog.csdn.net/20150603124235346?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWF5dW4wNTE2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
+<h2 id="四、singleInstance"><a href="#四、singleInstance" class="headerlink" title="四、singleInstance"></a>四、singleInstance</h2><p>这个模式不同于以上三种模式，指定为singleInstance模式的活动会启用一个新的返回栈来管理这个活动（其实，如果singleTask模式制定了不同的taskAffinity，也许启动一个新的返回栈）。那么这么做的意义是什么呢？想象一下如下场景，假设我们的程序中有一个活动允许其他程序调用的，如果我们想实现其他程序和我们的程序可以共享这个活动的实例，应该如何实现呢？在本模式下会产生一个单独的返回栈来管理这个共享的活动，无论哪个应用程序来访问这个活动，都共用同一个返回栈，也就解决了共享活动实例的问题。我们来实践一下。<br>1.修改AndroidManifest.xml中SecondActivity的launchMode：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">manifest</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></div><div class="line">    <span class="attr">package</span>=<span class="string">"org.jily.demo"</span></div><div class="line">    <span class="attr">android:versionCode</span>=<span class="string">"1"</span></div><div class="line">    <span class="attr">android:versionName</span>=<span class="string">"1.0"</span> &gt;</div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">uses-sdk</span> <span class="attr">android:minSdkVersion</span>=<span class="string">"10"</span> /&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">application</span></span></div><div class="line">        <span class="attr">android:icon</span>=<span class="string">"@drawable/icon"</span></div><div class="line">        <span class="attr">android:label</span>=<span class="string">"@string/app_name"</span> &gt;</div><div class="line">        <span class="tag">&lt;<span class="name">activity</span></span></div><div class="line">            <span class="attr">android:name</span>=<span class="string">".MainActivity"</span></div><div class="line">            <span class="attr">android:label</span>=<span class="string">"@string/app_name"</span></div><div class="line">            <span class="attr">android:launchMode</span>=<span class="string">"singleTask"</span> &gt;</div><div class="line">            <span class="tag">&lt;<span class="name">intent-filter</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">"android.intent.action.MAIN"</span> /&gt;</span></div><div class="line"></div><div class="line">                <span class="tag">&lt;<span class="name">category</span> <span class="attr">android:name</span>=<span class="string">"android.intent.category.LAUNCHER"</span> /&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">activity</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">activity</span> </span></div><div class="line">            <span class="attr">android:name</span>=<span class="string">".SecondActivity"</span></div><div class="line">            <span class="attr">android:launchMode</span>=<span class="string">"singleInstance"</span> &gt;</div><div class="line">        <span class="tag">&lt;/<span class="name">activity</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">activity</span> </span></div><div class="line">            <span class="attr">android:name</span>=<span class="string">".ThirdActivity"</span>&gt;<span class="tag">&lt;/<span class="name">activity</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">application</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">manifest</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>2.修改MainActivity.java代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> org.jily.demo;</div><div class="line"></div><div class="line"><span class="keyword">import</span> android.app.Activity;</div><div class="line"><span class="keyword">import</span> android.content.Intent;</div><div class="line"><span class="keyword">import</span> android.os.Bundle;</div><div class="line"><span class="keyword">import</span> android.util.Log;</div><div class="line"><span class="keyword">import</span> android.view.View;</div><div class="line"><span class="keyword">import</span> android.view.View.OnClickListener;</div><div class="line"><span class="keyword">import</span> android.widget.Button;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</div><div class="line"> <span class="keyword">private</span> Button btnButton;</div><div class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">  <span class="keyword">super</span>.onCreate(savedInstanceState); <span class="comment">// 生命周期方法</span></div><div class="line">  Log.d(<span class="string">"MainActivity"</span>,<span class="string">"Task id is"</span>+getTaskId());</div><div class="line">  <span class="keyword">super</span>.setContentView(R.layout.main); <span class="comment">// 设置要使用的布局管理器</span></div><div class="line">  </div><div class="line"> btnButton=(Button)findViewById(R.id.btn);</div><div class="line"> btnButton.setOnClickListener(<span class="keyword">new</span> OnClickListener() &#123;</div><div class="line">  </div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</div><div class="line">   Intent intent=<span class="keyword">new</span> Intent(MainActivity.<span class="keyword">this</span>,SecondActivity.class);</div><div class="line">   startActivity(intent);</div><div class="line">   </div><div class="line">  &#125;</div><div class="line"> &#125;);</div><div class="line"></div><div class="line"> &#125;</div><div class="line"> <span class="meta">@Override</span></div><div class="line"> <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onRestart</span><span class="params">()</span> </span>&#123;</div><div class="line">  <span class="keyword">super</span>.onRestart();</div><div class="line">  Log.d(<span class="string">"MainActivity"</span>,<span class="string">"onRestart"</span>);</div><div class="line"> &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>3.修改SecondActivity.java:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> org.jily.demo;</div><div class="line"></div><div class="line"><span class="keyword">import</span> android.app.Activity;</div><div class="line"><span class="keyword">import</span> android.content.Intent;</div><div class="line"><span class="keyword">import</span> android.os.Bundle;</div><div class="line"><span class="keyword">import</span> android.util.Log;</div><div class="line"><span class="keyword">import</span> android.view.View;</div><div class="line"><span class="keyword">import</span> android.view.View.OnClickListener;</div><div class="line"><span class="keyword">import</span> android.widget.Button;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SecondActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</div><div class="line"> <span class="keyword">private</span> Button button;</div><div class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">  <span class="keyword">super</span>.onCreate(savedInstanceState); <span class="comment">// 生命周期方法</span></div><div class="line">  Log.d(<span class="string">"SecondActivity"</span>,<span class="string">"Task id is"</span>+getTaskId());</div><div class="line">  <span class="keyword">super</span>.setContentView(R.layout.second); <span class="comment">// 设置要使用的布局管理器</span></div><div class="line"> button=(Button)findViewById(R.id.btn);</div><div class="line"> button.setOnClickListener(<span class="keyword">new</span> OnClickListener() &#123;</div><div class="line">  </div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</div><div class="line">   Intent intent=<span class="keyword">new</span> Intent(SecondActivity.<span class="keyword">this</span>,ThirdActivity.class);</div><div class="line">   startActivity(intent);</div><div class="line">   </div><div class="line">  &#125;</div><div class="line"> &#125;);</div><div class="line"> </div><div class="line"></div><div class="line"> &#125;</div><div class="line"> <span class="meta">@Override</span></div><div class="line"> <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDestroy</span><span class="params">()</span> </span>&#123;</div><div class="line">  <span class="keyword">super</span>.onDestroy();</div><div class="line">  Log.d(<span class="string">"SecondActivity"</span>,<span class="string">"onDestroy"</span>);</div><div class="line"> &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="number">4</span>.修改ThirdActivity.java:</div><div class="line"><span class="keyword">package</span> org.jily.demo;</div><div class="line"></div><div class="line"><span class="keyword">import</span> android.app.Activity;</div><div class="line"><span class="keyword">import</span> android.os.Bundle;</div><div class="line"><span class="keyword">import</span> android.util.Log;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThirdActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</div><div class="line"> </div><div class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">  <span class="keyword">super</span>.onCreate(savedInstanceState); <span class="comment">// 生命周期方法</span></div><div class="line">  Log.d(<span class="string">"ThirdActivity"</span>,<span class="string">"Task id is"</span>+getTaskId());</div><div class="line">  <span class="keyword">super</span>.setContentView(R.layout.main); <span class="comment">// 设置要使用的布局管理器</span></div><div class="line"> </div><div class="line"></div><div class="line"> &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>运行实例，点击按钮跳到SecondActivity，再点击按钮跳到ThirdActivity,我们看一下此时的logcat：<br><img src="http://img.blog.csdn.net/20150603143830763?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWF5dW4wNTE2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""><br>可以看出MainActivity和ThirdActivity在同一个Task中，SecondActivity在另一个Task中，这时我们按返回按钮，从ThirdActivity直接跳到MainActivity，再按返回键，跳到SecondActivity,再按返回键，所有的栈都已经空了，程序退出。看一下singleInstance模式的原理示意图：<br><img src="http://img.blog.csdn.net/20150603144158306?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveWF5dW4wNTE2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
+<h3 id="参考链接："><a href="#参考链接：" class="headerlink" title="参考链接："></a>参考链接：</h3><blockquote>
+<p><a href="http://blog.csdn.net/jily0516/article/details/46341565" target="_blank" rel="external">http://blog.csdn.net/jily0516/article/details/46341565</a><br><a href="https://inthecheesefactory.com/blog/understand-android-activity-launchmode/en" target="_blank" rel="external">https://inthecheesefactory.com/blog/understand-android-activity-launchmode/en</a></p>
+</blockquote>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/08/04/跟着Android源码学app开发之settings分析2/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          跟着Android源码学app开发之settings分析（二）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/08/03/NDK开发相关技巧汇总/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">NDK开发相关技巧汇总</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Activity启动模式详解" data-title="Activity启动模式详解" data-url="https://github.com/jilyjiang/2016/08/04/Activity启动模式详解/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"jily"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 jily.jiang
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

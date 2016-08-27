@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>跟着Android源码学app开发之settings分析(一) | jily&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="问题背景：前段时间，因为某个项目的特殊要求，要求在三天之内提供一个BlueTooth的apk可以使用，界面风格尽量符合某司要求即可；操作方式不限；于是和老大协商后，决定只修改Android的setting的背景和UI风格，尽快出一个单独的bluetooth给客户！
+现状：
+Android 的setting 源码
+木有蓝牙的相关开发经验，查看setting的src，发现高达40几个java类
+时间">
+<meta property="og:type" content="article">
+<meta property="og:title" content="跟着Android源码学app开发之settings分析(一)">
+<meta property="og:url" content="https://github.com/jilyjiang/2016/07/26/跟着Android源码学app开发之settings分析/index.html">
+<meta property="og:site_name" content="jily's blog">
+<meta property="og:description" content="问题背景：前段时间，因为某个项目的特殊要求，要求在三天之内提供一个BlueTooth的apk可以使用，界面风格尽量符合某司要求即可；操作方式不限；于是和老大协商后，决定只修改Android的setting的背景和UI风格，尽快出一个单独的bluetooth给客户！
+现状：
+Android 的setting 源码
+木有蓝牙的相关开发经验，查看setting的src，发现高达40几个java类
+时间">
+<meta property="og:image" content="http://oa1wnpe3m.bkt.clouddn.com/settings.png">
+<meta property="og:updated_time" content="2016-07-26T03:56:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="跟着Android源码学app开发之settings分析(一)">
+<meta name="twitter:description" content="问题背景：前段时间，因为某个项目的特殊要求，要求在三天之内提供一个BlueTooth的apk可以使用，界面风格尽量符合某司要求即可；操作方式不限；于是和老大协商后，决定只修改Android的setting的背景和UI风格，尽快出一个单独的bluetooth给客户！
+现状：
+Android 的setting 源码
+木有蓝牙的相关开发经验，查看setting的src，发现高达40几个java类
+时间">
+<meta name="twitter:image" content="http://oa1wnpe3m.bkt.clouddn.com/settings.png">
+  
+    <link rel="alternative" href="/atom.xml" title="jily&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/assets/images/favicon/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/assets/images/avatar/avatar.png" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">jily.jiang</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">努力奔跑，只为看更大的世界！</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/tags/随笔">随笔</a></li>
+				        
+							<li><a href="/tags/技术">技术</a></li>
+				        
+							<li><a href="/tags/读书">读书</a></li>
+				        
+							<li><a href="/tags/电影">电影</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/JilyJiang" title="github">github</a>
+					        
+								<a class="zhihu" target="_blank" href="https://zhihu.com" title="zhihu">zhihu</a>
+					        
+								<a class="mail" target="_blank" href="/jily.jiang@hotmail.com" title="mail">mail</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Activity/" style="font-size: 10px;">Activity</a> <a href="/tags/Android/" style="font-size: 16.67px;">Android</a> <a href="/tags/Git/" style="font-size: 13.33px;">Git</a> <a href="/tags/GitHub-Page/" style="font-size: 10px;">GitHub Page</a> <a href="/tags/Grub/" style="font-size: 10px;">Grub</a> <a href="/tags/HW加速/" style="font-size: 10px;">HW加速</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Intent/" style="font-size: 10px;">Intent</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/ListView/" style="font-size: 10px;">ListView</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/NDK/" style="font-size: 13.33px;">NDK</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Settings/" style="font-size: 13.33px;">Settings</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/技术/" style="font-size: 20px;">技术</a> <a href="/tags/电影/" style="font-size: 10px;">电影</a> <a href="/tags/读书/" style="font-size: 13.33px;">读书</a> <a href="/tags/随笔/" style="font-size: 13.33px;">随笔</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://juniperphoton.net/">JuniperPhoton</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://yazhuo.github.io/">yazoo</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">嗯...我是来占领地球的，哈哈哈哈！</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">jily.jiang</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="/assets/images/avatar/avatar.png" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">jily.jiang</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">努力奔跑，只为看更大的世界！</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/tags/随笔">随笔</a></li>
+		        
+					<li><a href="/tags/技术">技术</a></li>
+		        
+					<li><a href="/tags/读书">读书</a></li>
+		        
+					<li><a href="/tags/电影">电影</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/JilyJiang" title="github">github</a>
+			        
+						<a class="zhihu" target="_blank" href="https://zhihu.com" title="zhihu">zhihu</a>
+			        
+						<a class="mail" target="_blank" href="/jily.jiang@hotmail.com" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-跟着Android源码学app开发之settings分析" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/07/26/跟着Android源码学app开发之settings分析/" class="article-date">
+  	<time datetime="2016-07-26T03:56:50.000Z" itemprop="datePublished">2016-07-26</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      跟着Android源码学app开发之settings分析(一)
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Settings/">Settings</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术/">技术</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="问题背景："><a href="#问题背景：" class="headerlink" title="问题背景："></a>问题背景：</h2><p>前段时间，因为某个项目的特殊要求，要求在三天之内提供一个BlueTooth的apk可以使用，界面风格尽量符合某司要求即可；操作方式不限；于是和老大协商后，决定只修改Android的setting的背景和UI风格，尽快出一个单独的bluetooth给客户！</p>
+<h2 id="现状："><a href="#现状：" class="headerlink" title="现状："></a>现状：</h2><ul>
+<li>Android 的setting 源码</li>
+<li>木有蓝牙的相关开发经验，查看setting的src，发现高达40几个java类</li>
+<li>时间紧迫，只有三天时间<h2 id="正题："><a href="#正题：" class="headerlink" title="正题："></a>正题：</h2>项目如期完成，于是决定通过setting的源码把app开发的知识点全部回顾和整理一遍；<a id="more"></a>
+<img src="http://oa1wnpe3m.bkt.clouddn.com/settings.png" alt="setting"> <h2 id="解析AndroidManifest-xml的一些不太常见的知识点："><a href="#解析AndroidManifest-xml的一些不太常见的知识点：" class="headerlink" title="解析AndroidManifest.xml的一些不太常见的知识点："></a>解析AndroidManifest.xml的一些不太常见的知识点：</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"> <span class="tag">&lt;<span class="name">manifest</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></div><div class="line">        <span class="attr">package</span>=<span class="string">"com.android.settings"</span></div><div class="line">        <span class="attr">coreApp</span>=<span class="string">"true"</span></div><div class="line">        <span class="attr">android:sharedUserId</span>=<span class="string">"android.uid.system"</span>&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">original-package</span> <span class="attr">android:name</span>=<span class="string">"com.android.settings"</span> /&gt;</span></div><div class="line"> ……</div><div class="line"> ……</div><div class="line"> ……</div><div class="line"><span class="tag">&lt;/<span class="name">manifest</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="coreApp-quot-true-quot-："><a href="#coreApp-quot-true-quot-：" class="headerlink" title="coreApp=&quot;true&quot;："></a><code>coreApp=&quot;true&quot;</code>：</h2><p>关于coreApp=true的说明，在manifest中增加该属性，其实并不是代表该APP具有系统权限，<strong>而是把该类app归类为核心APP，核心app其实也是最小android framework系统。</strong>那么核心APP的作用是什么呢？在Android3.0之后，Android就增加了加密机制，当系统开机时检测到系统加密，他就把核心APP全部启动，并显示UI提供用户输入密码，密码正确后才会启动完整系统。</p>
+<h2 id="lt-original-package-gt"><a href="#lt-original-package-gt" class="headerlink" title="&lt;original-package&gt;"></a><code>&lt;original-package&gt;</code></h2><p>   <manifest>标签中package属性用于设置应 用程序的进程名，即在运行时使用ddms查看到的进程名。<br>   <original-package>标签用以设置应用 源码包名，<font color="red">即Java文件所在的源码程序包层次，android工程中真实的源代码层次结构</font>。<br>   <manifest>中package属性若与<original-package>的android:name值相同，配置组建时android:name属性值 可以使用”.ClassName”形式。<br>   使用<original-package>标签后，在<activity><service><receiver><provider>中的android:name属性需要写完整的包名，”.ClassName”形式无效。</provider></receiver></service></activity></original-package></original-package></manifest></original-package></manifest></p>
+<p>   <font color="red" size="5">注意:</font><strong><manifest>标签中package属性只是告诉系统应用的进程名；因此进程名（Manifest中package属性的值）与<original-package>的值可以不一样</original-package></manifest></strong>。</p>
+<p>若某些客户不想改变他们的apk，但是需要启动我们的apk，这样就需要把我们的报名+类名改成客户apk指定的名字，若你又不想修改源码的代码结构，此时orgin-package就发挥重大用途了；添加origin-package，修改packagename，改完之后，只需要替换R文件的路径即可（先通过AS或eclipse导入新的R，然后ctrl+H替换整个project的R文件即可）</p>
+<p>需要注意下<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">manifest</span></span></div><div class="line">        <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></div><div class="line">        <span class="attr">package</span>=<span class="string">"com.android.settings"</span></div><div class="line">        <span class="attr">android:sharedUserId</span>=<span class="string">"@string/sharedUserId"</span></div><div class="line">        &gt;</div></pre></td></tr></table></figure></p>
+<p>这里<code>package=&quot;com.android.settings&quot;</code>，产生的R.java就会在com.android.settings</p>
+<p><original-package android:name="com.android.settings2"> 这个地方表示，源码包是com.android.settings2。所以在代码中引用的R.java必须是import com.android.settings.R;</original-package></p>
+<h2 id="requiredForAllUsers-amp-supportsRtl"><a href="#requiredForAllUsers-amp-supportsRtl" class="headerlink" title="requiredForAllUsers&amp;supportsRtl"></a><code>requiredForAllUsers</code>&amp;<code>supportsRtl</code></h2><p><strong><em>requiredForAllUsers</em></strong><br>Flag to specify if this application needs to be present for all users.(此apk是否需要默认面对所有用户，因为android支持多用户系统切换)<br><strong><em>supportsRtl</em></strong><br>Declare that your application will be able to deal with RTL (right to left) layouts.（此应用支持从右向左布局,此属性为解决入阿拉伯文，希伯来语等从右向左的阅读习惯）<a href="http://stackoverflow.com/questions/27378921/the-project-references-rtl-attributes-but-does-not-explicitly-enable-or-disable" target="_blank" rel="external">The project references RTL attributes, but does not explicitly enable or disable RTL support</a><br><a href="http://www.apkbus.com/blog-327085-57866.html" target="_blank" rel="external">中文文档</a></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">application</span> <span class="attr">android:label</span>=<span class="string">"@string/settings_label"</span></span></div><div class="line">         <span class="attr">android:icon</span>=<span class="string">"@mipmap/ic_launcher_settings"</span></div><div class="line">         <span class="attr">android:taskAffinity</span>=<span class="string">""</span></div><div class="line">         <span class="attr">android:theme</span>=<span class="string">"@style/Theme.Settings"</span></div><div class="line">         <span class="attr">android:hardwareAccelerated</span>=<span class="string">"true"</span></div><div class="line">         <span class="attr">android:requiredForAllUsers</span>=<span class="string">"true"</span></div><div class="line">         <span class="attr">android:supportsRtl</span>=<span class="string">"true"</span>&gt;</div><div class="line">     <span class="comment">&lt;!-- Settings --&gt;</span></div><div class="line"></div><div class="line">     <span class="tag">&lt;<span class="name">activity</span> <span class="attr">android:name</span>=<span class="string">"Settings"</span></span></div><div class="line">             <span class="attr">android:label</span>=<span class="string">"@string/settings_label_launcher"</span></div><div class="line">             <span class="attr">android:taskAffinity</span>=<span class="string">"com.android.settings"</span></div><div class="line">             <span class="attr">android:launchMode</span>=<span class="string">"singleTask"</span>&gt;</div><div class="line">         <span class="tag">&lt;<span class="name">intent-filter</span>&gt;</span></div><div class="line">             <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">"android.intent.action.MAIN"</span> /&gt;</span></div><div class="line">             <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">"android.settings.SETTINGS"</span> /&gt;</span></div><div class="line">             <span class="tag">&lt;<span class="name">category</span> <span class="attr">android:name</span>=<span class="string">"android.intent.category.DEFAULT"</span> /&gt;</span></div><div class="line">             <span class="tag">&lt;<span class="name">category</span> <span class="attr">android:name</span>=<span class="string">"android.intent.category.LAUNCHER"</span> /&gt;</span></div><div class="line">         <span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></div><div class="line">     <span class="tag">&lt;/<span class="name">activity</span>&gt;</span></div></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/08/01/Android的焦点控制顺序？/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Android 的view焦点控制
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/07/22/Google的搜索技巧/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Google的搜索技巧</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="跟着Android源码学app开发之settings分析" data-title="跟着Android源码学app开发之settings分析(一)" data-url="https://github.com/jilyjiang/2016/07/26/跟着Android源码学app开发之settings分析/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"jily"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 jily.jiang
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
