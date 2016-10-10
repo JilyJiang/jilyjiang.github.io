@@ -64,31 +64,30 @@ onIntentSelected会根据传入的ResolveInfo设置默认的Home，并根据Inte
         }
          ResolveInfo ri = mAdapter.resolveInfoForPosition(which, filtered);
         Intent intent = mAdapter.intentForPosition(which, filtered);
-       
+
         //设置默认Home，并启动
         onIntentSelected(ri, intent, always);
         finish();
     }
-    
 ```
 ResolveListAdapter的相关代码
 
 ```java
        /**
         *
-        * @param position 
+        * @param position
         * @param filtered
-        * @return 
+        * @return
         */
         public ResolveInfo resolveInfoForPosition(int position, boolean filtered) {
             //mList为List<DisplayResolveInfo>
             return (filtered ? getItem(position) : mList.get(position)).ri;
         }
         /**
-        * 
+        *
         * @param position
         * @param filtered
-        * @return 
+        * @return
         */
         public Intent intentForPosition(int position, boolean filtered) {
             //mList为List<DisplayResolveInfo>
@@ -100,7 +99,7 @@ ResolveListAdapter的相关代码
 扯了半天了，分析完谷歌的原生流程，现在终于开始进行客制化的修改了。进入正题：
 此Activity的onCreate方法中判断是否为第一次启动，如果是则调用startSelected方法设置默认Home app。
 
-默认Home app的从ResolveListAdapter中获取，所以在ResolveListAdapter中添加getDefaultHomePosition(String packageName)方法，用于获取默认home app在List<DisplayResolveInfo> 中的位置，代码如下：
+默认Home app的从ResolveListAdapter中获取，所以在ResolveListAdapter中添加`getDefaultHomePosition(String packageName)`方法，用于获取默认home app在List<DisplayResolveInfo> 中的位置，代码如下：
 ```java
 public int getDefaultHomePosition(String packageName){
             for (int i = 0; i < mList.size(); i++) {
@@ -114,7 +113,7 @@ public int getDefaultHomePosition(String packageName){
             return -1;
         }
 
-```   
+```
 在ResolverActivity中添加设置默认app的方法setupDefaultLauncher()，代码如下：
 
 ```java
@@ -209,30 +208,28 @@ frameworks\base\services\java\com\android\server\am\ActivityManagerService.java
 ```
 **新增客制化的method**
 ```java
-private void setDefaultLauncher() {  
-        // get default component   
-        String packageName = "com.coship.factorytest";//默认launcher包名
-        String className = "com.coship.factorytest.MainActivity";////默认launcher入口
-          
+private void setDefaultLauncher() {
+        // get default component
+        String packageName = "你指定的包名";//默认launcher包名
+        String className = "你指定的类名";////默认launcher入口
+
         IPackageManager pm = ActivityThread.getPackageManager();
-         
+
         //判断指定的launcher是否存在
         if(hasApkInstalled(packageName)) {
-         
-            Slog.i(TAG, "defautl packageName = " + packageName + ", default className = " + className); 
-                       
-            //清除当前默认launcher 
+
+            Slog.i(TAG, "defautl packageName = " + packageName + ", default className = " + className);
+            //清除当前默认launcher
             ArrayList<IntentFilter> intentList = new ArrayList<IntentFilter>();  
             ArrayList<ComponentName> cnList = new ArrayList<ComponentName>();  
-            mContext.getPackageManager().getPreferredActivities(intentList, cnList, null);  
+            mContext.getPackageManager().getPreferredActivities(intentList, cnList, null);
             IntentFilter dhIF = null;  
             for(int i = 0; i < cnList.size(); i++) {  
                 dhIF = intentList.get(i);  
-                if(dhIF.hasAction(Intent.ACTION_MAIN) && dhIF.hasCategory(Intent.CATEGORY_HOME)) {  
-                    mContext.getPackageManager().clearPackagePreferredActivities(cnList.get(i).getPackageName());  
-                }  
-            }  
-                       
+                if(dhIF.hasAction(Intent.ACTION_MAIN) && dhIF.hasCategory(Intent.CATEGORY_HOME)) {
+                    mContext.getPackageManager().clearPackagePreferredActivities(cnList.get(i).getPackageName());
+                }
+            }
             //获取所有launcher activity 
             Intent intent = new Intent(Intent.ACTION_MAIN);  
             intent.addCategory(Intent.CATEGORY_HOME);  
@@ -247,9 +244,7 @@ private void setDefaultLauncher() {
             filter.addAction(Intent.ACTION_MAIN);  
             filter.addCategory(Intent.CATEGORY_HOME);  
             filter.addCategory(Intent.CATEGORY_DEFAULT);  
-            final int N = list.size();  
-            Slog.d(TAG, "N:::::hyhyhyhy:::: = " + N);  
-                     
+            final int N = list.size();
             //设置默认launcher 
             ComponentName launcher = new ComponentName(packageName, className);  
  
@@ -258,17 +253,16 @@ private void setDefaultLauncher() {
             for (int i = 0; i < N; i++) {  
                 ResolveInfo r = list.get(i);  
                 set[i] = new ComponentName(r.activityInfo.packageName, r.activityInfo.name);  
-                Slog.d(TAG, "r.activityInfo.packageName:::::hyhyhyhy:::: = " + r.activityInfo.packageName);
-                Slog.d(TAG, "r.activityInfo.name:::::hyhyhyhy:::: = " + r.activityInfo.name);
+                Slog.d(TAG, "r.activityInfo.packageName======= " + r.activityInfo.packageName);
+                Slog.d(TAG, "r.activityInfo.name========= " + r.activityInfo.name);
                 if(launcher.getClassName().equals(r.activityInfo.name)) {
                     defaultMatch = r.match;
                 }
-            }  
-                     
+            }
             try {  
                 pm.addPreferredActivity(filter, defaultMatch, set, launcher);
             } catch (RemoteException e) {  
-                throw new RuntimeException("com.coship.factorytest.MainActivity : Package manager has died", e);  
+                throw new RuntimeException("Package manager has died", e);  
             }   
              
              
@@ -288,12 +282,12 @@ private void setDefaultLauncher() {
     }
 ```
 然后在ActivityManagerService类中的
->boolean startHomeActivityLocked()
+`boolean startHomeActivityLocked()`
 方法第一行调用上面添加的
->setDefaultLauncher()
-  ```java
-  boolean startHomeActivityLocked() {
-     
+`setDefaultLauncher()`
+
+```java
+boolean startHomeActivityLocked() {
         if (mFactoryTest == SystemServer.FACTORY_TEST_LOW_LEVEL
                 && mTopAction == null) {
             // We are running in factory test mode, but unable to find
@@ -301,7 +295,7 @@ private void setDefaultLauncher() {
             // error message and don't try to start anything.
             return false;
         }
- 
+ `
 	//-------新增方法的执行位置---------------
         setDefaultLauncher();
          
@@ -331,12 +325,10 @@ private void setDefaultLauncher() {
                   
         return true;
     }
-  ```
+```
   添加后的方法全部内容如上，重新编译android，烧录，开机就能够自动进入自定义的launcher
 可以通过系统设置取消该launcher的默认设置，取消之后按home键会弹出launcher选择提示框
-```
-frameworks\base\core\java\com\android\internal\app\ResolverActivity.java
-```
+`frameworks\base\core\java\com\android\internal\app\ResolverActivity.java`
 ResolverActivity类就是选择打开方式的弹出框
   
  顺便查看老外有没有类似的需求，在stackoverflow上面一查询还真发现有一些精彩的答案（O(∩_∩)O哈哈~，看来奸商全球通用）：
