@@ -122,7 +122,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/Activity/" style="font-size: 10px;">Activity</a> <a href="/tags/Android/" style="font-size: 16.67px;">Android</a> <a href="/tags/Git/" style="font-size: 13.33px;">Git</a> <a href="/tags/GitHub-Page/" style="font-size: 10px;">GitHub Page</a> <a href="/tags/Grub/" style="font-size: 10px;">Grub</a> <a href="/tags/HW加速/" style="font-size: 10px;">HW加速</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Intent/" style="font-size: 10px;">Intent</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/ListView/" style="font-size: 10px;">ListView</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/NDK/" style="font-size: 13.33px;">NDK</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Settings/" style="font-size: 13.33px;">Settings</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/技术/" style="font-size: 20px;">技术</a> <a href="/tags/电影/" style="font-size: 10px;">电影</a> <a href="/tags/读书/" style="font-size: 13.33px;">读书</a> <a href="/tags/随笔/" style="font-size: 13.33px;">随笔</a>
+						<a href="/tags/Activity/" style="font-size: 10px;">Activity</a> <a href="/tags/Android/" style="font-size: 16.67px;">Android</a> <a href="/tags/Android，Framework/" style="font-size: 10px;">Android，Framework</a> <a href="/tags/Framework/" style="font-size: 10px;">Framework</a> <a href="/tags/Git/" style="font-size: 13.33px;">Git</a> <a href="/tags/GitHub-Page/" style="font-size: 10px;">GitHub Page</a> <a href="/tags/Grub/" style="font-size: 10px;">Grub</a> <a href="/tags/HW加速/" style="font-size: 10px;">HW加速</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Intent/" style="font-size: 10px;">Intent</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/ListView/" style="font-size: 10px;">ListView</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/NDK/" style="font-size: 13.33px;">NDK</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Settings/" style="font-size: 13.33px;">Settings</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/技术/" style="font-size: 20px;">技术</a> <a href="/tags/电影/" style="font-size: 10px;">电影</a> <a href="/tags/读书/" style="font-size: 13.33px;">读书</a> <a href="/tags/随笔/" style="font-size: 13.33px;">随笔</a>
 					</div>
 				</section>
 				
@@ -131,9 +131,7 @@
 				<section class="switch-part switch-part3">
 					<div id="js-friends">
 					
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://juniperphoton.net/">JuniperPhoton</a>
-			        
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://yazhuo.github.io/">yazoo</a>
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://stormzhang.com/">逗比张stormzhang</a>
 			        
 			        </div>
 				</section>
@@ -143,7 +141,7 @@
 				
 				<section class="switch-part switch-part4">
 				
-					<div id="js-aboutme">嗯...我是来占领地球的，哈哈哈哈！</div>
+					<div id="js-aboutme">MStar资深工程师，专注于Android 系统级的APK及framework的开发！</div>
 				</section>
 				
 			</div>
@@ -205,6 +203,197 @@
 </nav>
 
       <div class="body-wrap">
+  
+    <article id="post-NDK开发相关技巧汇总" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/08/03/NDK开发相关技巧汇总/" class="article-date">
+  	<time datetime="2016-08-03T04:26:09.000Z" itemprop="datePublished">2016-08-03</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/03/NDK开发相关技巧汇总/">NDK开发相关技巧汇总</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>Android NDK(Native Development Kit)是基于Java JNI的使用C/C++和Java来混合开发应用的一种方式</p>
+<h3 id="函数签名的写法"><a href="#函数签名的写法" class="headerlink" title="函数签名的写法"></a>函数签名的写法</h3><p>Java代码中调用Native的代码还是比较简单的，把方法声明成为native，然后可以当作普通的Java方法一样来使用，只不过这个native的方法的实现是在Native中。</p>
+<p>JNI是一个桥梁，让不同的语言能够在一起使用，不但Java能调用Native层代码，在Native层也是能够调用Java的代码。但是JNI的最初目的是能够让Java使用C/C++语言来解决Java做不到的事情，所以在Native中调用Java的方法要稍微费一点劲。要获取JNI的执行环境(JNIEnv)，要找到类和对象，更重要的是要写对函数签名，否则是找不到的。</p>
+<h3 id="函数签名的写法-1"><a href="#函数签名的写法-1" class="headerlink" title="函数签名的写法"></a>函数签名的写法</h3>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NDK/">NDK</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术/">技术</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2016/08/03/NDK开发相关技巧汇总/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Android的焦点控制顺序？" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/08/01/Android的焦点控制顺序？/" class="article-date">
+  	<time datetime="2016-08-01T07:20:49.000Z" itemprop="datePublished">2016-08-01</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/01/Android的焦点控制顺序？/">Android 的view焦点控制</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h3 id="Understanding-Control-Focus-Order"><a href="#Understanding-Control-Focus-Order" class="headerlink" title="Understanding Control Focus Order"></a>Understanding Control Focus Order</h3><p>因为做TV或STB的应用，不像手机或pad一样，焦点的控制主要是通过触摸事件来控制焦点；有时候需要自己通过程序来控制焦点，才能使遥控器的操作符合我们期望的要求；</p>
+<h3 id="Step-1-Define-a-Layout-with-Controls"><a href="#Step-1-Define-a-Layout-with-Controls" class="headerlink" title="Step 1: Define a Layout with Controls"></a>Step 1: Define a Layout with Controls</h3><p>Android默认焦点控制顺序与人的读书习惯一样；<font color=red>从左到右，从上到下</font><br>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术/">技术</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2016/08/01/Android的焦点控制顺序？/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-跟着Android源码学app开发之settings分析" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/07/26/跟着Android源码学app开发之settings分析/" class="article-date">
+  	<time datetime="2016-07-26T03:56:50.000Z" itemprop="datePublished">2016-07-26</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/26/跟着Android源码学app开发之settings分析/">跟着Android源码学app开发之settings分析(一)</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="问题背景："><a href="#问题背景：" class="headerlink" title="问题背景："></a>问题背景：</h2><p>前段时间，因为某个项目的特殊要求，要求在三天之内提供一个BlueTooth的apk可以使用，界面风格尽量符合某司要求即可；操作方式不限；于是和老大协商后，决定只修改Android的setting的背景和UI风格，尽快出一个单独的bluetooth给客户！</p>
+<h2 id="现状："><a href="#现状：" class="headerlink" title="现状："></a>现状：</h2><ul>
+<li>Android 的setting 源码</li>
+<li>木有蓝牙的相关开发经验，查看setting的src，发现高达40几个java类</li>
+<li>时间紧迫，只有三天时间<h2 id="正题："><a href="#正题：" class="headerlink" title="正题："></a>正题：</h2>项目如期完成，于是决定通过setting的源码把app开发的知识点全部回顾和整理一遍；
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Settings/">Settings</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术/">技术</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2016/07/26/跟着Android源码学app开发之settings分析/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-Google的搜索技巧" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -394,192 +583,9 @@
 
 
   
-    <article id="post-Android与so相关的一个大坑" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/07/11/Android与so相关的一个大坑/" class="article-date">
-  	<time datetime="2016-07-11T06:29:02.000Z" itemprop="datePublished">2016-07-11</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/11/Android与so相关的一个大坑/">Android与so相关的一个大坑</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h1 id="与armeabi和armeabi-v7a相关的一个坑"><a href="#与armeabi和armeabi-v7a相关的一个坑" class="headerlink" title="与armeabi和armeabi-v7a相关的一个坑"></a>与armeabi和armeabi-v7a相关的一个坑</h1><p>上周验证253个游戏apk的兼容性问题时，发现有一部分apk在android4.4上跑的极为欢快，但在android5.1时候，一运行就FC；<br>突然想起以前在知乎上看到一篇文章<a href="https://zhuanlan.zhihu.com/p/21359984">与 .so 有关的一个长年大坑</a>,决定搬运过来做个记录，感谢Caspar的分享！</p>
-<p>Android 应用开发中不可避免的会引入第三方的代码。如果是开源项目风险相对可控，如果引入商用的 SDK 那就要谨慎了，难免会有这样或那样的问题。比如我们今天要说的这一个。<br><img src="http://oa1wnpe3m.bkt.clouddn.com/armeabi.png" alt="结构" title="结构"><br>对集成过第三方 SDK 的同学，上图中的目录结构应该不陌生。正常情况下我们只需要将不同版本的 .so 文件分别放置。<strong><em>但如果我们要集成的这个第三方 SDK 偏偏没有 arm-v7a 的版本呢？是删除 armeabi-v7a 目录只保留 armeabi ？还是说两个目录下 .so 文件数不同也没有关系？系统会加载哪个 .so 呢？</em></strong></p>
-<font  color=red size=5><strong> 如果只对结论感兴趣可以直接跳到最后</strong></font><br>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NDK/">NDK</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术/">技术</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2016/07/11/Android与so相关的一个大坑/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Android5.0新特性有哪些会影响到开发" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/07/11/Android5.0新特性有哪些会影响到开发/" class="article-date">
-  	<time datetime="2016-07-11T03:21:52.000Z" itemprop="datePublished">2016-07-11</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/11/Android5.0新特性有哪些会影响到开发/">Android5.0新特性有哪些会影响到开发者？</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h1 id="Android5-0有哪些新特性"><a href="#Android5-0有哪些新特性" class="headerlink" title="Android5.0有哪些新特性"></a>Android5.0有哪些新特性</h1><p>因为公司的平台全部切到android5.1.1,除了大名鼎鼎的ART的模式，android5.0以后的新特性一直没有进行汇总，上周出差porting客户的apk发现bind service的大坑后，见我另一篇文章：<a href="http://jily.org/2016/07/10/Android%205.0%20%28L%29%20Service%20Intent%20must%20be%20explicit/">Android 5.0 (L) Service Intent must be explicit</a>；后来又发现了一个坑，<a href="http://jily.org/2016/07/11/Android%E4%B8%8Eso%E7%9B%B8%E5%85%B3%E7%9A%84%E4%B8%80%E4%B8%AA%E5%A4%A7%E5%9D%91/">armeabi-v7a与armeabi的坑</a></p>
-<p>除了<a href="https://developer.android.com/about/versions/android-5.0-changes.html">谷歌官方高大上的特性说明</a>外，还有如下坑需要注意：<br>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术/">技术</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2016/07/11/Android5.0新特性有哪些会影响到开发/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-movies01" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/07/11/movies01/" class="article-date">
-  	<time datetime="2016-07-11T02:07:29.000Z" itemprop="datePublished">2016-07-11</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/11/movies01/">movies01</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="看电影悟人生"><a href="#看电影悟人生" class="headerlink" title="看电影悟人生"></a>看电影悟人生</h2><p>一千个人眼中有一千个哈姆雷特，看电影不必拘泥于一定要遵守导演的思想，偶尔从导演中无意间流露出的思想，只要能够成为你的切入点，你也可以感受自己的生活和人生态度！<br>下面的思维导图是自己的一些胡思乱想，记录年轻的自己的一些幼稚的想法和观点，无需刻意的矫正；记录真实的自己而已，无他！<br><img src="http://oa1wnpe3m.bkt.clouddn.com/%E7%94%B5%E5%BD%B101.png" alt="movies01" title="01"></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/电影/">电影</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
     </nav>
   
 </div>

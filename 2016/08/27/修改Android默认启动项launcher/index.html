@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>修改Android默认启动项launcher | jily&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="问题背景：
+因为目前很多IPTV的厂商+广电的要求，不允许用户自己替换自己的launcher，为了保证利益，强行推广自己的launcher，对播控平台的掌控，于是就必须要求芯片原厂提供turnkey方案时符合其要求。下面用Android 5.1.1来举例说明，理论上AN的版本对此模块改动差异不太多。
+Google官方Android原生Launcher设置Launcher是Android系统的桌面、">
+<meta property="og:type" content="article">
+<meta property="og:title" content="修改Android默认启动项launcher">
+<meta property="og:url" content="https://github.com/jilyjiang/2016/08/27/修改Android默认启动项launcher/index.html">
+<meta property="og:site_name" content="jily's blog">
+<meta property="og:description" content="问题背景：
+因为目前很多IPTV的厂商+广电的要求，不允许用户自己替换自己的launcher，为了保证利益，强行推广自己的launcher，对播控平台的掌控，于是就必须要求芯片原厂提供turnkey方案时符合其要求。下面用Android 5.1.1来举例说明，理论上AN的版本对此模块改动差异不太多。
+Google官方Android原生Launcher设置Launcher是Android系统的桌面、">
+<meta property="og:image" content="https://github.com/jilyjiang/home/jily.jiang/Pictures/1.png">
+<meta property="og:updated_time" content="2016-08-27T11:19:02.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="修改Android默认启动项launcher">
+<meta name="twitter:description" content="问题背景：
+因为目前很多IPTV的厂商+广电的要求，不允许用户自己替换自己的launcher，为了保证利益，强行推广自己的launcher，对播控平台的掌控，于是就必须要求芯片原厂提供turnkey方案时符合其要求。下面用Android 5.1.1来举例说明，理论上AN的版本对此模块改动差异不太多。
+Google官方Android原生Launcher设置Launcher是Android系统的桌面、">
+<meta name="twitter:image" content="https://github.com/jilyjiang/home/jily.jiang/Pictures/1.png">
+  
+    <link rel="alternative" href="/atom.xml" title="jily&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/assets/images/favicon/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/assets/images/avatar/avatar.png" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">jily.jiang</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">努力奔跑，只为看更大的世界！</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/tags/随笔">随笔</a></li>
+				        
+							<li><a href="/tags/技术">技术</a></li>
+				        
+							<li><a href="/tags/读书">读书</a></li>
+				        
+							<li><a href="/tags/电影">电影</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/JilyJiang" title="github">github</a>
+					        
+								<a class="zhihu" target="_blank" href="https://zhihu.com" title="zhihu">zhihu</a>
+					        
+								<a class="mail" target="_blank" href="/jily.jiang@hotmail.com" title="mail">mail</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Activity/" style="font-size: 10px;">Activity</a> <a href="/tags/Android/" style="font-size: 16.67px;">Android</a> <a href="/tags/Android，Framework/" style="font-size: 10px;">Android，Framework</a> <a href="/tags/Framework/" style="font-size: 10px;">Framework</a> <a href="/tags/Git/" style="font-size: 13.33px;">Git</a> <a href="/tags/GitHub-Page/" style="font-size: 10px;">GitHub Page</a> <a href="/tags/Grub/" style="font-size: 10px;">Grub</a> <a href="/tags/HW加速/" style="font-size: 10px;">HW加速</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Intent/" style="font-size: 10px;">Intent</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/ListView/" style="font-size: 10px;">ListView</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/NDK/" style="font-size: 13.33px;">NDK</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Settings/" style="font-size: 13.33px;">Settings</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/技术/" style="font-size: 20px;">技术</a> <a href="/tags/电影/" style="font-size: 10px;">电影</a> <a href="/tags/读书/" style="font-size: 13.33px;">读书</a> <a href="/tags/随笔/" style="font-size: 13.33px;">随笔</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://stormzhang.com/">逗比张stormzhang</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">MStar资深工程师，专注于Android 系统级的APK及framework的开发！</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">jily.jiang</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="/assets/images/avatar/avatar.png" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">jily.jiang</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">努力奔跑，只为看更大的世界！</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/tags/随笔">随笔</a></li>
+		        
+					<li><a href="/tags/技术">技术</a></li>
+		        
+					<li><a href="/tags/读书">读书</a></li>
+		        
+					<li><a href="/tags/电影">电影</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/JilyJiang" title="github">github</a>
+			        
+						<a class="zhihu" target="_blank" href="https://zhihu.com" title="zhihu">zhihu</a>
+			        
+						<a class="mail" target="_blank" href="/jily.jiang@hotmail.com" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-修改Android默认启动项launcher" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/08/27/修改Android默认启动项launcher/" class="article-date">
+  	<time datetime="2016-08-27T11:19:02.000Z" itemprop="datePublished">2016-08-27</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      修改Android默认启动项launcher
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Framework/">Framework</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术/">技术</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="问题背景："><a href="#问题背景：" class="headerlink" title="问题背景："></a>问题背景：</h4><hr>
+<p>因为目前很多IPTV的厂商+广电的要求，不允许用户自己替换自己的launcher，为了保证利益，强行推广自己的launcher，对播控平台的掌控，于是就必须要求芯片原厂提供turnkey方案时符合其要求。下面用Android 5.1.1来举例说明，理论上AN的版本对此模块改动差异不太多。</p>
+<h4 id="Google官方Android原生Launcher设置"><a href="#Google官方Android原生Launcher设置" class="headerlink" title="Google官方Android原生Launcher设置"></a>Google官方Android原生Launcher设置</h4><p>Launcher是Android系统的桌面、是android系统的主要组件。android系统允许存在多个Launcher并设置默认主界面。</p>
+<p>应用程序作为Home(主界面)需在Activity的intent-filter节点中添加如下内容<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">category</span> <span class="attr">android:name</span>=<span class="string">"android.intent.category.HOME"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">category</span> <span class="attr">android:name</span>=<span class="string">"android.intent.category.DEFAULT"</span> /&gt;</span></div></pre></td></tr></table></figure></p>
+<p>当系统中存在多个Home app且没有设置默认，用户点击Home键会弹出如下图所示的界面（图一）：<br><img src="/home/jily.jiang/Pictures/1.png" alt="launcher" title="launcher"><br>用户可以选择“只有一次”或者“总是”来启动选择的APP<br><a id="more"></a><br>一般情况下android中只会存在一个Home APP，系统启动后会直接启动此APP为默认，不需要用户选择。但是当系统中存在多个Home APP时，系统第一次启动就会弹出上图所示界面，让用户选择其中一个APP作为主屏幕应用，如果用户通过“始终”确认会设置选择的APP为默认的Home，用户通过“仅此一次”则此次以选择的APP为Home，再次按home键还是会弹出选择窗口.</p>
+<h4 id="针对广电总局播控客制化方案"><a href="#针对广电总局播控客制化方案" class="headerlink" title="针对广电总局播控客制化方案"></a>针对广电总局播控客制化方案</h4><p>针对上图，思考一下，可以采用两种方案：</p>
+<ol>
+<li><font color="red">让google原生态中的选框自动选中并且自动进入，这样就符合我们的需求了</font></li>
+<li><font color="red">直接清除launcher选择的堆栈，让home的堆栈里面永远只保留我们需要的那个,这个是受Android原生code，AMS启动home activity启发</font>
+
+</li>
+</ol>
+<h4 id="方案一"><a href="#方案一" class="headerlink" title="方案一"></a>方案一</h4><pre><code>根据操作流程分析code flow，两者互相糅合，理清问题的关键。
+</code></pre><p>从上面弹出的选择默认主界面的界面入手，通过追踪发现上述界面是一个Activity，Activity代码路径frameworks/base/core/java/com/android/internal/app/ResolverActivity.java</p>
+<blockquote>
+<p>ResolverActivity分析<br>此Activity会获取系统中所有的Home app，并根据系统的设置情况显示如上界面。此类中有一个内部类ResolveListAdapter该类继承自BaseAdapter，该类是Home app选择界面的数据适配器。</p>
+</blockquote>
+<p>ResolveListAdapter会在ResolverActivity的onCreate方法中被初始化并会传入一个ResolveInfo类型的List，ResolveListAdapter根据会传入的List<resolveinfo>初始化一个List<displayresolveinfo> mList ，用户的点击事件都会在ResolveListAdapter获取数据。<br>用户点击”ALWAYS”的事件发生在ResolverActivity的onButtonClick 方法中，此方法会获取选中的Item的position、或者获取用户上一次启动的Home app的，mAlwaysUseOption代表用户选中的是否为历史选择（如2图中的Launcher3），并调用startSelected。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onButtonClick</span><span class="params">(View v)</span> </span>&#123;</div><div class="line">    <span class="keyword">final</span> <span class="keyword">int</span> id = v.getId();</div><div class="line">    startSelected(mAlwaysUseOption ?</div><div class="line">            mListView.getCheckedItemPosition() : mAdapter.getFilteredPosition(),</div><div class="line">  </div><div class="line">            id == R.id.button_always,</div><div class="line">            mAlwaysUseOption);</div><div class="line">    dismiss();</div><div class="line">&#125;</div></pre></td></tr></table></figure></displayresolveinfo></resolveinfo></p>
+<p>StartSeletced中通过ResolveListAdapter获取选择的item代表的Home app。并且finish此activity<br>onIntentSelected会根据传入的ResolveInfo设置默认的Home，并根据Intent跳转到相应界面，onIntentSelected的代码在这里就不列出。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">  <span class="comment">/**</span></div><div class="line">   * 设置默认Home app并跳转，结束此Activity</div><div class="line">   * <span class="doctag">@param</span> which 用户选择的Item的position</div><div class="line">   * <span class="doctag">@param</span> always 是否设置为总是</div><div class="line">   * <span class="doctag">@param</span> filtered 是否非历史选择</div><div class="line">   */</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">startSelected</span><span class="params">(<span class="keyword">int</span> which, <span class="keyword">boolean</span> always, <span class="keyword">boolean</span> filtered)</span> </span>&#123;</div><div class="line">      <span class="keyword">if</span> (isFinishing()) &#123;</div><div class="line">          <span class="keyword">return</span>;</div><div class="line">      &#125;</div><div class="line">       ResolveInfo ri = mAdapter.resolveInfoForPosition(which, filtered);</div><div class="line">      Intent intent = mAdapter.intentForPosition(which, filtered);</div><div class="line">     </div><div class="line">      <span class="comment">//设置默认Home，并启动</span></div><div class="line">      onIntentSelected(ri, intent, always);</div><div class="line">      finish();</div><div class="line">  &#125;</div></pre></td></tr></table></figure></p>
+<p>ResolveListAdapter的相关代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> *</div><div class="line"> * <span class="doctag">@param</span> position </div><div class="line"> * <span class="doctag">@param</span> filtered</div><div class="line"> * <span class="doctag">@return</span> </div><div class="line"> */</div><div class="line"> <span class="function"><span class="keyword">public</span> ResolveInfo <span class="title">resolveInfoForPosition</span><span class="params">(<span class="keyword">int</span> position, <span class="keyword">boolean</span> filtered)</span> </span>&#123;</div><div class="line">     <span class="comment">//mList为List&lt;DisplayResolveInfo&gt;</span></div><div class="line">     <span class="keyword">return</span> (filtered ? getItem(position) : mList.get(position)).ri;</div><div class="line"> &#125;</div><div class="line"> <span class="comment">/**</span></div><div class="line"> * </div><div class="line"> * <span class="doctag">@param</span> position</div><div class="line"> * <span class="doctag">@param</span> filtered</div><div class="line"> * <span class="doctag">@return</span> </div><div class="line"> */</div><div class="line"> <span class="function"><span class="keyword">public</span> Intent <span class="title">intentForPosition</span><span class="params">(<span class="keyword">int</span> position, <span class="keyword">boolean</span> filtered)</span> </span>&#123;</div><div class="line">     <span class="comment">//mList为List&lt;DisplayResolveInfo&gt;</span></div><div class="line">     DisplayResolveInfo dri = filtered ? getItem(position) : mList.get(position);</div><div class="line">     <span class="keyword">return</span> intentForDisplayResolveInfo(dri);</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<p><strong>解决措施</strong><br>扯了半天了，分析完谷歌的原生流程，现在终于开始进行客制化的修改了。进入正题：<br>此Activity的onCreate方法中判断是否为第一次启动，如果是则调用startSelected方法设置默认Home app。</p>
+<p>默认Home app的从ResolveListAdapter中获取，所以在ResolveListAdapter中添加getDefaultHomePosition(String packageName)方法，用于获取默认home app在List<displayresolveinfo> 中的位置，代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getDefaultHomePosition</span><span class="params">(String packageName)</span></span>&#123;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; mList.size(); i++) &#123;</div><div class="line">                ResolveInfo info = mList.get(i).ri;</div><div class="line">                <span class="keyword">if</span> (DEBUG)</div><div class="line">                Log.w(TAG,<span class="string">"getDefaultHomePosition "</span> + info.activityInfo.packageName);</div><div class="line">                <span class="keyword">if</span> (info.activityInfo.packageName.equals(packageName)) &#123;</div><div class="line">                   <span class="keyword">return</span> i;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">return</span> -<span class="number">1</span>;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">```   </div><div class="line">在ResolverActivity中添加设置默认app的方法setupDefaultLauncher()，代码如下：</div><div class="line"></div><div class="line">```java</div><div class="line"></div><div class="line"> <span class="comment">//用于记录默认home app是否设置过</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String DEFAULT_HOME = <span class="string">"persist.sys.default.home"</span>;</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">setupDefaultLauncher</span><span class="params">()</span> </span>&#123;</div><div class="line">        String first = <span class="string">""</span>;</div><div class="line">        <span class="keyword">try</span>&#123;</div><div class="line">            first =  SystemProperties.get(DEFAULT_HOME);</div><div class="line">        &#125;<span class="keyword">catch</span>(Exception e)&#123;</div><div class="line">            Log.w(TAG,<span class="string">"exception error get DEFAULT_HOME"</span>);</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//判断默认home 是否设置过，如果获取的字符串为空代表，未设置，否则return不在进行设置</span></div><div class="line">        <span class="keyword">if</span> (!TextUtils.isEmpty(first)) &#123;</div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//使用包名获取所需设置的默认home app在ResolveListAdapter中的位置</span></div><div class="line">        <span class="keyword">int</span> position = mAdapter.getDefaultHomePosition(<span class="string">"home app包名"</span>);</div><div class="line">        <span class="comment">//如果不存在则return</span></div><div class="line">        <span class="keyword">if</span> (position == -<span class="number">1</span>) &#123;</div><div class="line">            <span class="keyword">if</span> (DEBUG)</div><div class="line">            Log.w(TAG,<span class="string">"not find default Home"</span>);</div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//设置默认home app后，则添加记录</span></div><div class="line">        <span class="keyword">try</span>&#123;</div><div class="line">            SystemProperties.set(DEFAULT_HOME,DEFAULT_HOME);</div><div class="line">        &#125;<span class="keyword">catch</span>(Exception e)&#123;</div><div class="line">            Log.w(TAG,<span class="string">"exception error set DEFAULT_HOME"</span>);</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//设置默认home app，并跳转</span></div><div class="line">        startSelected(position, <span class="keyword">true</span>, <span class="keyword">true</span>);</div><div class="line">        <span class="comment">//结束此activity</span></div><div class="line">        dismiss();</div><div class="line">    &#125;</div></pre></td></tr></table></figure></displayresolveinfo></p>
+<p>为了保证mAdapter被初始化 setupDefaultLauncher()的调用添加到ResolverActivity的onCreate函数中，代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState, Intent intent,</span></span></div><div class="line">            CharSequence title, <span class="keyword">int</span> defaultTitleRes, Intent[] initialIntents,</div><div class="line">            List&lt;ResolveInfo&gt; rList, <span class="keyword">boolean</span> alwaysUseOption) &#123;</div><div class="line">        <span class="comment">//其他初始化代码</span></div><div class="line">        ............</div><div class="line">        mIntent = <span class="keyword">new</span> Intent(intent);</div><div class="line">        mAdapter = <span class="keyword">new</span> ResolveListAdapter(<span class="keyword">this</span>, initialIntents, rList,</div><div class="line">                mLaunchedFromUid, alwaysUseOption);</div><div class="line">        <span class="comment">//其它初始化代码</span></div><div class="line">        ............</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (mLaunchedFromUid &lt; <span class="number">0</span> || UserHandle.isIsolated(mLaunchedFromUid)) &#123;</div><div class="line">            <span class="comment">// Gulp!</span></div><div class="line">            finish();</div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">int</span> count = mAdapter.mList.size();</div><div class="line">        <span class="comment">//添加的代码</span></div><div class="line">        setupDefaultLauncher();</div><div class="line">        <span class="comment">//原有逻辑</span></div><div class="line">        <span class="comment">//如果系统中home app大于1</span></div><div class="line">        <span class="keyword">if</span> (count &gt; <span class="number">1</span> || (count == <span class="number">1</span> &amp;&amp; mAdapter.getOtherProfile() != <span class="keyword">null</span>)) &#123;</div><div class="line">            <span class="comment">//初始化代码</span></div><div class="line">            .........</div><div class="line">        <span class="comment">//如果home app等于1则设置唯一的home app为Home</span></div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (count == <span class="number">1</span>) &#123;</div><div class="line">            safelyStartActivity(mAdapter.intentForPosition(<span class="number">0</span>, <span class="keyword">false</span>));</div><div class="line">            mPackageMonitor.unregister();</div><div class="line">            mRegistered = <span class="keyword">false</span>;</div><div class="line">            finish();</div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            setContentView(R.layout.resolver_list);</div><div class="line"></div><div class="line">            <span class="keyword">final</span> TextView empty = (TextView) findViewById(R.id.empty);</div><div class="line">            empty.setVisibility(View.VISIBLE);</div><div class="line"></div><div class="line">            mListView = (ListView) findViewById(R.id.resolver_list);</div><div class="line">            mListView.setVisibility(View.GONE);</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//其它初始化代码</span></div><div class="line">        ..........</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<p><font color="red"><em>通过以上方法即可实现设置默认home的功能</em></font></p>
+<h4 id="方案二【优势，可以通过长按home按键进行切换】"><a href="#方案二【优势，可以通过长按home按键进行切换】" class="headerlink" title="方案二【优势，可以通过长按home按键进行切换】"></a>方案二【优势，可以通过长按home按键进行切换】</h4><p>ActivityManagerService.java在每次启动时执行，每次都默认启动设定的launcher，当然，如果设定的launcher存在的话，设置其他的launcher为默认会无效，因为重新启动时setDefaultLauncher()会将当前默认launcher清除。只有在卸载了设定默认启动的launcher后才能设置其他launcher为默认启动.<br>修改AMS：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">frameworks\base\services\java\com\android\server\am\ActivityManagerService.java</div></pre></td></tr></table></figure></p>
+<p><strong>新增客制化的method</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">setDefaultLauncher</span><span class="params">()</span> </span>&#123;  </div><div class="line">        <span class="comment">// get default component   </span></div><div class="line">        String packageName = <span class="string">"com.coship.factorytest"</span>;<span class="comment">//默认launcher包名</span></div><div class="line">        String className = <span class="string">"com.coship.factorytest.MainActivity"</span>;<span class="comment">////默认launcher入口</span></div><div class="line">          </div><div class="line">        IPackageManager pm = ActivityThread.getPackageManager();</div><div class="line">         </div><div class="line">        <span class="comment">//判断指定的launcher是否存在</span></div><div class="line">        <span class="keyword">if</span>(hasApkInstalled(packageName)) &#123;</div><div class="line">         </div><div class="line">            Slog.i(TAG, <span class="string">"defautl packageName = "</span> + packageName + <span class="string">", default className = "</span> + className); </div><div class="line">                       </div><div class="line">            <span class="comment">//清除当前默认launcher </span></div><div class="line">            ArrayList&lt;IntentFilter&gt; intentList = <span class="keyword">new</span> ArrayList&lt;IntentFilter&gt;();  </div><div class="line">            ArrayList&lt;ComponentName&gt; cnList = <span class="keyword">new</span> ArrayList&lt;ComponentName&gt;();  </div><div class="line">            mContext.getPackageManager().getPreferredActivities(intentList, cnList, <span class="keyword">null</span>);  </div><div class="line">            IntentFilter dhIF = <span class="keyword">null</span>;  </div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; cnList.size(); i++) &#123;  </div><div class="line">                dhIF = intentList.get(i);  </div><div class="line">                <span class="keyword">if</span>(dhIF.hasAction(Intent.ACTION_MAIN) &amp;&amp; dhIF.hasCategory(Intent.CATEGORY_HOME)) &#123;  </div><div class="line">                    mContext.getPackageManager().clearPackagePreferredActivities(cnList.get(i).getPackageName());  </div><div class="line">                &#125;  </div><div class="line">            &#125;  </div><div class="line">                       </div><div class="line">            <span class="comment">//获取所有launcher activity </span></div><div class="line">            Intent intent = <span class="keyword">new</span> Intent(Intent.ACTION_MAIN);  </div><div class="line">            intent.addCategory(Intent.CATEGORY_HOME);  </div><div class="line">            List&lt;ResolveInfo&gt; list = <span class="keyword">new</span> ArrayList&lt;ResolveInfo&gt;();  </div><div class="line">            <span class="keyword">try</span> &#123;  </div><div class="line">                list = pm.queryIntentActivities(intent, intent.resolveTypeIfNeeded(mContext.getContentResolver()), PackageManager.MATCH_DEFAULT_ONLY);  </div><div class="line">            &#125;<span class="keyword">catch</span> (RemoteException e) &#123;  </div><div class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"Package manager has died"</span>, e);  </div><div class="line">            &#125;   </div><div class="line">            <span class="comment">// get all components and the best match  </span></div><div class="line">            IntentFilter filter = <span class="keyword">new</span> IntentFilter();  </div><div class="line">            filter.addAction(Intent.ACTION_MAIN);  </div><div class="line">            filter.addCategory(Intent.CATEGORY_HOME);  </div><div class="line">            filter.addCategory(Intent.CATEGORY_DEFAULT);  </div><div class="line">            <span class="keyword">final</span> <span class="keyword">int</span> N = list.size();  </div><div class="line">            Slog.d(TAG, <span class="string">"N:::::hyhyhyhy:::: = "</span> + N);  </div><div class="line">                     </div><div class="line">            <span class="comment">//设置默认launcher </span></div><div class="line">            ComponentName launcher = <span class="keyword">new</span> ComponentName(packageName, className);  </div><div class="line"> </div><div class="line">            ComponentName[] set = <span class="keyword">new</span> ComponentName[N];  </div><div class="line">            <span class="keyword">int</span> defaultMatch = <span class="number">0</span>;  </div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++) &#123;  </div><div class="line">                ResolveInfo r = list.get(i);  </div><div class="line">                set[i] = <span class="keyword">new</span> ComponentName(r.activityInfo.packageName, r.activityInfo.name);  </div><div class="line">                Slog.d(TAG, <span class="string">"r.activityInfo.packageName:::::hyhyhyhy:::: = "</span> + r.activityInfo.packageName);</div><div class="line">                Slog.d(TAG, <span class="string">"r.activityInfo.name:::::hyhyhyhy:::: = "</span> + r.activityInfo.name);</div><div class="line">                <span class="keyword">if</span>(launcher.getClassName().equals(r.activityInfo.name)) &#123;</div><div class="line">                    defaultMatch = r.match;</div><div class="line">                &#125;</div><div class="line">            &#125;  </div><div class="line">                     </div><div class="line">            <span class="keyword">try</span> &#123;  </div><div class="line">                pm.addPreferredActivity(filter, defaultMatch, set, launcher);</div><div class="line">            &#125; <span class="keyword">catch</span> (RemoteException e) &#123;  </div><div class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"com.coship.factorytest.MainActivity : Package manager has died"</span>, e);  </div><div class="line">            &#125;   </div><div class="line">             </div><div class="line">             </div><div class="line">        &#125;<span class="comment">//end if</span></div><div class="line">         </div><div class="line">    &#125;  </div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">hasApkInstalled</span><span class="params">(String pkgname)</span> </span>&#123;</div><div class="line"> </div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            mSelf.mContext.getPackageManager().getPackageInfo(pkgname,<span class="number">0</span>);</div><div class="line">        &#125; <span class="keyword">catch</span>(Exception e) &#123;</div><div class="line">            Slog.d(TAG, <span class="string">"PackageManager.NameNotFoundException: = "</span> + e.getMessage());</div><div class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<p>然后在ActivityManagerService类中的</p>
+<blockquote>
+<p>boolean startHomeActivityLocked()<br>方法第一行调用上面添加的<br>setDefaultLauncher()<br>  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"> <span class="function"><span class="keyword">boolean</span> <span class="title">startHomeActivityLocked</span><span class="params">()</span> </span>&#123;</div><div class="line">    </div><div class="line">       <span class="keyword">if</span> (mFactoryTest == SystemServer.FACTORY_TEST_LOW_LEVEL</div><div class="line">               &amp;&amp; mTopAction == <span class="keyword">null</span>) &#123;</div><div class="line">           <span class="comment">// We are running in factory test mode, but unable to find</span></div><div class="line">           <span class="comment">// the factory test app, so just sit around displaying the</span></div><div class="line">           <span class="comment">// error message and don't try to start anything.</span></div><div class="line">           <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">       &#125;</div><div class="line"></div><div class="line"><span class="comment">//-------新增方法的执行位置---------------</span></div><div class="line">       setDefaultLauncher();</div><div class="line">        </div><div class="line">       Intent intent = <span class="keyword">new</span> Intent(</div><div class="line">           mTopAction,</div><div class="line">           mTopData != <span class="keyword">null</span> ? Uri.parse(mTopData) : <span class="keyword">null</span>);</div><div class="line">       intent.setComponent(mTopComponent);</div><div class="line">       <span class="keyword">if</span> (mFactoryTest != SystemServer.FACTORY_TEST_LOW_LEVEL) &#123;</div><div class="line">           intent.addCategory(Intent.CATEGORY_HOME);</div><div class="line">       &#125;</div><div class="line">       ActivityInfo aInfo =</div><div class="line">           intent.resolveActivityInfo(mContext.getPackageManager(),</div><div class="line">                   STOCK_PM_FLAGS);</div><div class="line">       <span class="keyword">if</span> (aInfo != <span class="keyword">null</span>) &#123;</div><div class="line">           intent.setComponent(<span class="keyword">new</span> ComponentName(</div><div class="line">                   aInfo.applicationInfo.packageName, aInfo.name));</div><div class="line">           <span class="comment">// Don't do this if the home app is currently being</span></div><div class="line">           <span class="comment">// instrumented.</span></div><div class="line">           ProcessRecord app = getProcessRecordLocked(aInfo.processName,</div><div class="line">                   aInfo.applicationInfo.uid);</div><div class="line">           <span class="keyword">if</span> (app == <span class="keyword">null</span> || app.instrumentationClass == <span class="keyword">null</span>) &#123;</div><div class="line">               intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NEW_TASK);</div><div class="line">               mMainStack.startActivityLocked(<span class="keyword">null</span>, intent, <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="number">0</span>, aInfo,</div><div class="line">                       <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="keyword">false</span>, <span class="keyword">false</span>, <span class="keyword">null</span>);</div><div class="line">           &#125;</div><div class="line">       &#125;</div><div class="line">                 </div><div class="line">       <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">   &#125;</div></pre></td></tr></table></figure></p>
+</blockquote>
+<p>  添加后的方法全部内容如上，重新编译android，烧录，开机就能够自动进入自定义的launcher<br>可以通过系统设置取消该launcher的默认设置，取消之后按home键会弹出launcher选择提示框<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">frameworks\base\core\java\com\android\internal\app\ResolverActivity.java</div></pre></td></tr></table></figure></p>
+<p>ResolverActivity类就是选择打开方式的弹出框</p>
+<p> 顺便查看老外有没有类似的需求，在stackoverflow上面一查询还真发现有一些精彩的答案（O(∩_∩)O哈哈~，看来奸商全球通用）：<br> <a href="http://stackoverflow.com/questions/27991656/how-to-set-default-app-launcher-programmatically" target="_blank" rel="external">How to set default app launcher programmatically?</a><br> <a href="http://stackoverflow.com/questions/15537522/how-to-reset-default-launcher-home-screen-replacement" target="_blank" rel="external">How to reset default launcher/home screen replacement?</a> </p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/08/27/Android布局文件重复ID的影响/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          layout布局文件有重复ID，会有什么影响
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/08/04/ListView的动态数据加载/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">译：ListView的动态数据加载</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="修改Android默认启动项launcher" data-title="修改Android默认启动项launcher" data-url="https://github.com/jilyjiang/2016/08/27/修改Android默认启动项launcher/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"jily"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 jily.jiang
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

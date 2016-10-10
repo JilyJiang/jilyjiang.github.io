@@ -122,7 +122,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/Activity/" style="font-size: 10px;">Activity</a> <a href="/tags/Android/" style="font-size: 16.67px;">Android</a> <a href="/tags/Git/" style="font-size: 13.33px;">Git</a> <a href="/tags/GitHub-Page/" style="font-size: 10px;">GitHub Page</a> <a href="/tags/Grub/" style="font-size: 10px;">Grub</a> <a href="/tags/HW加速/" style="font-size: 10px;">HW加速</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Intent/" style="font-size: 10px;">Intent</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/ListView/" style="font-size: 10px;">ListView</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/NDK/" style="font-size: 13.33px;">NDK</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Settings/" style="font-size: 13.33px;">Settings</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/技术/" style="font-size: 20px;">技术</a> <a href="/tags/电影/" style="font-size: 10px;">电影</a> <a href="/tags/读书/" style="font-size: 13.33px;">读书</a> <a href="/tags/随笔/" style="font-size: 13.33px;">随笔</a>
+						<a href="/tags/Activity/" style="font-size: 10px;">Activity</a> <a href="/tags/Android/" style="font-size: 16.67px;">Android</a> <a href="/tags/Android，Framework/" style="font-size: 10px;">Android，Framework</a> <a href="/tags/Framework/" style="font-size: 10px;">Framework</a> <a href="/tags/Git/" style="font-size: 13.33px;">Git</a> <a href="/tags/GitHub-Page/" style="font-size: 10px;">GitHub Page</a> <a href="/tags/Grub/" style="font-size: 10px;">Grub</a> <a href="/tags/HW加速/" style="font-size: 10px;">HW加速</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Intent/" style="font-size: 10px;">Intent</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/ListView/" style="font-size: 10px;">ListView</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/NDK/" style="font-size: 13.33px;">NDK</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Settings/" style="font-size: 13.33px;">Settings</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/技术/" style="font-size: 20px;">技术</a> <a href="/tags/电影/" style="font-size: 10px;">电影</a> <a href="/tags/读书/" style="font-size: 13.33px;">读书</a> <a href="/tags/随笔/" style="font-size: 13.33px;">随笔</a>
 					</div>
 				</section>
 				
@@ -131,9 +131,7 @@
 				<section class="switch-part switch-part3">
 					<div id="js-friends">
 					
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://juniperphoton.net/">JuniperPhoton</a>
-			        
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://yazhuo.github.io/">yazoo</a>
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://stormzhang.com/">逗比张stormzhang</a>
 			        
 			        </div>
 				</section>
@@ -143,7 +141,7 @@
 				
 				<section class="switch-part switch-part4">
 				
-					<div id="js-aboutme">嗯...我是来占领地球的，哈哈哈哈！</div>
+					<div id="js-aboutme">MStar资深工程师，专注于Android 系统级的APK及framework的开发！</div>
 				</section>
 				
 			</div>
@@ -205,6 +203,196 @@
 </nav>
 
       <div class="body-wrap">
+  
+    <article id="post-系统默认错误弹框-xxx，停止运行-ANR" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/08/27/系统默认错误弹框-xxx，停止运行-ANR/" class="article-date">
+  	<time datetime="2016-08-27T11:21:28.000Z" itemprop="datePublished">2016-08-27</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/27/系统默认错误弹框-xxx，停止运行-ANR/">屏蔽系统默认错误弹框--xxx，停止运行/ANR</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<p>因为运营商某些apk的兼容性存在一定程度问题，但apk因为特殊体制的问题，不会对其apk进行更改；这时就需要底层协助厂商处理一些兼容性的apk，比如某些时候apk退出会弹出一个‘xxx，已停止运行’，但实际上apk所有功能均正常，不影响用户的实际体验，于是乎就去想办法去掉这个ErrorDialog；<br>依旧根据常规分析思路，现在找到其对应的source code：<br>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android，Framework/">Android，Framework</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术/">技术</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2016/08/27/系统默认错误弹框-xxx，停止运行-ANR/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Android布局文件重复ID的影响" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/08/27/Android布局文件重复ID的影响/" class="article-date">
+  	<time datetime="2016-08-27T11:21:28.000Z" itemprop="datePublished">2016-08-27</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/27/Android布局文件重复ID的影响/">layout布局文件有重复ID，会有什么影响</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>前一段时间，一个同事来找我处理一个他觉得很奇怪的一个问题；</p>
+<blockquote>
+<p>同一个运营商的APK的在Android4.4上，电影的节目详细列表上，电影的名称显示正常；但在Android5.1上，电影的节目详细列表上，节目名称始终不显示；他们初步看现象以为是Android5.1上有什么特殊的图层渲染机制导致的;</p>
+</blockquote>
+<p>反编译apk发现对应的布局文件中，有重复的ID（一般情况下，eclipse和AS都会提示重复id报错，但若apk的开发人员是直接在android 源代码编译的时候，编译则不会报错）</p>
+<h3 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h3><h5 id="情况一：同个一个Xml文件中的同名"><a href="#情况一：同个一个Xml文件中的同名" class="headerlink" title="情况一：同个一个Xml文件中的同名"></a><strong>情况一：同个一个Xml文件中的同名</strong></h5>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术/">技术</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2016/08/27/Android布局文件重复ID的影响/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-修改Android默认启动项launcher" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/08/27/修改Android默认启动项launcher/" class="article-date">
+  	<time datetime="2016-08-27T11:19:02.000Z" itemprop="datePublished">2016-08-27</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/27/修改Android默认启动项launcher/">修改Android默认启动项launcher</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="问题背景："><a href="#问题背景：" class="headerlink" title="问题背景："></a>问题背景：</h4><hr>
+<p>因为目前很多IPTV的厂商+广电的要求，不允许用户自己替换自己的launcher，为了保证利益，强行推广自己的launcher，对播控平台的掌控，于是就必须要求芯片原厂提供turnkey方案时符合其要求。下面用Android 5.1.1来举例说明，理论上AN的版本对此模块改动差异不太多。</p>
+<h4 id="Google官方Android原生Launcher设置"><a href="#Google官方Android原生Launcher设置" class="headerlink" title="Google官方Android原生Launcher设置"></a>Google官方Android原生Launcher设置</h4><p>Launcher是Android系统的桌面、是android系统的主要组件。android系统允许存在多个Launcher并设置默认主界面。</p>
+<p>应用程序作为Home(主界面)需在Activity的intent-filter节点中添加如下内容<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">category</span> <span class="attr">android:name</span>=<span class="string">"android.intent.category.HOME"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">category</span> <span class="attr">android:name</span>=<span class="string">"android.intent.category.DEFAULT"</span> /&gt;</span></div></pre></td></tr></table></figure></p>
+<p>当系统中存在多个Home app且没有设置默认，用户点击Home键会弹出如下图所示的界面（图一）：<br><img src="/home/jily.jiang/Pictures/1.png" alt="launcher" title="launcher"><br>用户可以选择“只有一次”或者“总是”来启动选择的APP<br>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Framework/">Framework</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术/">技术</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2016/08/27/修改Android默认启动项launcher/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-ListView的动态数据加载" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -394,200 +582,9 @@
 
 
   
-    <article id="post-NDK开发相关技巧汇总" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/08/03/NDK开发相关技巧汇总/" class="article-date">
-  	<time datetime="2016-08-03T04:26:09.000Z" itemprop="datePublished">2016-08-03</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/03/NDK开发相关技巧汇总/">NDK开发相关技巧汇总</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>Android NDK(Native Development Kit)是基于Java JNI的使用C/C++和Java来混合开发应用的一种方式</p>
-<h3 id="函数签名的写法"><a href="#函数签名的写法" class="headerlink" title="函数签名的写法"></a>函数签名的写法</h3><p>Java代码中调用Native的代码还是比较简单的，把方法声明成为native，然后可以当作普通的Java方法一样来使用，只不过这个native的方法的实现是在Native中。</p>
-<p>JNI是一个桥梁，让不同的语言能够在一起使用，不但Java能调用Native层代码，在Native层也是能够调用Java的代码。但是JNI的最初目的是能够让Java使用C/C++语言来解决Java做不到的事情，所以在Native中调用Java的方法要稍微费一点劲。要获取JNI的执行环境(JNIEnv)，要找到类和对象，更重要的是要写对函数签名，否则是找不到的。</p>
-<h3 id="函数签名的写法-1"><a href="#函数签名的写法-1" class="headerlink" title="函数签名的写法"></a>函数签名的写法</h3>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NDK/">NDK</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术/">技术</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2016/08/03/NDK开发相关技巧汇总/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Android的焦点控制顺序？" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/08/01/Android的焦点控制顺序？/" class="article-date">
-  	<time datetime="2016-08-01T07:20:49.000Z" itemprop="datePublished">2016-08-01</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/01/Android的焦点控制顺序？/">Android 的view焦点控制</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h3 id="Understanding-Control-Focus-Order"><a href="#Understanding-Control-Focus-Order" class="headerlink" title="Understanding Control Focus Order"></a>Understanding Control Focus Order</h3><p>因为做TV或STB的应用，不像手机或pad一样，焦点的控制主要是通过触摸事件来控制焦点；有时候需要自己通过程序来控制焦点，才能使遥控器的操作符合我们期望的要求；</p>
-<h3 id="Step-1-Define-a-Layout-with-Controls"><a href="#Step-1-Define-a-Layout-with-Controls" class="headerlink" title="Step 1: Define a Layout with Controls"></a>Step 1: Define a Layout with Controls</h3><p>Android默认焦点控制顺序与人的读书习惯一样；<font color=red>从左到右，从上到下</font><br>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术/">技术</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2016/08/01/Android的焦点控制顺序？/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-跟着Android源码学app开发之settings分析" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/07/26/跟着Android源码学app开发之settings分析/" class="article-date">
-  	<time datetime="2016-07-26T03:56:50.000Z" itemprop="datePublished">2016-07-26</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/26/跟着Android源码学app开发之settings分析/">跟着Android源码学app开发之settings分析(一)</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<h2 id="问题背景："><a href="#问题背景：" class="headerlink" title="问题背景："></a>问题背景：</h2><p>前段时间，因为某个项目的特殊要求，要求在三天之内提供一个BlueTooth的apk可以使用，界面风格尽量符合某司要求即可；操作方式不限；于是和老大协商后，决定只修改Android的setting的背景和UI风格，尽快出一个单独的bluetooth给客户！</p>
-<h2 id="现状："><a href="#现状：" class="headerlink" title="现状："></a>现状：</h2><ul>
-<li>Android 的setting 源码</li>
-<li>木有蓝牙的相关开发经验，查看setting的src，发现高达40几个java类</li>
-<li>时间紧迫，只有三天时间<h2 id="正题："><a href="#正题：" class="headerlink" title="正题："></a>正题：</h2>项目如期完成，于是决定通过setting的源码把app开发的知识点全部回顾和整理一遍；
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Settings/">Settings</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术/">技术</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2016/07/26/跟着Android源码学app开发之settings分析/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 </div>
