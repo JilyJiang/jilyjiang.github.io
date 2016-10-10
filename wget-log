@@ -1,0 +1,14 @@
+--2016-08-30 14:36:13--  https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+Resolving dl.google.com (dl.google.com)... 203.208.48.46, 203.208.48.36, 203.208.48.32, ...
+Connecting to dl.google.com (dl.google.com)|203.208.48.46|:443... failed: Connection timed out.
+Connecting to dl.google.com (dl.google.com)|203.208.48.36|:443... failed: Connection timed out.
+Connecting to dl.google.com (dl.google.com)|203.208.48.32|:443... failed: Connection timed out.
+Connecting to dl.google.com (dl.google.com)|203.208.48.34|:443... failed: Connection timed out.
+Connecting to dl.google.com (dl.google.com)|203.208.48.35|:443... failed: Connection timed out.
+Connecting to dl.google.com (dl.google.com)|203.208.48.33|:443... failed: Connection timed out.
+Connecting to dl.google.com (dl.google.com)|203.208.48.41|:443... failed: Connection timed out.
+Connecting to dl.google.com (dl.google.com)|203.208.48.39|:443... failed: Connection timed out.
+Connecting to dl.google.com (dl.google.com)|203.208.48.40|:443... failed: Connection timed out.
+Connecting to dl.google.com (dl.google.com)|203.208.48.38|:443... failed: Connection timed out.
+Connecting to dl.google.com (dl.google.com)|203.208.48.37|:443... failed: Connection timed out.
+Connecting to dl.google.com (dl.google.com)|2404:6800:4005:801::200e|:443... failed: Network is unreachable.
