@@ -6,7 +6,7 @@
   position: relative;
   border: 1px solid #ddd;
   background: #fff;
-  -webkit-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
   &.show{
     visibility: visible;
     -webkit-animation: cd-bounce-1 0.6s;
@@ -182,8 +182,8 @@
     margin: 10px 0px;  
   }
   li{
-    ul,ol{
-      margin-left: 30px;
+    ul,ol{	  
+      margin-left: 30px;	  
       li:before{
         content: "";
         background: #dedede;
@@ -357,3 +357,48 @@
     float: right;
   }
 }
+
+@media (max-width: 1099px){
+  #toc{
+    display: none;
+  }  
+}
+
+@media (min-width: 1100px) { 
+  #toc{    
+    background-color: #fff;
+    padding: 0 1em;
+    border:1px solid #ddd;
+    position: fixed;
+    top: 100px;
+    right: -180px;
+    transition: right .5s ease-in;
+    width: 150px;
+    h2{
+      margin-bottom:10px;
+    }
+    ol{
+      padding-left: 0!important;
+    }
+    line-height: 1.3em;
+    font-size: 0.8em;
+    float: right;
+    .toc{
+      padding: 0;
+      list-style: none;
+      li{        
+        margin: .5em 0 .5em;
+        ol{
+          margin: .5em 0 .5em 1em;
+        }
+      }      
+    }   
+  }
+  .article2{
+    margin-right: 211px;
+    transition: margin-right .5s ease-in;
+  }
+}
+
+
+  

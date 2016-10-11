@@ -20,8 +20,8 @@
   }
   %>
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title><% if (title){ %><%= title %> | <% } %><%= config.title %></title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title><% if (title){ %><%= title %> | <% } %><%= config.title %></title>  
+  <meta name="viewport" content="width=device-width,initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
   <%- open_graph({twitter_id: theme.twitter, google_plus: theme.google_plus, fb_admins: theme.fb_admins, fb_app_id: theme.fb_app_id}) %>
   <% if (theme.rss){ %>
     <link rel="alternative" href="<%- theme.rss %>" title="<%= config.title %>" type="application/atom+xml">
@@ -30,4 +30,22 @@
     <link rel="icon" href="<%- theme.favicon %>">
   <% } %>
   <%- css('css/style') %>
+  <!-- android Add to Homescreen -->
+  <link rel="manifest" href="/manifest.json">
+  <!-- ios Add to Homescreen -->
+  <link rel="apple-touch-icon-precomposed" sizes="57x57" href="/res/ic_launcher_72.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/res/ic_launcher_72.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/res/ic_launcher_144.png">
+  <link rel="apple-touch-startup-image" sizes="2048x1496" href="/res/ic_launcher_192.png" media="screen and (min-device-width:481px) and (max-device-width:1024px) and (orientation:landscape) and (-webkit-min-device-pixel-ratio: 2)">
+  <link rel="apple-touch-startup-image" sizes="1536x2008" href="/res/ic_launcher_192.png" media="screen and (min-device-width:481px) and (max-device-width:1024px) and (orientation:portrait) and (-webkit-min-device-pixel-ratio: 2)">
+  <link rel="apple-touch-startup-image" sizes="1024x748" href="/res/ic_launcher_192.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
+  <link rel="apple-touch-startup-image" sizes="768x1004" href="/res/ic_launcher_192.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
+  <link rel="apple-touch-startup-image" sizes="640x920" href="/res/ic_launcher_192.png" media="screen and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2)">
+  <link rel="apple-touch-startup-image" sizes="320x460" href="/res/ic_launcher_192.png" media="screen and (max-device-width: 320)">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no">
+ 
+  <meta name="browsermode" content="application"/>
+  <meta name="x5-page-mode" content="app" />
 </head>

@@ -67,7 +67,7 @@
 	}
 
 	@media screen and (max-width:1040px) {
-
+		
 	}@media screen and (max-width:800px) {
 		@import "_partial/mobile"
 	}
@@ -97,7 +97,7 @@
 		margin: 0 auto;
 		position: relative;
 		overflow: hidden;
-		background: #88acdb;
+		/* background: #88acdb; */
 		-webkit-transition: all 0.2s ease-in;
 		display: -webkit-box;
 		-webkit-box-orient: horizontal;
@@ -134,7 +134,8 @@
 		cursor: pointer;
 		text-transform: uppercase;
 		float:none;
-		min-height: 150px;
+		/* height: 150px; */
+		height:auto;
 		margin-left: -12px;
 		text-align: center;
 		display: -webkit-box;
@@ -225,6 +226,13 @@
 				border:1px solid #c83d20;
 				&:hover {
 					border:1px solid #9c3019;
+				}
+			}
+            a.pinboard {
+				background:url('/img/pinboard.png') center no-repeat #1E90FF;
+				border:1px solid #1E90FF;
+				&:hover {
+					border:1px solid #1E90FF;
 				}
 			}
 			a.twitter {
