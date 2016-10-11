@@ -1,5 +1,4 @@
 require([], function (){
-
 	var isMobileInit = false;
 	var loadMobile = function(){
 		require(['/js/mobile.js'], function(mobile){
@@ -105,6 +104,32 @@ require([], function (){
 	//是否新窗口打开链接
 	if(yiliaConfig.open_in_new == true){
 		$(".article a[href]").attr("target", "_blank")
-	}
-	
+	}	
+  
+  function changeColor(){
+    //随机取颜色
+    //$(".left-col .overlay").css({"background-color": '#'+('00000'+(Math.random()*0x1000000<<0).toString(16)).slice(-6),"opacity": 1});
+    //从给定的颜色值中选
+    var colorList = ["#FFF", "#00CC66", "#ff945c", "#0099FF", "#996666", "#99CCCC", "#99CC99", "#CC6666"];
+    var id = Math.ceil(Math.random()*(colorList.length-1));
+    var colors = {"background-color": colorList[id],"opacity": 1,"transition":"all 0.2 ease-in","-ms-transition":"all 0.2 ease-in","-moz-transition":"all 0.2 ease-in","-webkit-transition":"all 0.2s ease-in"}
+    //移动页面
+    $("#container #mobile-nav .overlay").css(colors);
+    //PC页面
+    $("#container .left-col .overlay").css(colors);
+  }
+  
+  setTimeout(changeColor,1000);
+  
+  function search(){
+    // swiftype搜索
+    (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+    })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+    _st('install','jza1LHWu1bhF8xMFQDod','2.0.0'); 
+  }
+  
+  setTimeout(search,1000);    
 });

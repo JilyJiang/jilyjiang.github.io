@@ -129,6 +129,7 @@ var Instagram = (function(){
 				return;
 			}
 			getList("https://api.instagram.com/v1/users/"+ userId +"/media/recent/?client_id="+insid+"&count=100");
+			//getList("https://api.instagram.com/v1/users/"+ userId +"/media/recent/?access_token=1216103802.1fb234f.27bd8d00862545f8bca12ac8bba59b8a&count=100");					
 			bind();
 		}
 	}

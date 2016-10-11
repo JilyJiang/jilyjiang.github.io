@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>跟着Android源码学app开发之settings分析（二） | jily&#39;s blog</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>跟着Android源码学app开发之settings分析（二） | jily&#39;s blog</title>  
+  <meta name="viewport" content="width=device-width,initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
   <meta name="description" content="android:taskAffinity谷歌官网解释The task that the activity has an affinity for. Activities with the same affinity conceptually belong to the same task (to the same “application” from the user’s perspective">
 <meta property="og:type" content="article">
 <meta property="og:title" content="跟着Android源码学app开发之settings分析（二）">
@@ -23,8 +23,25 @@
     <link rel="icon" href="/assets/images/favicon/favicon.png">
   
   <link rel="stylesheet" href="/css/style.css">
+  <!-- android Add to Homescreen -->
+  <link rel="manifest" href="/manifest.json">
+  <!-- ios Add to Homescreen -->
+  <link rel="apple-touch-icon-precomposed" sizes="57x57" href="/res/ic_launcher_72.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/res/ic_launcher_72.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/res/ic_launcher_144.png">
+  <link rel="apple-touch-startup-image" sizes="2048x1496" href="/res/ic_launcher_192.png" media="screen and (min-device-width:481px) and (max-device-width:1024px) and (orientation:landscape) and (-webkit-min-device-pixel-ratio: 2)">
+  <link rel="apple-touch-startup-image" sizes="1536x2008" href="/res/ic_launcher_192.png" media="screen and (min-device-width:481px) and (max-device-width:1024px) and (orientation:portrait) and (-webkit-min-device-pixel-ratio: 2)">
+  <link rel="apple-touch-startup-image" sizes="1024x748" href="/res/ic_launcher_192.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
+  <link rel="apple-touch-startup-image" sizes="768x1004" href="/res/ic_launcher_192.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
+  <link rel="apple-touch-startup-image" sizes="640x920" href="/res/ic_launcher_192.png" media="screen and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2)">
+  <link rel="apple-touch-startup-image" sizes="320x460" href="/res/ic_launcher_192.png" media="screen and (max-device-width: 320)">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no">
+ 
+  <meta name="browsermode" content="application"/>
+  <meta name="x5-page-mode" content="app" />
 </head>
-
 <body>
   <div id="container">
     <div class="left-col">
@@ -104,17 +121,17 @@
 							<li><a href="/tags/读书">读书</a></li>
 				        
 							<li><a href="/tags/电影">电影</a></li>
-				        
+				        				      		    
 						</ul>
 					</nav>
 					<nav class="header-nav">
 						<div class="social">
 							
-								<a class="github" target="_blank" href="https://github.com/JilyJiang" title="github">github</a>
+								<a class="github" target="_blank" href='https://github.com/JilyJiang' title="github">github</a>
 					        
-								<a class="zhihu" target="_blank" href="https://zhihu.com" title="zhihu">zhihu</a>
+								<a class="zhihu" target="_blank" href='https://zhihu.com' title="zhihu">zhihu</a>
 					        
-								<a class="mail" target="_blank" href="/jily.jiang@hotmail.com" title="mail">mail</a>
+								<a class="mail" target="_blank" href='/jily.jiang@hotmail.com' title="mail">mail</a>
 					        
 						</div>
 					</nav>
@@ -123,7 +140,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/AS/" style="font-size: 10px;">AS</a> <a href="/tags/Activity/" style="font-size: 10px;">Activity</a> <a href="/tags/Android/" style="font-size: 17.5px;">Android</a> <a href="/tags/Framework/" style="font-size: 12.5px;">Framework</a> <a href="/tags/Git/" style="font-size: 12.5px;">Git</a> <a href="/tags/GitHub-Page/" style="font-size: 10px;">GitHub Page</a> <a href="/tags/Grub/" style="font-size: 10px;">Grub</a> <a href="/tags/HW加速/" style="font-size: 10px;">HW加速</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Intent/" style="font-size: 10px;">Intent</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/ListView/" style="font-size: 10px;">ListView</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/NDK/" style="font-size: 12.5px;">NDK</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Settings/" style="font-size: 12.5px;">Settings</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/技术/" style="font-size: 20px;">技术</a> <a href="/tags/电影/" style="font-size: 10px;">电影</a> <a href="/tags/读书/" style="font-size: 15px;">读书</a> <a href="/tags/随笔/" style="font-size: 12.5px;">随笔</a>
+						<a href="/tags/AS/" style="font-size: 10px;">AS</a> <a href="/tags/Activity/" style="font-size: 10px;">Activity</a> <a href="/tags/Android/" style="font-size: 17.5px;">Android</a> <a href="/tags/Framework/" style="font-size: 12.5px;">Framework</a> <a href="/tags/Git/" style="font-size: 12.5px;">Git</a> <a href="/tags/GitHub-Page/" style="font-size: 10px;">GitHub Page</a> <a href="/tags/Grub/" style="font-size: 10px;">Grub</a> <a href="/tags/HW加速/" style="font-size: 10px;">HW加速</a> <a href="/tags/Hexo/" style="font-size: 12.5px;">Hexo</a> <a href="/tags/Intent/" style="font-size: 10px;">Intent</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/ListView/" style="font-size: 10px;">ListView</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/NDK/" style="font-size: 12.5px;">NDK</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Settings/" style="font-size: 12.5px;">Settings</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/技术/" style="font-size: 20px;">技术</a> <a href="/tags/电影/" style="font-size: 10px;">电影</a> <a href="/tags/读书/" style="font-size: 15px;">读书</a> <a href="/tags/随笔/" style="font-size: 12.5px;">随笔</a>
 					</div>
 				</section>
 				
@@ -149,7 +166,6 @@
 		</div>
 	</header>				
 </div>
-
     </div>
     <div class="mid-col">
       <nav id="mobile-nav">
@@ -160,9 +176,7 @@
 	<div class="intrude-less">
 		<header id="header" class="inner">
 			<div class="profilepic">
-			
 				<img lazy-src="/assets/images/avatar/avatar.png" class="js-avatar">
-			
 			</div>
 			<hgroup>
 			  <h1 class="header-author">jily.jiang</h1>
@@ -191,18 +205,17 @@
 			<nav class="header-nav">
 				<div class="social">
 					
-						<a class="github" target="_blank" href="https://github.com/JilyJiang" title="github">github</a>
+						<a class="github" target="_blank" href='https://github.com/JilyJiang' title="github">github</a>
 			        
-						<a class="zhihu" target="_blank" href="https://zhihu.com" title="zhihu">zhihu</a>
+						<a class="zhihu" target="_blank" href='https://zhihu.com' title="zhihu">zhihu</a>
 			        
-						<a class="mail" target="_blank" href="/jily.jiang@hotmail.com" title="mail">mail</a>
+						<a class="mail" target="_blank" href='/jily.jiang@hotmail.com' title="mail">mail</a>
 			        
 				</div>
 			</nav>
 		</header>				
 	</div>
 </nav>
-
       <div class="body-wrap"><article id="post-跟着Android源码学app开发之settings分析2" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -240,6 +253,20 @@
     
     <div class="article-entry" itemprop="articleBody">
       
+        
+          
+            <div id="toc" class="article-toc">
+            <h2>目录</h2>
+              <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#android-taskAffinity"><span class="toc-number">1.</span> <span class="toc-text">android:taskAffinity</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#第一种情况"><span class="toc-number">1.1.</span> <span class="toc-text">第一种情况</span></a></li></ol></li></ol>  
+            </div>
+            <script type="text/javascript">
+              var _article = document.getElementsByClassName('article')[0];
+              <!-- setTimeout("_article.style.marginRight = '211px'",0);  -->
+              setTimeout("_article.className += ' article2'",0); 
+              setTimeout("document.getElementById('toc').style.right = '15px'", 0);                
+            </script>
+          
+        
         <hr>
 <h3 id="android-taskAffinity"><a href="#android-taskAffinity" class="headerlink" title="android:taskAffinity"></a><code>android:taskAffinity</code></h3><p><a href="https://developer.android.com/guide/topics/manifest/activity-element.html#aff" target="_blank" rel="external">谷歌官网解释</a><br>The task that the activity has an affinity for. Activities with the same affinity conceptually belong to the same task (to the same “application” from the user’s perspective). The affinity of a task is determined by the affinity of its root activity.<br>The affinity determines two things — the task that the activity is re-parented to (see the allowTaskReparenting attribute) and the task that will house the activity when it is launched with the FLAG_ACTIVITY_NEW_TASK flag.</p>
 <p>By default, all activities in an application have the same affinity.<br>You can set this attribute to group them differently, and even place activities defined in different applications within the same task.<br>To specify that the activity does not have an affinity for any task, set it to an empty string.</p>
@@ -314,27 +341,6 @@
 </article>
 
 
-<div class="share_jia">
-	<!-- JiaThis Button BEGIN -->
-	<div class="jiathis_style">
-		<span class="jiathis_txt">分享到: &nbsp; </span>
-		<a class="jiathis_button_facebook"></a> 
-    <a class="jiathis_button_twitter"></a>
-    <a class="jiathis_button_plus"></a> 
-    <a class="jiathis_button_tsina"></a>
-		<a class="jiathis_button_cqq"></a>
-		<a class="jiathis_button_douban"></a>
-		<a class="jiathis_button_weixin"></a>
-		<a class="jiathis_button_tumblr"></a>
-    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
-	</div>
-	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
-	<!-- JiaThis Button END -->
-</div>
-
-
-
-
 
 
 <div class="duoshuo">
@@ -356,17 +362,21 @@
 	<!-- 多说公共JS代码 end -->
 </div>
 
+<link rel="stylesheet" href="/css/font.css">
 
 
 
 </div>
-      <footer id="footer">
+      <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<footer id="footer">
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
     		&copy; 2016 jily.jiang
-    	</div>
-      	<div class="footer-right">
+    	  | <span id="busuanzi_container_site_uv">您是iblogc的第<span id="busuanzi_value_site_uv"></span></span>名访客，<span id="busuanzi_container_site_pv">本站被打开了<span id="busuanzi_value_site_pv"></span>次</span>，<span id="busuanzi_container_page_pv">本页被<span id="busuanzi_value_page_pv"></span></span>人次浏览
+      	</div>
+		<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
       	</div>
     </div>
@@ -415,9 +425,50 @@ MathJax.Hub.Queue(function() {
 });
 </script>
 
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="http://cdn.bootcss.com/mathjax/2.5.3/MathJax.js">
 </script>
 
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?5e7821b23fbb243a2398dcfe85d1ab88";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-54784650-1', 'auto');
+  ga('send', 'pageview');
+</script> -->
+
+<!--.浮动小人start-->    
+<!--<script src="/js/spig.js"></script>
+<style>
+/* 中等屏幕（桌面显示器，大于等于 992px） */
+@media (max-width: 1024px) { 
+    #spig{
+        display:none;
+    }
+ }
+.spig {display:block;width:130px;height:170px;position:absolute;bottom: 300px;left:160px;z-index:9999;}
+#message{color :#191919;border: 1px solid #c4c4c4;background:#ddd;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;min-height:1em;padding:5px;top:-45px;position:absolute;text-align:center;width:auto !important;z-index:10000;-moz-box-shadow:0 0 15px #eeeeee;-webkit-box-shadow:0 0 15px #eeeeee;border-color:#eeeeee;box-shadow:0 0 15px #eeeeee;outline:none;}
+.mumu{width:130px;height:170px;cursor: move;background:url(/img/cy.gif) no-repeat;}
+</style>
+<div id="spig" class="spig">
+    <div id="message">加载中……</div>
+    <div id="mumu" class="mumu"></div>
+</div>-->
+<!--.浮动小人end-->
 
   </div>
 </body>
