@@ -217,6 +217,76 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Android系统指令查缺补漏" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/10/11/Android系统指令查缺补漏/" class="article-date">
+  	<time datetime="2016-10-11T03:57:45.000Z" itemprop="datePublished">2016-10-11</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/11/Android系统指令查缺补漏/">Android系统指令查缺补漏</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<p>Android命令查缺补漏</p>
+<h4 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h4><ul>
+<li>croot : 回到android的根目录</li>
+<li>cgrep：查询<em>.c/</em>.cpp的文件</li>
+<li>jgrep：</li>
+<li>resgrep：查找res/*.xml中的内容</li>
+<li>godir：是croot的逆命令，快速进入到包含某个文件的目录<blockquote>
+<p>比如我们要进到包含init.rc目录<br>$godir init.rc<br>第一次运行会提示建立索引，会在你根目录建立filelist文件</p>
+</blockquote>
+</li>
+</ul>
+<h4 id="pm-指令"><a href="#pm-指令" class="headerlink" title="pm 指令"></a>pm 指令</h4><p>pm list package -f 列出已安装的apk的包名<br>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术/">技术</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2016/10/11/Android系统指令查缺补漏/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-Hexo的优化配置" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -516,71 +586,9 @@
 
 
   
-    <article id="post-修改Android默认启动项launcher" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/08/27/修改Android默认启动项launcher/" class="article-date">
-  	<time datetime="2016-08-27T11:19:02.000Z" itemprop="datePublished">2016-08-27</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/27/修改Android默认启动项launcher/">修改Android默认启动项launcher</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="问题背景："><a href="#问题背景：" class="headerlink" title="问题背景："></a>问题背景：</h4><hr>
-<p>因为目前很多IPTV的厂商+广电的要求，不允许用户自己替换自己的launcher，为了保证利益，强行推广自己的launcher，对播控平台的掌控，于是就必须要求芯片原厂提供turnkey方案时符合其要求。下面用Android 5.1.1来举例说明，理论上AN的版本对此模块改动差异不太多。</p>
-<h4 id="Google官方Android原生Launcher设置"><a href="#Google官方Android原生Launcher设置" class="headerlink" title="Google官方Android原生Launcher设置"></a>Google官方Android原生Launcher设置</h4><p>Launcher是Android系统的桌面、是android系统的主要组件。android系统允许存在多个Launcher并设置默认主界面。</p>
-<p>应用程序作为Home(主界面)需在Activity的intent-filter节点中添加如下内容<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">category</span> <span class="attr">android:name</span>=<span class="string">"android.intent.category.HOME"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">category</span> <span class="attr">android:name</span>=<span class="string">"android.intent.category.DEFAULT"</span> /&gt;</span></div></pre></td></tr></table></figure></p>
-<p>当系统中存在多个Home app且没有设置默认，用户点击Home键会弹出如下图所示的界面（图一）：<br><img src="http://oa1wnpe3m.bkt.clouddn.com/1.png" alt="launcher"><br>用户可以选择“只有一次”或者“总是”来启动选择的APP<br>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Framework/">Framework</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术/">技术</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2016/08/27/修改Android默认启动项launcher/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 </div>
