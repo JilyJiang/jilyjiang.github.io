@@ -16,17 +16,17 @@ AS导入android 源代码编译源码idegen模块及生成AS配置文件(*.ipr)�
 <meta property="og:description" content="AS设置耍酷的背景黑色&amp;amp;IDE中文乱码中文乱码记得安装中文字体：sudo aptitude install ttf-wqy-microhei
 复用eclipse的快捷键
 AS导入android 源代码编译源码idegen模块及生成AS配置文件(*.ipr)在开始编译idegen模块前，你一定知道需要先全局编译出out目录及相关文件吧，这个不再过多说了，我们通过如下命令编译idegen模块">
-<meta property="og:image" content="https://github.com/jilyjiang/http://">
-<meta property="og:image" content="https://github.com/jilyjiang/http://">
-<meta property="og:image" content="https://github.com/jilyjiang/http://">
-<meta property="og:image" content="https://github.com/jilyjiang/http://">
+<meta property="og:image" content="http://oa1wnpe3m.bkt.clouddn.com/Selection_006.png">
+<meta property="og:image" content="http://oa1wnpe3m.bkt.clouddn.com/Selection_007.png">
+<meta property="og:image" content="http://oa1wnpe3m.bkt.clouddn.com/AS1.png">
+<meta property="og:image" content="http://oa1wnpe3m.bkt.clouddn.com/AS2.png">
 <meta property="og:updated_time" content="2016-10-10T12:48:45.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android_Studio使用技巧">
 <meta name="twitter:description" content="AS设置耍酷的背景黑色&amp;amp;IDE中文乱码中文乱码记得安装中文字体：sudo aptitude install ttf-wqy-microhei
 复用eclipse的快捷键
 AS导入android 源代码编译源码idegen模块及生成AS配置文件(*.ipr)在开始编译idegen模块前，你一定知道需要先全局编译出out目录及相关文件吧，这个不再过多说了，我们通过如下命令编译idegen模块">
-<meta name="twitter:image" content="https://github.com/jilyjiang/http://">
+<meta name="twitter:image" content="http://oa1wnpe3m.bkt.clouddn.com/Selection_006.png">
   
     <link rel="alternative" href="/atom.xml" title="jily&#39;s blog" type="application/atom+xml">
   
@@ -252,8 +252,8 @@ AS导入android 源代码编译源码idegen模块及生成AS配置文件(*.ipr)�
     <div class="article-entry" itemprop="articleBody">
       
         <hr>
-<h3 id="AS设置耍酷的背景黑色-amp-IDE中文乱码"><a href="#AS设置耍酷的背景黑色-amp-IDE中文乱码" class="headerlink" title="AS设置耍酷的背景黑色&amp;IDE中文乱码"></a>AS设置耍酷的背景黑色&amp;IDE中文乱码</h3><p><img src="http://" alt="图1"><br>中文乱码记得安装中文字体：<code>sudo aptitude install ttf-wqy-microhei</code></p>
-<h3 id="复用eclipse的快捷键"><a href="#复用eclipse的快捷键" class="headerlink" title="复用eclipse的快捷键"></a>复用eclipse的快捷键</h3><p><img src="http://" alt="图2"></p>
+<h3 id="AS设置耍酷的背景黑色-amp-IDE中文乱码"><a href="#AS设置耍酷的背景黑色-amp-IDE中文乱码" class="headerlink" title="AS设置耍酷的背景黑色&amp;IDE中文乱码"></a>AS设置耍酷的背景黑色&amp;IDE中文乱码</h3><p><img src="http://oa1wnpe3m.bkt.clouddn.com/Selection_006.png" alt="图1"><br>中文乱码记得安装中文字体：<code>sudo aptitude install ttf-wqy-microhei</code></p>
+<h3 id="复用eclipse的快捷键"><a href="#复用eclipse的快捷键" class="headerlink" title="复用eclipse的快捷键"></a>复用eclipse的快捷键</h3><p><img src="http://oa1wnpe3m.bkt.clouddn.com/Selection_007.png" alt="图2"></p>
 <h4 id="AS导入android-源代码"><a href="#AS导入android-源代码" class="headerlink" title="AS导入android 源代码"></a>AS导入android 源代码</h4><h6 id="编译源码idegen模块及生成AS配置文件-ipr"><a href="#编译源码idegen模块及生成AS配置文件-ipr" class="headerlink" title="编译源码idegen模块及生成AS配置文件(*.ipr)"></a>编译源码idegen模块及生成AS配置文件(*.ipr)</h6><p>在开始编译idegen模块前，你一定知道需要先全局编译出out目录及相关文件吧，这个不再过多说了，我们通过如下命令编译idegen模块：</p>
 <p><code>mmm development/tools/idegen/</code></p>
 <p>这行命令的意思是编译idegen这个模块项目，然后生成idegen.jar文件（不信你自己去查看这个模块的Android.mk的目标吧，不多解释）。运行完以后如果看到如下信息则说明编译OK：<br><a id="more"></a><br>……<br><code>#### make completed successfully (7 seconds) ####</code></p>
@@ -269,8 +269,8 @@ Traversed tree: 194799ms</code></p>
 <p>我们可以仿照上面这段代码的<excludefolder url="file://$MODULE_DIR$/.repo">写法一样过滤掉不需要的内容，这样在导入时就会快很多。</excludefolder></p>
 <p>也可以通过Android Studio的Project Stucture 打开左侧Modules，然后将右侧Sources中一些目录Excluded掉。</p>
 <h6 id="使用技巧"><a href="#使用技巧" class="headerlink" title="使用技巧"></a>使用技巧</h6><p>上图我们看见了，可以通过Android Studio搜索整套源码的代码了。但是这时候如果你打开一个Service.Java类，然后把鼠标放在其中任意方法的Intent参数上按住CTRL+鼠标左键跳转到Intent类你会发现跳转过去的是一个Intent.class文件，为啥呢？因为他跳转的是你的默认SDK中的jar内部的class文件。既然要修改查看整套源码，这么跳转得多蛋疼啊，所以我们需要配置让其能跳转到Intent.java文件，具体做法如下：</p>
-<p>首先删掉依赖中的所有依赖，只保留下图中没被选中的那两个（当然你可以选择保留一些你用到的其他jar），如下：<br><img src="http://" alt="AS1"><br>接着点击加号的JARs or directories将你源码的frameworks及external和你用到的其他跳转目录添加到依赖中，然后apply即可。</p>
-<p>这时候我们在像上面一样打开Service.java跳转Intent，你会发现像下图一样直接跳转到你源码路径下的Intent.java文件了，如下：<br><img src="http://" alt="AS2"><br>到此对于平时只是查看源码的人来说已经够用了。</p>
+<p>首先删掉依赖中的所有依赖，只保留下图中没被选中的那两个（当然你可以选择保留一些你用到的其他jar），如下：<br><img src="http://oa1wnpe3m.bkt.clouddn.com/AS1.png" alt="AS1"><br>接着点击加号的JARs or directories将你源码的frameworks及external和你用到的其他跳转目录添加到依赖中，然后apply即可。</p>
+<p>这时候我们在像上面一样打开Service.java跳转Intent，你会发现像下图一样直接跳转到你源码路径下的Intent.java文件了，如下：<br><img src="http://oa1wnpe3m.bkt.clouddn.com/AS2.png" alt="AS2"><br>到此对于平时只是查看源码的人来说已经够用了。</p>
 
       
     </div>
@@ -290,8 +290,8 @@ Traversed tree: 194799ms</code></p>
     </a>
   
   
-    <a href="/2016/08/27/Android布局文件重复ID的影响/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">layout布局文件有重复ID，会有什么影响</div>
+    <a href="/2016/08/27/系统默认错误弹框-xxx，停止运行-ANR/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">屏蔽系统默认错误弹框--xxx，停止运行/ANR</div>
       <strong class="article-nav-caption">></strong>
     </a>
   

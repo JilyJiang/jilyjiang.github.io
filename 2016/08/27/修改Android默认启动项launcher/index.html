@@ -16,14 +16,14 @@ Google官方Android原生Launcher设置Launcher是Android系统的桌面、">
 <meta property="og:description" content="问题背景：
 因为目前很多IPTV的厂商+广电的要求，不允许用户自己替换自己的launcher，为了保证利益，强行推广自己的launcher，对播控平台的掌控，于是就必须要求芯片原厂提供turnkey方案时符合其要求。下面用Android 5.1.1来举例说明，理论上AN的版本对此模块改动差异不太多。
 Google官方Android原生Launcher设置Launcher是Android系统的桌面、">
-<meta property="og:image" content="https://github.com/jilyjiang/home/jily.jiang/Pictures/1.png">
+<meta property="og:image" content="http://oa1wnpe3m.bkt.clouddn.com/1.png">
 <meta property="og:updated_time" content="2016-08-27T11:19:02.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="修改Android默认启动项launcher">
 <meta name="twitter:description" content="问题背景：
 因为目前很多IPTV的厂商+广电的要求，不允许用户自己替换自己的launcher，为了保证利益，强行推广自己的launcher，对播控平台的掌控，于是就必须要求芯片原厂提供turnkey方案时符合其要求。下面用Android 5.1.1来举例说明，理论上AN的版本对此模块改动差异不太多。
 Google官方Android原生Launcher设置Launcher是Android系统的桌面、">
-<meta name="twitter:image" content="https://github.com/jilyjiang/home/jily.jiang/Pictures/1.png">
+<meta name="twitter:image" content="http://oa1wnpe3m.bkt.clouddn.com/1.png">
   
     <link rel="alternative" href="/atom.xml" title="jily&#39;s blog" type="application/atom+xml">
   
@@ -252,7 +252,7 @@ Google官方Android原生Launcher设置Launcher是Android系统的桌面、">
 <p>因为目前很多IPTV的厂商+广电的要求，不允许用户自己替换自己的launcher，为了保证利益，强行推广自己的launcher，对播控平台的掌控，于是就必须要求芯片原厂提供turnkey方案时符合其要求。下面用Android 5.1.1来举例说明，理论上AN的版本对此模块改动差异不太多。</p>
 <h4 id="Google官方Android原生Launcher设置"><a href="#Google官方Android原生Launcher设置" class="headerlink" title="Google官方Android原生Launcher设置"></a>Google官方Android原生Launcher设置</h4><p>Launcher是Android系统的桌面、是android系统的主要组件。android系统允许存在多个Launcher并设置默认主界面。</p>
 <p>应用程序作为Home(主界面)需在Activity的intent-filter节点中添加如下内容<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">category</span> <span class="attr">android:name</span>=<span class="string">"android.intent.category.HOME"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">category</span> <span class="attr">android:name</span>=<span class="string">"android.intent.category.DEFAULT"</span> /&gt;</span></div></pre></td></tr></table></figure></p>
-<p>当系统中存在多个Home app且没有设置默认，用户点击Home键会弹出如下图所示的界面（图一）：<br><img src="/home/jily.jiang/Pictures/1.png" alt="launcher" title="launcher"><br>用户可以选择“只有一次”或者“总是”来启动选择的APP<br><a id="more"></a><br>一般情况下android中只会存在一个Home APP，系统启动后会直接启动此APP为默认，不需要用户选择。但是当系统中存在多个Home APP时，系统第一次启动就会弹出上图所示界面，让用户选择其中一个APP作为主屏幕应用，如果用户通过“始终”确认会设置选择的APP为默认的Home，用户通过“仅此一次”则此次以选择的APP为Home，再次按home键还是会弹出选择窗口.</p>
+<p>当系统中存在多个Home app且没有设置默认，用户点击Home键会弹出如下图所示的界面（图一）：<br><img src="http://oa1wnpe3m.bkt.clouddn.com/1.png" alt="launcher"><br>用户可以选择“只有一次”或者“总是”来启动选择的APP<br><a id="more"></a><br>一般情况下android中只会存在一个Home APP，系统启动后会直接启动此APP为默认，不需要用户选择。但是当系统中存在多个Home APP时，系统第一次启动就会弹出上图所示界面，让用户选择其中一个APP作为主屏幕应用，如果用户通过“始终”确认会设置选择的APP为默认的Home，用户通过“仅此一次”则此次以选择的APP为Home，再次按home键还是会弹出选择窗口.</p>
 <h4 id="针对广电总局播控客制化方案"><a href="#针对广电总局播控客制化方案" class="headerlink" title="针对广电总局播控客制化方案"></a>针对广电总局播控客制化方案</h4><p>针对上图，思考一下，可以采用两种方案：</p>
 <ol>
 <li><font color="red">让google原生态中的选框自动选中并且自动进入，这样就符合我们的需求了</font></li>
@@ -290,11 +290,11 @@ Google官方Android原生Launcher设置Launcher是Android系统的桌面、">
     
 <nav id="article-nav">
   
-    <a href="/2016/08/27/系统默认错误弹框-xxx，停止运行-ANR/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2016/08/27/Android布局文件重复ID的影响/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption"><</strong>
       <div class="article-nav-title">
         
-          屏蔽系统默认错误弹框--xxx，停止运行/ANR
+          layout布局文件有重复ID，会有什么影响
         
       </div>
     </a>

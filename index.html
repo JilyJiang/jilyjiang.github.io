@@ -231,7 +231,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <hr>
-<p>前一段时间看完《解忧杂货店》，整理了一下思路，画了一个思维导图，发现作者的思维方式确实非常独特和精巧，说实话，羡慕嫉妒恨，O(∩_∩)O哈哈哈~<br><img src="http://" alt="za1"></p>
+<p>前一段时间看完《解忧杂货店》，整理了一下思路，画了一个思维导图，发现作者的思维方式确实非常独特和精巧，说实话，羡慕嫉妒恨，O(∩_∩)O哈哈哈~<br><img src="http://oa1wnpe3m.bkt.clouddn.com/%E7%9F%A2%E6%B5%AA%E6%9D%82%E8%B4%A7%E5%BA%97.png" alt="za1"></p>
 
       
     </div>
@@ -289,8 +289,8 @@
     <div class="article-entry" itemprop="articleBody">
       
         <hr>
-<h3 id="AS设置耍酷的背景黑色-amp-IDE中文乱码"><a href="#AS设置耍酷的背景黑色-amp-IDE中文乱码" class="headerlink" title="AS设置耍酷的背景黑色&amp;IDE中文乱码"></a>AS设置耍酷的背景黑色&amp;IDE中文乱码</h3><p><img src="http://" alt="图1"><br>中文乱码记得安装中文字体：<code>sudo aptitude install ttf-wqy-microhei</code></p>
-<h3 id="复用eclipse的快捷键"><a href="#复用eclipse的快捷键" class="headerlink" title="复用eclipse的快捷键"></a>复用eclipse的快捷键</h3><p><img src="http://" alt="图2"></p>
+<h3 id="AS设置耍酷的背景黑色-amp-IDE中文乱码"><a href="#AS设置耍酷的背景黑色-amp-IDE中文乱码" class="headerlink" title="AS设置耍酷的背景黑色&amp;IDE中文乱码"></a>AS设置耍酷的背景黑色&amp;IDE中文乱码</h3><p><img src="http://oa1wnpe3m.bkt.clouddn.com/Selection_006.png" alt="图1"><br>中文乱码记得安装中文字体：<code>sudo aptitude install ttf-wqy-microhei</code></p>
+<h3 id="复用eclipse的快捷键"><a href="#复用eclipse的快捷键" class="headerlink" title="复用eclipse的快捷键"></a>复用eclipse的快捷键</h3><p><img src="http://oa1wnpe3m.bkt.clouddn.com/Selection_007.png" alt="图2"></p>
 <h4 id="AS导入android-源代码"><a href="#AS导入android-源代码" class="headerlink" title="AS导入android 源代码"></a>AS导入android 源代码</h4><h6 id="编译源码idegen模块及生成AS配置文件-ipr"><a href="#编译源码idegen模块及生成AS配置文件-ipr" class="headerlink" title="编译源码idegen模块及生成AS配置文件(*.ipr)"></a>编译源码idegen模块及生成AS配置文件(*.ipr)</h6><p>在开始编译idegen模块前，你一定知道需要先全局编译出out目录及相关文件吧，这个不再过多说了，我们通过如下命令编译idegen模块：</p>
 <p><code>mmm development/tools/idegen/</code></p>
 <p>这行命令的意思是编译idegen这个模块项目，然后生成idegen.jar文件（不信你自己去查看这个模块的Android.mk的目标吧，不多解释）。运行完以后如果看到如下信息则说明编译OK：<br>
@@ -309,6 +309,67 @@
       
         <p class="article-more-link">
           <a  href="/2016/10/10/Android-Studio使用技巧/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-系统默认错误弹框-xxx，停止运行-ANR" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/08/27/系统默认错误弹框-xxx，停止运行-ANR/" class="article-date">
+  	<time datetime="2016-08-27T11:21:28.000Z" itemprop="datePublished">2016-08-27</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/27/系统默认错误弹框-xxx，停止运行-ANR/">屏蔽系统默认错误弹框--xxx，停止运行/ANR</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<p>因为运营商某些apk的兼容性存在一定程度问题，但apk因为特殊体制的问题，不会对其apk进行更改；这时就需要底层协助厂商处理一些兼容性的apk，比如某些时候apk退出会弹出一个‘xxx，已停止运行’，但实际上apk所有功能均正常，不影响用户的实际体验，于是乎就去想办法去掉这个ErrorDialog；<br>依旧根据常规分析思路，现在找到其对应的source code：<br>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Framework/">Framework</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术/">技术</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2016/08/27/系统默认错误弹框-xxx，停止运行-ANR/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>
@@ -392,67 +453,6 @@
 
 
   
-    <article id="post-系统默认错误弹框-xxx，停止运行-ANR" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/08/27/系统默认错误弹框-xxx，停止运行-ANR/" class="article-date">
-  	<time datetime="2016-08-27T11:21:28.000Z" itemprop="datePublished">2016-08-27</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/27/系统默认错误弹框-xxx，停止运行-ANR/">屏蔽系统默认错误弹框--xxx，停止运行/ANR</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<p>因为运营商某些apk的兼容性存在一定程度问题，但apk因为特殊体制的问题，不会对其apk进行更改；这时就需要底层协助厂商处理一些兼容性的apk，比如某些时候apk退出会弹出一个‘xxx，已停止运行’，但实际上apk所有功能均正常，不影响用户的实际体验，于是乎就去想办法去掉这个ErrorDialog；<br>依旧根据常规分析思路，现在找到其对应的source code：<br>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Framework/">Framework</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术/">技术</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2016/08/27/系统默认错误弹框-xxx，停止运行-ANR/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
     <article id="post-修改Android默认启动项launcher" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -483,7 +483,7 @@
 <p>因为目前很多IPTV的厂商+广电的要求，不允许用户自己替换自己的launcher，为了保证利益，强行推广自己的launcher，对播控平台的掌控，于是就必须要求芯片原厂提供turnkey方案时符合其要求。下面用Android 5.1.1来举例说明，理论上AN的版本对此模块改动差异不太多。</p>
 <h4 id="Google官方Android原生Launcher设置"><a href="#Google官方Android原生Launcher设置" class="headerlink" title="Google官方Android原生Launcher设置"></a>Google官方Android原生Launcher设置</h4><p>Launcher是Android系统的桌面、是android系统的主要组件。android系统允许存在多个Launcher并设置默认主界面。</p>
 <p>应用程序作为Home(主界面)需在Activity的intent-filter节点中添加如下内容<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">category</span> <span class="attr">android:name</span>=<span class="string">"android.intent.category.HOME"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">category</span> <span class="attr">android:name</span>=<span class="string">"android.intent.category.DEFAULT"</span> /&gt;</span></div></pre></td></tr></table></figure></p>
-<p>当系统中存在多个Home app且没有设置默认，用户点击Home键会弹出如下图所示的界面（图一）：<br><img src="/home/jily.jiang/Pictures/1.png" alt="launcher" title="launcher"><br>用户可以选择“只有一次”或者“总是”来启动选择的APP<br>
+<p>当系统中存在多个Home app且没有设置默认，用户点击Home键会弹出如下图所示的界面（图一）：<br><img src="http://oa1wnpe3m.bkt.clouddn.com/1.png" alt="launcher"><br>用户可以选择“只有一次”或者“总是”来启动选择的APP<br>
       
     </div>
     
