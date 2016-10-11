@@ -18,7 +18,7 @@ Launcher是Android系统的桌面、是android系统的主要组件。android系
 <category android:name="android.intent.category.DEFAULT" />
 ```
 当系统中存在多个Home app且没有设置默认，用户点击Home键会弹出如下图所示的界面（图一）： 
-![launcher](/home/jily.jiang/Pictures/1.png  "launcher")
+![launcher](http://oa1wnpe3m.bkt.clouddn.com/1.png)
 用户可以选择“只有一次”或者“总是”来启动选择的APP
 <!--more-->
 一般情况下android中只会存在一个Home APP，系统启动后会直接启动此APP为默认，不需要用户选择。但是当系统中存在多个Home APP时，系统第一次启动就会弹出上图所示界面，让用户选择其中一个APP作为主屏幕应用，如果用户通过“始终”确认会设置选择的APP为默认的Home，用户通过“仅此一次”则此次以选择的APP为Home，再次按home键还是会弹出选择窗口.

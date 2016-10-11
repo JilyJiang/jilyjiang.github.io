@@ -8,10 +8,10 @@ updated: 2016-10-10 20:48:45
 
 ------
 ### AS设置耍酷的背景黑色&IDE中文乱码
-![图1](http://)
+![图1](http://oa1wnpe3m.bkt.clouddn.com/Selection_006.png)
 中文乱码记得安装中文字体：`sudo aptitude install ttf-wqy-microhei`
 ### 复用eclipse的快捷键
-![图2](http://)
+![图2](http://oa1wnpe3m.bkt.clouddn.com/Selection_007.png)
 #### AS导入android 源代码
 ###### 编译源码idegen模块及生成AS配置文件(*.ipr)
 
@@ -66,9 +66,9 @@ Traversed tree: 194799ms`
 上图我们看见了，可以通过Android Studio搜索整套源码的代码了。但是这时候如果你打开一个Service.Java类，然后把鼠标放在其中任意方法的Intent参数上按住CTRL+鼠标左键跳转到Intent类你会发现跳转过去的是一个Intent.class文件，为啥呢？因为他跳转的是你的默认SDK中的jar内部的class文件。既然要修改查看整套源码，这么跳转得多蛋疼啊，所以我们需要配置让其能跳转到Intent.java文件，具体做法如下：
 
 首先删掉依赖中的所有依赖，只保留下图中没被选中的那两个（当然你可以选择保留一些你用到的其他jar），如下：
-![AS1](http://)
+![AS1](http://oa1wnpe3m.bkt.clouddn.com/AS1.png)
 接着点击加号的JARs or directories将你源码的frameworks及external和你用到的其他跳转目录添加到依赖中，然后apply即可。
 
 这时候我们在像上面一样打开Service.java跳转Intent，你会发现像下图一样直接跳转到你源码路径下的Intent.java文件了，如下：
-![AS2](http://)
+![AS2](http://oa1wnpe3m.bkt.clouddn.com/AS2.png)
 到此对于平时只是查看源码的人来说已经够用了。

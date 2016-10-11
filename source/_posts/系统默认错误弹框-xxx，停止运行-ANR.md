@@ -13,6 +13,7 @@ updated: 2016-08-27 19:21:28
   <!--more-->
 #### 1.根据“已停止运行”找到关键字;
 `frameworks/base/core/res/res/values-zh-rCN/strings.xml`
+![error1](http://oa1wnpe3m.bkt.clouddn.com/Selection_001.png)
 ```xml
  <string name="aerr_application" msgid="932628488013092776">"很抱歉，“<xliff:g id="APPLICATION">%1$s</xliff:g>”已停止运行。"</string>
     <string name="aerr_process" msgid="4507058997035697579">"抱歉，进程“<xliff:g id="PROCESS">%1$s</xliff:g>”已停止运行。"</string>
@@ -28,9 +29,9 @@ updated: 2016-08-27 19:21:28
 ```
 #### 2. 根据aerr_application 查找对应的dialog
  `/frameworks/base/services/java/com/android/server/am/AppErrorDialog.java`
-
+![e2](http://oa1wnpe3m.bkt.clouddn.com/Selection_002.png)
+![e3](http://oa1wnpe3m.bkt.clouddn.com/Selection_003.png)
 ```java
-
  public AppErrorDialog(Context context, ActivityManagerService service,
             AppErrorResult result, ProcessRecord app) {
         super(context);
@@ -57,6 +58,7 @@ updated: 2016-08-27 19:21:28
 }
 ```
 #### 3. 根据AppErrorDialog找到调用dialog的地方AMS，修改AMS的控制源头即可控制是否弹出对话框
+![e4](http://oa1wnpe3m.bkt.clouddn.com/Selection_004.png)
   `/frameworks/base/services/java/com/android/server/am/ActivityManagerService.java`
  
  ```java
