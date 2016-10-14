@@ -151,7 +151,7 @@ AS导入android 源代码编译源码idegen模块及生成AS配置文件(*.ipr)�
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/AS/" style="font-size: 10px;">AS</a> <a href="/tags/Activity/" style="font-size: 10px;">Activity</a> <a href="/tags/Android/" style="font-size: 17.5px;">Android</a> <a href="/tags/Framework/" style="font-size: 12.5px;">Framework</a> <a href="/tags/Git/" style="font-size: 12.5px;">Git</a> <a href="/tags/GitHub-Page/" style="font-size: 10px;">GitHub Page</a> <a href="/tags/Grub/" style="font-size: 10px;">Grub</a> <a href="/tags/HW加速/" style="font-size: 10px;">HW加速</a> <a href="/tags/Hexo/" style="font-size: 12.5px;">Hexo</a> <a href="/tags/Intent/" style="font-size: 10px;">Intent</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/ListView/" style="font-size: 10px;">ListView</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/NDK/" style="font-size: 12.5px;">NDK</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Settings/" style="font-size: 12.5px;">Settings</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/技术/" style="font-size: 20px;">技术</a> <a href="/tags/电影/" style="font-size: 10px;">电影</a> <a href="/tags/读书/" style="font-size: 15px;">读书</a> <a href="/tags/随笔/" style="font-size: 12.5px;">随笔</a>
+						<a href="/tags/AS/" style="font-size: 10px;">AS</a> <a href="/tags/Activity/" style="font-size: 10px;">Activity</a> <a href="/tags/Android/" style="font-size: 17.5px;">Android</a> <a href="/tags/Framework/" style="font-size: 12.5px;">Framework</a> <a href="/tags/Git/" style="font-size: 12.5px;">Git</a> <a href="/tags/GitHub-Page/" style="font-size: 10px;">GitHub Page</a> <a href="/tags/Grub/" style="font-size: 10px;">Grub</a> <a href="/tags/HW加速/" style="font-size: 10px;">HW加速</a> <a href="/tags/Hexo/" style="font-size: 12.5px;">Hexo</a> <a href="/tags/Intent/" style="font-size: 10px;">Intent</a> <a href="/tags/Linux/" style="font-size: 12.5px;">Linux</a> <a href="/tags/ListView/" style="font-size: 10px;">ListView</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/NDK/" style="font-size: 12.5px;">NDK</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Settings/" style="font-size: 12.5px;">Settings</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/技术/" style="font-size: 20px;">技术</a> <a href="/tags/电影/" style="font-size: 10px;">电影</a> <a href="/tags/读书/" style="font-size: 15px;">读书</a> <a href="/tags/随笔/" style="font-size: 12.5px;">随笔</a>
 					</div>
 				</section>
 				
@@ -298,6 +298,9 @@ Traversed tree: 194799ms</code></p>
 <h6 id="使用技巧"><a href="#使用技巧" class="headerlink" title="使用技巧"></a>使用技巧</h6><p>上图我们看见了，可以通过Android Studio搜索整套源码的代码了。但是这时候如果你打开一个Service.Java类，然后把鼠标放在其中任意方法的Intent参数上按住CTRL+鼠标左键跳转到Intent类你会发现跳转过去的是一个Intent.class文件，为啥呢？因为他跳转的是你的默认SDK中的jar内部的class文件。既然要修改查看整套源码，这么跳转得多蛋疼啊，所以我们需要配置让其能跳转到Intent.java文件，具体做法如下：</p>
 <p>首先删掉依赖中的所有依赖，只保留下图中没被选中的那两个（当然你可以选择保留一些你用到的其他jar），如下：<br><img src="http://oa1wnpe3m.bkt.clouddn.com/AS1.png" alt="AS1"><br>接着点击加号的JARs or directories将你源码的frameworks及external和你用到的其他跳转目录添加到依赖中，然后apply即可。</p>
 <p>这时候我们在像上面一样打开Service.java跳转Intent，你会发现像下图一样直接跳转到你源码路径下的Intent.java文件了，如下：<br><img src="http://oa1wnpe3m.bkt.clouddn.com/AS2.png" alt="AS2"><br>到此对于平时只是查看源码的人来说已经够用了。</p>
+<blockquote>
+<p>更加详细的AS的技巧如下：<a href="http://jaeger.itscoder.com/android/2016/02/14/android-studio-tips.html" target="_blank" rel="external">http://jaeger.itscoder.com/android/2016/02/14/android-studio-tips.html</a></p>
+</blockquote>
 
       
     </div>
@@ -317,8 +320,8 @@ Traversed tree: 194799ms</code></p>
     </a>
   
   
-    <a href="/2016/08/27/Android布局文件重复ID的影响/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">layout布局文件有重复ID，会有什么影响</div>
+    <a href="/2016/08/27/系统默认错误弹框-xxx，停止运行-ANR/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">屏蔽系统默认错误弹框--xxx，停止运行/ANR</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
