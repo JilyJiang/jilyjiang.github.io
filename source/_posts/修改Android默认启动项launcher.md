@@ -212,74 +212,74 @@ private void setDefaultLauncher() {
         // get default component
         String packageName = "你指定的包名";//默认launcher包名
         String className = "你指定的类名";////默认launcher入口
-
         IPackageManager pm = ActivityThread.getPackageManager();
-
         //判断指定的launcher是否存在
-        if(hasApkInstalled(packageName)) {
-
+        if (hasApkInstalled(packageName)) {
             Slog.i(TAG, "defautl packageName = " + packageName + ", default className = " + className);
             //清除当前默认launcher
-            ArrayList<IntentFilter> intentList = new ArrayList<IntentFilter>();  
-            ArrayList<ComponentName> cnList = new ArrayList<ComponentName>();  
+            ArrayList<IntentFilter> intentList = new ArrayList<IntentFilter>();
+            ArrayList<ComponentName> cnList = new ArrayList<ComponentName>();
             mContext.getPackageManager().getPreferredActivities(intentList, cnList, null);
-            IntentFilter dhIF = null;  
-            for(int i = 0; i < cnList.size(); i++) {  
-                dhIF = intentList.get(i);  
-                if(dhIF.hasAction(Intent.ACTION_MAIN) && dhIF.hasCategory(Intent.CATEGORY_HOME)) {
+            IntentFilter dhIF = null;
+            for (int i = 0; i < cnList.size(); i++) {
+                dhIF = intentList.get(i);
+                if (dhIF.hasAction(Intent.ACTION_MAIN) && dhIF.hasCategory(Intent.CATEGORY_HOME)) {
                     mContext.getPackageManager().clearPackagePreferredActivities(cnList.get(i).getPackageName());
                 }
             }
-            //获取所有launcher activity 
-            Intent intent = new Intent(Intent.ACTION_MAIN);  
-            intent.addCategory(Intent.CATEGORY_HOME);  
-            List<ResolveInfo> list = new ArrayList<ResolveInfo>();  
-            try {  
-                list = pm.queryIntentActivities(intent, intent.resolveTypeIfNeeded(mContext.getContentResolver()), PackageManager.MATCH_DEFAULT_ONLY);  
-            }catch (RemoteException e) {  
-                throw new RuntimeException("Package manager has died", e);  
-            }   
-            // get all components and the best match  
-            IntentFilter filter = new IntentFilter();  
-            filter.addAction(Intent.ACTION_MAIN);  
-            filter.addCategory(Intent.CATEGORY_HOME);  
-            filter.addCategory(Intent.CATEGORY_DEFAULT);  
+            //获取所有launcher activity
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            List<ResolveInfo> list = new ArrayList<ResolveInfo>();
+            try {
+                list = pm.queryIntentActivities(intent,
+                        intent.resolveTypeIfNeeded(mContext.getContentResolver()),
+                        PackageManager.MATCH_DEFAULT_ONLY, getCurrentUserIdLocked());
+            } catch (RemoteException e) {
+                throw new RuntimeException("Package manager has died", e);
+            }
+            // get all components and the best match
+            IntentFilter filter = new IntentFilter();
+            filter.addAction(Intent.ACTION_MAIN);
+            filter.addCategory(Intent.CATEGORY_HOME);
+            filter.addCategory(Intent.CATEGORY_DEFAULT);
             final int N = list.size();
-            //设置默认launcher 
-            ComponentName launcher = new ComponentName(packageName, className);  
- 
-            ComponentName[] set = new ComponentName[N];  
-            int defaultMatch = 0;  
-            for (int i = 0; i < N; i++) {  
-                ResolveInfo r = list.get(i);  
-                set[i] = new ComponentName(r.activityInfo.packageName, r.activityInfo.name);  
+            //设置默认launcher
+            ComponentName launcher = new ComponentName(packageName, className);
+
+            ComponentName[] set = new ComponentName[N];
+            int defaultMatch = 0;
+            for (int i = 0; i < N; i++) {
+                ResolveInfo r = list.get(i);
+                set[i] = new ComponentName(r.activityInfo.packageName, r.activityInfo.name);
                 Slog.d(TAG, "r.activityInfo.packageName======= " + r.activityInfo.packageName);
                 Slog.d(TAG, "r.activityInfo.name========= " + r.activityInfo.name);
-                if(launcher.getClassName().equals(r.activityInfo.name)) {
+                if (launcher.getClassName().equals(r.activityInfo.name)) {
                     defaultMatch = r.match;
                 }
             }
-            try {  
-                pm.addPreferredActivity(filter, defaultMatch, set, launcher);
-            } catch (RemoteException e) {  
-                throw new RuntimeException("Package manager has died", e);  
-            }   
-             
-             
-        }//end if
-         
-    }  
- 
-    private static boolean hasApkInstalled(String pkgname) {
- 
+            try {
+                pm.addPreferredActivity(filter, defaultMatch, set, launcher, getCurrentUserIdLocked());
+            } catch (RemoteException e) {
+                throw new RuntimeException("Package manager has died", e);
+            }
+        }
+    }
+
+ private  boolean hasApkInstalled(String packageName) {
+
+        if (packageName == null || "".equals(packageName))
+            return false;
+
+        android.content.pm.ApplicationInfo info = null;
         try {
-            mSelf.mContext.getPackageManager().getPackageInfo(pkgname,0);
-        } catch(Exception e) {
-            Slog.d(TAG, "PackageManager.NameNotFoundException: = " + e.getMessage());
+            info = mContext.getPackageManager().getApplicationInfo(packageName, 0);
+            return info != null;
+        } catch (NameNotFoundException e) {
             return false;
         }
-        return true;
     }
+
 ```
 然后在ActivityManagerService类中的
 `boolean startHomeActivityLocked()`

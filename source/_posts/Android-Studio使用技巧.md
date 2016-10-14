@@ -72,3 +72,4 @@ Traversed tree: 194799ms`
 这时候我们在像上面一样打开Service.java跳转Intent，你会发现像下图一样直接跳转到你源码路径下的Intent.java文件了，如下：
 ![AS2](http://oa1wnpe3m.bkt.clouddn.com/AS2.png)
 到此对于平时只是查看源码的人来说已经够用了。
+>更加详细的AS的技巧如下：http://jaeger.itscoder.com/android/2016/02/14/android-studio-tips.html
